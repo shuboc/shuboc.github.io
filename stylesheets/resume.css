@@ -1,0 +1,48 @@
+body {
+  font-size: 16px;
+  font-family: "Khula", Helvetica, sans-serif;
+  border-top: 3px solid #03A9F4;
+}
+
+h1 {
+  font-size: 4em;
+  font-family: "Carter One", cursive;
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 1.2em;
+  border-bottom: 1px solid #eee;
+}
+
+h1, a {
+  color: #03A9F4;
+}
+
+h1 a, h2 a, h3 a, h4 a {
+  text-decoration: none;
+}
+
+.flex-box {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.resume {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.darkgray {
+  color: gray;
+}
+
+.gray {
+  color: #666;
+  font-size: 0.8em;
+  font-weight: 300;
+  margin-left: 5px;
+}
