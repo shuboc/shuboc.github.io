@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="main.css">
-
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -17,35 +14,27 @@
     ga('create', 'UA-67843032-2', 'auto');
     ga('send', 'pageview');
   </script>
-
 </head>
 
 <body>
-  <!-- <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <ul class="nav navbar-nav pull-left">
-        <li><a href="index.html">About</a></li>
-        <li><a href="review.html">Review</a></li>
+  <nav class="navbar navbar-default navbar-fixed-top navbar-collapse collapse">
+    <div class="main container-fluid">
+      <ul class="nav navbar-nav">
+        <li><a href="#client">Client</a></li>
+        <li><a href="#backend">Back End</a></li>
+        <li><a href="#frontend">Front End</a></li>
       </ul>
     </div>
-  </nav> -->
+  </nav>
 
   <div class="main container-fluid">
     <div class="row">
-      <!-- <div class="sidebar col-md-3">
-        <ul class="nav nav-sidebar">
-          <li><a href="#">Summary</a></li>
-          <li><a href="#notification-center">Notification Center</a></li>
-          <li><a href="#team-folder-enhancement">Team Folder Enhancement</a></li>
-          <li><a href="#stay-signed-in">Force Stay-Signed-In Policy</a></li>
-        </ul>
-      </div> -->
-
       <div class="col-md-12">
-        <div class="learn-more" id="summary">
+        <div id="summary">
           <h1>2015 PRP Summary</h1>
           <hr>
 
+          <div class="anchor" id="client"></div>
           <h2>Client Development</h2>
           <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -87,6 +76,7 @@
           </div>
 
           <hr>
+          <div class="anchor" id="backend"></div>
           <h2>Back End Development</h2>
           <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -112,6 +102,7 @@
           </div>
 
           <hr>
+          <div class="anchor" id="frontend"></div>
           <h2>Front End Development</h2>
           <h3>Notification Center for Windows Client</h3>
           <div class="row">

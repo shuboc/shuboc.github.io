@@ -1,3 +1,12 @@
+body {
+  margin-top: 70px;
+}
+
+.anchor {
+  position: relative;
+  bottom: 70px;
+}
+
 .nav a {
   color: #5a5a5a;
   font-size: 11px;
@@ -32,20 +41,6 @@
 .jumbotron p {
   font-size: 20px;
   color: #fff;
-}
-
-.learn-more {
-  border-bottom: 1px solid #dbdbdb;
-}
-
-.learn-more h3 {
-  font-family: 'Shift', sans-serif;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.learn-more a {
-  color: #00b0ff;
 }
 
 @media screen and (min-width: 768px) {
