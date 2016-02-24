@@ -20,9 +20,9 @@
   <nav class="navbar navbar-default navbar-fixed-top navbar-collapse collapse">
     <div class="main container-fluid">
       <ul class="nav navbar-nav">
-        <li><a href="#client">Client</a></li>
-        <li><a href="#backend">Back End</a></li>
         <li><a href="#frontend">Front End</a></li>
+        <li><a href="#backend">Back End</a></li>
+        <li><a href="#client">Client</a></li>
       </ul>
     </div>
   </nav>
@@ -34,74 +34,6 @@
           <h1>2015 PRP Summary</h1>
           <hr>
 
-          <div class="anchor" id="client"></div>
-          <h2>Client Development</h2>
-          <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>Notification Center</h3>
-              <ul>
-                <li>Designed to notify users about file changes.</li>
-                <li>Implemented inserting file events in DB for Windows and Mac.</li>
-                <li>Implemented new UI with jQueryUI for Windows clients.</li>
-              </ul>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>Team Folders Enhancement</h3>
-              <ul>
-                <li>Designed to avoid insufficient storage.</li>
-                <li>Users will not start download until they gets notified and confirm.</li>
-                <li>Enhanced the selective-sync UI.</li>
-                <li>Designed data structures and DB schema to maintain the checked list.</li>
-              </ul>
-            </div>
-            <!-- <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>Controlled stay-signed-in</h3>
-              <p>Implemented functionalities for controlled stay-signed-in.</p>
-            </div> -->
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>Upgrade Visual Studio 2015</h3>
-              <ul>
-                <li>Upgrade project to VS2015 to support new Win 10 SDK.</li>
-                <li>Upgrade OpenSSL and Boost and integrated with Boost filesystem V3 API.</li>
-                <li>Removed obsolete SOAP API integration.</li>
-                <li>Implemented REST clients and Integrated with REST APIs.</li>
-              </ul>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>iOS Encryption Module</h3>
-              <ul>
-                <li>Upgrade the encryption module and the iOS app to support 64-bit machines.</li>
-              </ul>
-            </div>
-          </div>
-
-          <hr>
-          <div class="anchor" id="backend"></div>
-          <h2>Back End Development</h2>
-          <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>Single Domain</h3>
-              <ul>
-                <!-- <li>Redesigned and implemented "Network Setting" page.</li> -->
-                <li>Removed www/soap/dav domain for usability.</li>
-                <li>Implemented Nginx redirection rule to support migration of the shared links with the old domain.</li>
-              </ul>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>REST APIs for Win/Mac clients</h3>
-              <ul>
-                <li>Ported SOAP APIs for Win/Mac clients into REST APIs for new clients.</li>
-              </ul>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>Server Backup Tool</h3>
-              <ul>
-                <li>Implemented backup of server configs and storage management.</li>
-              </ul>
-            </div>
-          </div>
-
-          <hr>
           <div class="anchor" id="frontend"></div>
           <h2>Front End Development</h2>
           <h3>Notification Center for Windows Client</h3>
@@ -143,6 +75,7 @@
             </div>
           </div>
 
+          <hr>
           <h3>Selective-Sync Enhancement</h3>
           <div class="row">
             <div class="col-md-12">
@@ -152,6 +85,74 @@
                 <p>Memorize your checked list after collapse and expand.</p>
               </div>
               <img class="img-responsive" src="img/selective-sync.png">
+            </div>
+          </div>
+
+          <hr>
+          <div class="anchor" id="backend"></div>
+          <h2>Back End Development</h2>
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <h3>Single Domain</h3>
+              <ul>
+                <!-- <li>Redesigned and implemented "Network Setting" page.</li> -->
+                <li>Removed www/soap/dav domain for usability.</li>
+                <li>Implemented Nginx redirection rule to support migration of the shared links with the old domain.</li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <h3>REST APIs for Win/Mac clients</h3>
+              <ul>
+                <li>Ported SOAP APIs for Win/Mac clients into REST APIs for new clients.</li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <h3>Server Backup Tool</h3>
+              <ul>
+                <li>Implemented backup of server configs and storage management.</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr>
+          <div class="anchor" id="client"></div>
+          <h2>Client Development</h2>
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <h3>Notification Center</h3>
+              <ul>
+                <li>Designed to notify users about file changes.</li>
+                <li>Implemented inserting file events in DB for Windows and Mac.</li>
+                <li>Implemented new UI with jQueryUI for Windows clients.</li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <h3>Team Folders Enhancement</h3>
+              <ul>
+                <li>Designed to avoid insufficient storage.</li>
+                <li>Users will not start download until they gets notified and confirm.</li>
+                <li>Enhanced the selective-sync UI.</li>
+                <li>Designed data structures and DB schema to maintain the checked list.</li>
+              </ul>
+            </div>
+            <!-- <div class="col-md-4 col-sm-6 col-xs-12">
+              <h3>Controlled stay-signed-in</h3>
+              <p>Implemented functionalities for controlled stay-signed-in.</p>
+            </div> -->
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <h3>Upgrade Visual Studio 2015</h3>
+              <ul>
+                <li>Upgrade project to VS2015 to support new Win 10 SDK.</li>
+                <li>Upgrade OpenSSL and Boost and integrated with Boost filesystem V3 API.</li>
+                <li>Removed obsolete SOAP API integration.</li>
+                <li>Implemented REST clients and Integrated with REST APIs.</li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <h3>iOS Encryption Module</h3>
+              <ul>
+                <li>Upgrade the encryption module and the iOS app to support 64-bit machines.</li>
+              </ul>
             </div>
           </div>
         </div>
