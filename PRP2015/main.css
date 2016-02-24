@@ -48,25 +48,13 @@
   color: #00b0ff;
 }
 
-.neighborhood-guides {
-    border-bottom: 1px solid #dbdbdb;
-}
+@media screen and (min-width: 992px) {
+  .main {
+    width: 992px;
+    margin: 0 auto;
+  }
 
-.neighborhood-guides h2 {
-    color: #393c3d;
-    font-size: 24px;
-}
-
-.neighborhood-guides p {
-    font-size: 15px;
-    margin-bottom: 13px;
-}
-
-.sidebar {
-  margin-top: 25px;
-  position: fixed;
-}
-
-.back-to-top {
-  margin-top: 30px;
+  .desc {
+    height: 90px;
+  }
 }
