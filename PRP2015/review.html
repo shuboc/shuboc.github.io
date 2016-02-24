@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
 
   <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
@@ -20,98 +21,84 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <!-- <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <ul class="nav navbar-nav pull-left">
         <li><a href="index.html">About</a></li>
         <li><a href="review.html">Review</a></li>
       </ul>
     </div>
-  </nav>
+  </nav> -->
 
   <div class="main container-fluid">
     <div class="row">
-      <div class="sidebar col-md-3">
+      <!-- <div class="sidebar col-md-3">
         <ul class="nav nav-sidebar">
           <li><a href="#">Summary</a></li>
           <li><a href="#notification-center">Notification Center</a></li>
           <li><a href="#team-folder-enhancement">Team Folder Enhancement</a></li>
-          <!-- <li><a href="#vs2015">Visual Studio 2015</a></li> -->
           <li><a href="#stay-signed-in">Force Stay-Signed-In Policy</a></li>
         </ul>
-      </div>
+      </div> -->
 
-      <div class="col-md-9 col-md-offset-3">
+      <div class="col-md-12">
         <div class="learn-more" id="summary">
           <h1>2015 PRP Summary</h1>
-          <h2>Clients</h2>
+          <h2>Client Development</h2>
           <div class="row">
-
             <div class="col-md-4">
               <h3>Notification Center</h3>
               <ul>
+                <li>Designed to notify users about file changes.</li>
                 <li>Implemented inserting file events in DB for Windows and Mac.</li>
-                <li>Implemented new UIs with jQueryUI for Windows clients.</li>
+                <li>Implemented new UI with jQueryUI for Windows clients.</li>
               </ul>
-              <p><a href="#notification-center">Learn More</a></p>
             </div>
             <div class="col-md-4">
-              <h3>Team folders won't be downloaded without users' agreement</h3>
+              <h3>Team Folders Enhancement</h3>
               <ul>
-                <li>Designed data structures and DB to maintain checked list.</li>
-                <li>Implemented UI for new behaviour of selective-sync</li>
+                <li>Designed to avoid insufficient storage.</li>
+                <li>Users will not start download until they gets notified and confirm.</li>
+                <li>Enhanced the selective-sync UI.</li>
+                <li>Designed data structures and DB schema to maintain the checked list.</li>
               </ul>
-              <p><a href="#team-folder-enhancement">Learn More</a></p>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
               <h3>Controlled stay-signed-in</h3>
               <p>Implemented functionalities for controlled stay-signed-in.</p>
               <p><a href="#stay-signed-in">Learn More</a></p>
-            </div>
-          </div>
-
-          <div class="row">
+            </div> -->
             <div class="col-md-4">
-              <h3>Visual Studio 2015</h3>
+              <h3>Upgrade Visual Studio 2015</h3>
               <ul>
-                <li>Upgrade project to VS2015.</li>
-                <li>Built OpenSSL with VS2015.</li>
-                <li>Built Boost 1.59 with VS2015 and integrated with filesystem V3 API.</li>
+                <li>Upgrade project to VS2015 to support new Win 10 SDK.</li>
+                <li>Upgrade OpenSSL and Boost and integrated with Boost filesystem V3 API.</li>
                 <li>Removed obsolete SOAP API integration.</li>
                 <li>Implemented REST clients and Integrated with REST APIs.</li>
-                <li>Support C++11.</li>
-              </ul>
-              <!-- <p><a href="#vs2015">Learn More</a></p> -->
-            </div>
-            <div class="col-md-4">
-              <h3>Unit Testing &amp; Integration Testing (Ongoing)</h3>
-              <ul>
-                <li>Introduced Googletest Framework to Win/Mac.</li>
               </ul>
             </div>
             <div class="col-md-4">
-              <h3>iOS Support</h3>
+              <h3>iOS Encryption Module</h3>
               <ul>
-                <li>Upgrade iOS app to 64-bit.</li>
-                <li>Build StrongBox iOS universal library (supports both 32-bit & 64-bit iOS devices).</li>
+                <li>Upgrade the encryption module and the iOS app to support 64-bit machines.</li>
               </ul>
             </div>
           </div>
 
-          <h2>Server</h2>
+          <h2>Back End Development</h2>
           <div class="row">
             <div class="col-md-4">
-              <h3>Single Domain (Frondend + Backend)</h3>
+              <h3>Single Domain</h3>
               <ul>
-                <li>Redesigned and implemented "Network Setting" page.</li>
-                <li>Removed www/soap/dav domain.</li>
-                <li>Implemented redirection rule to support migration of links with old domains.</li>
+                <!-- <li>Redesigned and implemented "Network Setting" page.</li> -->
+                <li>Removed www/soap/dav domain for usability.</li>
+                <li>Implemented Nginx redirection rule to support migration of the shared links with the old domain.</li>
               </ul>
             </div>
             <div class="col-md-4">
-              <h3>REST APIs for clients</h3>
+              <h3>REST APIs for Win/Mac clients</h3>
               <ul>
-                <li>Implemented REST APIs for Win/Mac clients.</li>
+                <li>Ported SOAP APIs for Win/Mac clients into REST APIs for new clients.</li>
               </ul>
             </div>
             <div class="col-md-4">
@@ -119,6 +106,52 @@
               <ul>
                 <li>Implemented backup of server configs and storage management.</li>
               </ul>
+            </div>
+          </div>
+
+          <h2>Front End Development</h2>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="img-responsive">
+                <img src="img/file-update.png">
+              </div>
+              <h4>File Update History</h4>
+              <p>Show the history of file modification including file names, file paths and done-by-users.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="img-responsive">
+                <img src="img/team-folder-invitation.png">
+              </div>
+              <h4>Team Folder Invitation</h4>
+              <p>Ask for your agreement before downloading team folders.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="img-responsive">
+                <img src="img/number.png">
+              </div>
+              <h4>Number of Notifications</h4>
+              <p>Notify you as soon as there are new updates.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="img-responsive">
+                <img src="img/virus-problem.png">
+              </div>
+              <h4>Problem Indication</h4>
+              <p>Notify you if anything goes wrong.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="img-responsive">
+                <img src="img/sync-progress.png">
+              </div>
+              <h4>Sync Status</h4>
+              <p>Show the current progress of syncing.</p>
+            </div>
+            <div class="col-md-4">
+              <div class="img-responsive">
+                <img src="img/menu.png">
+              </div>
+              <h4>Embedded Menu</h4>
+              <p>An additional menu is cool and convenient.</p>
             </div>
           </div>
         </div>
@@ -129,21 +162,21 @@
           <p>Wonder what has happened? Notification Center has visually presented all file events for you.</p>
           <div class="row">
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/file-update.png">
               </div>
               <h4>File Update History</h4>
               <p>Show the history of file modification including file names, file paths and done-by-users.</p>
             </div>
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/team-folder-invitation.png">
               </div>
               <h4>Team Folder Invitation</h4>
               <p>Ask for your agreement before downloading team folders.</p>
             </div>
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/number.png">
               </div>
               <h4>Number of Notifications</h4>
@@ -153,7 +186,7 @@
 
           <div class="row">
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/virus-problem.png">
               </div>
               <h4>Problem Indication</h4>
@@ -161,14 +194,14 @@
             </div>
 
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/sync-progress.png">
               </div>
               <h4>Sync Status</h4>
               <p>Show the current progress of syncing.</p>
             </div>
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/menu.png">
               </div>
               <h4>Embedded Menu</h4>
@@ -185,13 +218,13 @@
 
           <div class="row">
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/sync-now.png">
               </div>
               <h4>You can download it via the notification.</h4>
             </div>
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/selective-sync.png">
               </div>
               <h4>Alternatively, you can check it in the selective-sync dialog.</h4>
@@ -207,21 +240,21 @@
 
           <div class="row">
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/test.png">
               </div>
               <h4>New Features Enabled</h4>
               <p>Win 10 Style UI/Universal Windows App</p>
             </div>
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/test.png">
               </div>
               <h4>Speed</h4>
               <p>?X faster to load a huge file list.</p>
             </div>
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/test.png">
               </div>
               <h4>Productivity</h4>
@@ -238,7 +271,7 @@
 
           <div class="row">
             <div class="col-md-4">
-              <div class="thumbnail">
+              <div class="img-responsive">
                 <img src="img/stay-signed-in.png">
               </div>
               <h4>"Stay Signed In" option will be  automatically unchecked after the policy applied.</h4>
