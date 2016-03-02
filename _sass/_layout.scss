@@ -17,6 +17,7 @@
     letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
+    font-family: $title-font-family;
 }
 
 .site-nav {
@@ -169,12 +170,22 @@
     font-size: 20px;
 }
 
+.post {
+  margin-bottom: $spacing-unit;
+  padding: 30px;
+  background-color: $post-background-color;
+  box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1);
+}
+
 .post-list {
     margin-left: 0;
     list-style: none;
 
     > li {
         margin-bottom: $spacing-unit;
+        padding: 30px;
+        background-color: $post-background-color;
+        box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1);
     }
 }
 
