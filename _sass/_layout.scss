@@ -13,19 +13,19 @@ $header-height: 70px;
 }
 
 .site-title {
-    color: $title-text-color;
+    color: $header-text-color;
     font-size: 26px;
     font-weight: 300;
     line-height: $header-height;
     letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
-    font-family: $title-font-family;
+    font-family: $header-font-family;
 }
 
 .site-nav {
     float: right;
-    line-height: 56px;
+    line-height: $header-height;
 
     .menu-icon {
         display: none;
@@ -33,6 +33,7 @@ $header-height: 70px;
 
     .page-link {
         line-height: $base-line-height;
+        color: $header-text-color;
 
         // Gaps between nav items, but not on the last one
         &:not(:last-child) {
@@ -42,10 +43,10 @@ $header-height: 70px;
 
     @include media-query($on-palm) {
         position: absolute;
-        top: 9px;
+        top: 16px;
         right: $spacing-unit / 2;
-        background-color: $background-color;
-        border: 1px solid $grey-color-light;
+        background-color: $brand-color;
+        border: 1px solid $brand-color;
         border-radius: 5px;
         text-align: right;
 
@@ -63,7 +64,7 @@ $header-height: 70px;
                 height: 15px;
 
                 path {
-                    fill: $grey-color-dark;
+                    fill: $header-text-color;
                 }
             }
         }
