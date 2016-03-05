@@ -66,7 +66,7 @@ bundle exec jekyll serve
 
 ## 使用現成版型
 
-自己調版型比想像中難一些，害我卡關了好一陣子～使用現成版型可以節省很多時間。
+客製化沒有那麼容易上手，要先搞懂很多Jekyll的設定和convention，使用現成版型可以節省一些時間。
 
 Google關鍵字`jekyll theme`就可以找到很多現成的版型。我大量參考[Jekyll Theme](http://jekyllthemes.org/)。
 
@@ -83,7 +83,7 @@ Google關鍵字`jekyll theme`就可以找到很多現成的版型。我大量參
 
 寫文章很容易，只要在`_post/`底下新增一個markdown格式的純文字檔，Jekyll就可以幫你變成靜態HTML網頁。
 
-為了要讓Jekyll處理，需要按照一定的格式去寫：
+為了要讓Jekyll正確處理，需要按照一定的格式去寫：
 
 1. 檔名是`YYYY-MM-DD-title-of-a-post`的形式，副檔名是`.md`或`.markdown`的形式。
 2. 內容的開頭用兩條橫線包成一個區塊，稱為[Front Matter](https://jekyllrb.com/docs/frontmatter/)。開頭有Front Matter的文件，才會被Jekyll特別處理。裡面定義一些Jekyll處理時需要的變數，例如：
@@ -93,15 +93,13 @@ Google關鍵字`jekyll theme`就可以找到很多現成的版型。我大量參
 layout: post
 title: An Example Post
 ---
-
 This is the content.
 ```
 
-`layout`是用來指定要用什麼版型來呈現頁面。定義了`layout: post`，就會用`_layout/post.html`來呈現頁面。
+`layout`是用來指定要用什麼版型來呈現頁面。定義了`layout: post`，Jekyll就會去找`_layout/post.html`來呈現頁面。
 
 ## 結論
 
+用Github Pages + Jekyll可以很方便地架部落格。也可以很容易的選擇喜歡的版型。
 
-
-
-
+但是如果想要客製化版型需要搞懂許多Jekyll的原理和設定，應該要先把[Jekyll Documentation](https://jekyllrb.com/docs/home/)完整的讀過一次。有空再來看一些實用的客製化技巧吧。
