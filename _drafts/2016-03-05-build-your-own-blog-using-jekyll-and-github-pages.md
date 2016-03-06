@@ -32,29 +32,29 @@ GitHub Pages支援Jekyll，所以在GitHub Pages上用Markdown寫文章非常容
 
 * 在資料夾底下建一個Gemfile：
 
-```
+~~~
 source 'https://rubygems.org'
 gem 'github-pages'
-```
+~~~
 
 * 安裝Jekyll跟一些套件：
 
-```
+~~~
 gem install bundler
 bundle install
-```
+~~~
 
 * 產生預設內容：
 
-```
+~~~
 bundle exec jekyll new . --force
-```
+~~~
 
 * 在本地端測試：
 
-```
+~~~
 bundle exec jekyll serve
-```
+~~~
 
 此時在瀏覽器打開localhost:4000就會看到熱騰騰的部落格了！
 
@@ -73,9 +73,7 @@ Google關鍵字`jekyll theme`就可以找到很多現成的版型。[Jekyll Them
 1. Fork你喜歡的版型的repo
 2. 在GitHub的設定裡，把fork過來的repo名稱改成`[GitHub使用者名稱.github.io]`
 
-實測在`master`branch裡面commit一篇新的文章之前，GitHub Pages永遠顯示404 not found，推測是有commit才會觸發GitHub Pages去更新頁面。
-
-注意一定要commit在`master` branch！ (專案頁面例外，要在`gh-pages`更新)
+實測在`master` branch裡面commit一篇新的文章之前，GitHub Pages永遠顯示404 not found，推測在`master` branch有commit才會觸發GitHub Pages去更新頁面。
 
 ## 寫文章
 
@@ -86,13 +84,13 @@ Google關鍵字`jekyll theme`就可以找到很多現成的版型。[Jekyll Them
 1. 檔名是`YYYY-MM-DD-title-of-a-post`的形式，副檔名是`.md`或`.markdown`的形式。
 2. 內容的開頭用兩條橫線包成一個區塊，稱為[Front Matter](https://jekyllrb.com/docs/frontmatter/)。開頭有Front Matter的文件，才會被Jekyll特別處理。Front Matter是用來定義一些Jekyll處理時需要的變數，例如：
 
-```
+~~~
 ---
 layout: post
 title: An Example Post
 ---
 This is the content.
-```
+~~~
 
 其中`layout`是用來指定要用什麼版型來呈現頁面。定義了`layout: post`，Jekyll就會去用`_layout/post.html`來呈現頁面。
 

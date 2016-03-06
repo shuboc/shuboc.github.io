@@ -17,4 +17,4 @@ twitter_username: apiggy0204
 github_username:  shuboc
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
