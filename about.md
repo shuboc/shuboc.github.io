@@ -4,12 +4,16 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+哈囉！我是趙勗博。2016年的新目標，就決定來寫個技術部落格吧！
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
+這個部落格打算放一些技術相關的學習心得，或是讀書心得。
 
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+希望能定期有一些產出，作為督促自己學新東西的動力～
+
+Hello! I am Shubo Chao, aka Chris.
+
+I decide to start a tech blog as my new year's resolution in 2016.
+
+I am going to write things about what I learn about new technologies or reflections on books.
+
+I hope writing posts regularly can drive me to learn new things!
