@@ -6,6 +6,7 @@
   <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
   <link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
@@ -23,4 +24,10 @@
     ga('create', 'UA-67843032-2', 'auto');
     ga('send', 'pageview');
   </script>
+
+  <!-- React and React-Bootstrap -->
+  <script src="https://fb.me/react-0.14.8.js"></script>
+  <script src="https://fb.me/react-dom-0.14.8.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.28.4/react-bootstrap.min.js"></script>
+  <script src="/js/test.js"></script>
 </head>
