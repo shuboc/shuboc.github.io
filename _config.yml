@@ -6,8 +6,9 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: "{趙勗博的程式設計部落格}"
-email: shubochao@gmail.com
+# title: "{name: \"趙勗博\"}"
+title: '{趙勗博: "blogging"}'
+email: chaoshubo@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   程式設計，網頁設計，學習筆記，讀書心得...
 baseurl: "" # the subpath of your site, e.g. /blog
