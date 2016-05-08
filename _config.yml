@@ -6,15 +6,15 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Shubo's Tech Blog
+title: "{趙勗博的程式設計部落格}"
 email: shubochao@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Hello! I am Shubo Chao (趙勗博), and this is my tech blog!
-  I'd like to share cool things about web development.
+  程式設計，網頁設計，學習筆記，讀書心得...
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://shuboc.github.io" # the base hostname & protocol for your site
 twitter_username: apiggy0204
 github_username:  shuboc
+facebook_username: chris.chao.10
 
 # Build settings
 markdown: kramdown

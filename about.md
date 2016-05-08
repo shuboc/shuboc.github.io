@@ -4,16 +4,17 @@ title: About
 permalink: /about/
 ---
 
-哈囉！我是趙勗博。2016年的新目標，就決定來寫個技術部落格吧！
+哈囉！我是趙勗博，工作是程式設計師，現居台北。
 
-這個部落格打算放一些技術相關的學習心得，或是讀書心得。
+對自己的期許：
 
-希望能定期有一些產出，作為督促自己學新東西的動力～
-
-Hello! I am Shubo Chao, aka Chris.
-
-I decide to start a tech blog as my new year's resolution in 2016.
-
-I am going to write things about what I learn about new technologies or reflections on books.
-
-I hope writing posts regularly can drive me to learn new things!
+* 記錄自己學習的過程。
+* 在學習的過程中，建立人與人的連結。
+* 想想自己可以貢獻給別人什麼。
+* 教別人自己學到的東西。
+	* 如果剛好能對別人有幫助就太好了。
+	* 自己也可以學得更紮實。
+* 當個業餘愛好者。
+	* 勇於嘗試和分享。
+	* 不要有當個專業人士的壓力。
+	* 不要有完美主義。
