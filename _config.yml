@@ -7,7 +7,7 @@
 
 # Site settings
 # title: "{name: \"趙勗博\"}"
-title: '{趙勗博: "blogging"}'
+title: '{Chris Chao: "blogging"}'
 email: chaoshubo@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   程式設計，網頁設計，學習筆記，讀書心得...

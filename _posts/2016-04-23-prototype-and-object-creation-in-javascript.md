@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JavaScript的原型繼承與創造物件
+title: Prototypal Inheritance and Object Creation in JS
 ---
 
 JS最大的特色之一就是原型繼承(prototypal inheritance)。JS的每個物件都繼承自一個原型委託(delegate prototype)物件。如果對物件查詢某個特性失敗時，就會去查詢他的原型物件上是否存在這個特性。
