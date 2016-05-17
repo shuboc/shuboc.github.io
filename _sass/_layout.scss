@@ -14,10 +14,10 @@ $header-height: 70px;
 
 .site-title {
     color: $header-text-color;
-    font-size: 26px;
-    font-weight: 300;
+    font-size: 36px;
+    font-weight: normal;
     line-height: $header-height;
-    letter-spacing: -1px;
+    letter-spacing: 1px;
     margin-bottom: 0;
     float: left;
     font-family: $header-font-family;
@@ -26,6 +26,7 @@ $header-height: 70px;
 .site-nav {
     float: right;
     line-height: $header-height;
+    font-family: $header-font-family;
 
     .menu-icon {
         display: none;
@@ -183,6 +184,10 @@ $header-height: 70px;
     margin-left: 0;
     list-style: none;
 
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 5px;
+    }
+
     > li {
         margin-bottom: $spacing-unit;
         background-color: $background-color;
@@ -190,8 +195,8 @@ $header-height: 70px;
 }
 
 .post-meta {
-    font-size: $small-font-size;
     color: $grey-color;
+    font-family: $meta-font-family;
 }
 
 .post-link {

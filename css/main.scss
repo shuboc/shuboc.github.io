@@ -7,13 +7,15 @@
 
 // Our variables
 $base-font-family: Helvetica, Arial, 'source-han-sans-traditional', sans-serif;
-$base-font-size:   16px;
+$base-font-size:   14px;
 $base-font-weight: 400;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
-$header-font-family: 'Luckiest Guy', cursive;
+$header-font-family: 'Fredericka the Great', cursive;
 $header-text-color: #fff;
+
+$meta-font-family: $header-font-family;
 
 $spacing-unit:     30px;
 
