@@ -8,7 +8,12 @@
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          <li>
+            <a href="mailto:{{ site.email }}">
+              <i class="fa fa-envelope icon" aria-hidden="true"></i>
+              {{ site.email }}
+            </a>
+          </li>
           {% if site.github_username %}
           <li>
             {% include icon-github.html username=site.github_username %}
