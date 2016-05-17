@@ -2,8 +2,7 @@
 layout: post
 title: "CSS氣球提示 (Balloon/Tooltip)"
 ---
-
-<p data-height="266" data-theme-id="0" data-slug-hash="pydPWd" data-default-tab="css,result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/pydPWd/">css-balloon</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="210" data-theme-id="0" data-slug-hash="pydPWd" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/pydPWd/">css-balloon</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 偶然之間看到了[Balloon.css](https://kazzkiq.github.io/balloon.css/)，很好奇這種常見的氣球提示要怎麼用CSS效果做出來！於是參考了他的程式碼，練習做看看。今天的目標是做一個按鈕，hover的時候會顯示氣球提示。
@@ -87,7 +86,7 @@ hover前後改變`opacity`屬性並設定轉場效果：
 
 最後的成品：
 
-<p data-height="266" data-theme-id="0" data-slug-hash="pydPWd" data-default-tab="css,result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/pydPWd/">css-balloon</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="210" data-theme-id="0" data-slug-hash="pydPWd" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/pydPWd/">css-balloon</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 CSS真是博大精深啊，光是一個常見的氣球也用到不少技巧！像是
