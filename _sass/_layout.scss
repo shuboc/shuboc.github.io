@@ -34,7 +34,6 @@ $header-height: 70px;
     .page-link {
         line-height: $base-line-height;
         color: $header-text-color;
-        font-family: $header-font-family;
 
         // Gaps between nav items, but not on the last one
         &:not(:last-child) {
@@ -177,9 +176,7 @@ $header-height: 70px;
 
 .post {
   margin-bottom: $spacing-unit;
-  padding: 30px;
-  background-color: $post-background-color;
-  box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1);
+  background-color: $background-color;
 }
 
 .post-list {
@@ -188,9 +185,7 @@ $header-height: 70px;
 
     > li {
         margin-bottom: $spacing-unit;
-        padding: 30px;
-        background-color: $post-background-color;
-        box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1);
+        background-color: $background-color;
     }
 }
 
