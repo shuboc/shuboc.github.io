@@ -5,7 +5,6 @@ $header-height: 70px;
 
 .site-header {
     min-height: $header-height;
-    box-shadow: 0px 6px 5px rgba(0,0,0,0.4);
     background-color: $brand-color;
 
     // Positioning context for the mobile navigation icon
@@ -100,6 +99,8 @@ $header-height: 70px;
 .site-footer {
     border-top: 1px solid $grey-color-light;
     padding: $spacing-unit 0;
+    background-color: $brand-color;
+    color: $header-text-color;
 }
 
 .footer-heading {
