@@ -4,9 +4,14 @@ title: About
 permalink: /about/
 ---
 
-哈囉！我是趙勗博，是個在台北工作的軟體工程師～
+我是趙勗博，目前在台北當個小小軟體工程師～
 
-自己這個部落格的一些期許：（持續更新中）
+為什麼想寫這個部落格？
+
+感覺很不像我會做的事。
+所以或許有那麼一點『挑戰做一件自己不可能去做的事』的意味在？
+另外一部分是想要平常或多或少累積一些東西，需要的時候可以拿出來。
+總之不管動機是什麼，容器已經在那裡了，就想辦法填滿它吧。
 
 * 動機
 	* 記錄自己學習的過程。
@@ -27,8 +32,8 @@ permalink: /about/
 	* 小一點的主題也沒關係
 		* 重要的是持續產出
 
-一些有用的連結：
+建立這個部落格用到的東西：
 
-* [Google Fonts](https://fonts.google.com/)：這個部落格用到的一些字型（免費）。
+* [Google Fonts](https://fonts.google.com/)：免費字型。
 * [Color Scheme Designer](http://colorschemedesigner.com/csd-3.5/#3q21Tw0w0w0w0)：選顏色的工具。
 * [Prism](http://prismjs.com/)：這個部落格的Syntax Highlighter。
