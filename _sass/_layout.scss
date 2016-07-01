@@ -180,6 +180,8 @@ $header-height: 70px;
 .post {
   margin-bottom: $spacing-unit;
   background-color: $background-color;
+  padding: $spacing-unit 2*$spacing-unit;
+  border-radius: 1em;
 }
 
 .post-list {
@@ -191,8 +193,11 @@ $header-height: 70px;
     }
 
     > li {
+        box-sizing: content-box;
         margin-bottom: $spacing-unit;
         background-color: $background-color;
+        padding: $spacing-unit 2*$spacing-unit;
+        border-radius: 1em;
     }
 }
 

@@ -19,18 +19,25 @@ $meta-font-family: 'Fredericka the Great', cursive;
 
 $spacing-unit:     30px;
 
+// Colors
+$theme-color:            #3AA6D0;
+$theme-color-complement: #FFA340;
+$theme-color-light:      #62B1D0;
+$theme-color-dark:       #024C68;
+
 $text-color:       rgba(34, 34, 34, 0.8);
 $background-color: #f6f9fb;
-$brand-color:      #2e2e2e;
-$link-color:       #3AA6D0; //#00BCD4;
-$link-hover-color: #FFA340;
+// $brand-color:      #2e2e2e;
+$brand-color:      black;
+$link-color:       $theme-color;
+$link-hover-color: $theme-color-complement;
 
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    800px;
+$content-width:    960px;
 
 $on-palm:          600px;
 $on-laptop:        800px;
