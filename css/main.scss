@@ -14,15 +14,16 @@ $base-line-height: 1.5;
 
 $header-font-family: 'Cabin Sketch', cursive;
 $header-text-color: #FFF;
-$title-font-family: 'Abril Fatface', cursive;
+$title-font-family: $base-font-family;
 $meta-font-family: 'Fredericka the Great', cursive;
 
 $spacing-unit:     30px;
 
 $text-color:       rgba(34, 34, 34, 0.8);
-$background-color: #FFF;
+$background-color: #f6f9fb;
 $brand-color:      #2e2e2e;
-$link-color:       #00BCD4;
+$link-color:       #3AA6D0; //#00BCD4;
+$link-hover-color: #FFA340;
 
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);

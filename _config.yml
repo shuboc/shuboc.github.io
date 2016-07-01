@@ -19,3 +19,6 @@ facebook_username: chris.chao.10
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
