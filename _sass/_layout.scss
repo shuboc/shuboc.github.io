@@ -9,17 +9,17 @@ $header-height: 70px;
 
     // Positioning context for the mobile navigation icon
     position: relative;
-}
 
-.site-title {
-    color: $header-text-color;
-    font-size: 36px;
-    font-weight: normal;
-    line-height: $header-height;
-    letter-spacing: 1px;
-    margin-bottom: 0;
-    float: left;
-    font-family: $header-font-family;
+    .site-title {
+        color: $header-text-color;
+        font-size: 36px;
+        font-weight: normal;
+        line-height: $header-height;
+        letter-spacing: 1px;
+        margin-bottom: 0;
+        float: left;
+        font-family: $header-font-family;
+    }
 }
 
 .site-nav {
@@ -180,6 +180,8 @@ $header-height: 70px;
 .post {
   margin-bottom: $spacing-unit;
   background-color: $background-color;
+  padding: $spacing-unit 2*$spacing-unit;
+  border-radius: 1em;
 }
 
 .post-list {
@@ -191,8 +193,11 @@ $header-height: 70px;
     }
 
     > li {
+        box-sizing: content-box;
         margin-bottom: $spacing-unit;
         background-color: $background-color;
+        padding: $spacing-unit 2*$spacing-unit;
+        border-radius: 1em;
     }
 }
 
