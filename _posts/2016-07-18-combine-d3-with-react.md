@@ -31,14 +31,14 @@ d3的Data Binding機制，讓資料和DOM節點形成一對一的對應關係；
 
 假設資料格式如下：
 
-<pre><code class="language-javascript">
-let dataset = [ 
+~~~jsx
+let dataset = [
     { key: 0, value: 5 },
     { key: 1, value: 10 },
     { key: 2, value: 13 },
     ...
 ];
-</code></pre>
+~~~
 
 d3提供了以下方法，可以操作DOM節點和data binding：
 
@@ -48,14 +48,14 @@ d3提供了以下方法，可以操作DOM節點和data binding：
 
 將dataset中每筆資料d都綁定到一個rect元素，key是d.key：
 
-<pre><code class="language-javascript">
+~~~jsx
 let svg = d3.select('body') // 在body裡面插入svg元素
             .append('svg')
             .attr('width', w)
             .attr('height', h);
 
 let bars = svg.selectAll('rect').data(dataset, d => d.key);
-</code></pre>
+~~~
 
 ### Enter, Update and Exit
 
@@ -65,13 +65,13 @@ let bars = svg.selectAll('rect').data(dataset, d => d.key);
 
 資料改變時，根據資料大小，設定長條圖的x, y座標和長寬：
 
-<pre><code class="language-javascript">
+~~~jsx
 // Update
 bars.attr('x', (d, i) => xScale(i))
     .attr('width', xScale.rangeBand())
     .attr('y', d => yScale(d.value))
     .attr('height', d => h - yScale(d.value)); // 高度正比於資料大小
-</code></pre>
+~~~
 
 #### enter()
 
@@ -79,7 +79,7 @@ bars.attr('x', (d, i) => xScale(i))
 
 使用append()可以對每筆資料產生對應的DOM節點，並把資料和DOM節點綁定在一起。
 
-<pre><code class="language-javascript">
+~~~jsx
 // Enter
 bars.enter()
     .append('rect') // 新增rect元素
@@ -87,7 +87,7 @@ bars.enter()
     .attr('width', xScale.rangeBand())
     .attr('y', d => yScale(d.value))
     .attr('height', d => h - yScale(d.value));
-</code></pre>    
+~~~
 
 #### exit()
 
@@ -95,10 +95,10 @@ bars.enter()
 
 對這些節點使用remove()即可從畫面中移除這些DOM節點。
 
-<pre><code class="language-javascript">
+~~~jsx
 // Exit
 bars.exit().remove();
-</code></pre>
+~~~
 
 ## 回到正題 - 在React中嵌入d3圖表
 
@@ -115,17 +115,17 @@ bars.exit().remove();
 
 定義某個元件的ref屬性：
 
-<pre><code class="language-markup">
-&lt;div ref="myDiv" />
-</code></pre>
+~~~jsx
+<div ref="myDiv" />
+~~~
 
 就能夠在React元件中的this.refs中存取這個DOM節點：
 
-<pre><code class="language-javascript">
+~~~jsx
 this.refs.myDiv // DOM node
 $(this.refs.myDiv).toggleClass('highlighted') // jQuery
 d3.select(this.refs.myDiv).append('svg') // d3
-</code></pre>
+~~~
 
 ### componentDidMount & componentDidUpdate
 
@@ -138,13 +138,13 @@ React提供介面，讓你在生命週期的一些階段裡可以安全操作你
 
 ### render()
 
-<pre><code class="language-markup">
-&lt;div>
-    &lt;div ref="chart">&lt;/div>
-    &lt;button onClick={e => this.handleAdd()}>Add&lt;/button>
-    &lt;button onClick={e => this.handleRemove()}>Remove&lt;/button>
-&lt;/div>
-</code></pre>
+~~~jsx
+<div>
+    <div ref="chart"></div>
+    <button onClick={e => this.handleAdd()}>Add</button>
+    <button onClick={e => this.handleRemove()}>Remove</button>
+</div>
+~~~
 
 * `<div ref="chart"></div>`用來放我們的d3長條圖。之後可以用this.refs.chart存取他。
 * 有兩個按鈕，按了之後會更新this.state.dataset，觸發`render()`。
@@ -155,11 +155,11 @@ React提供介面，讓你在生命週期的一些階段裡可以安全操作你
 
 * 圖表根據`this.state.dataset`去畫。
 
-<pre><code class="language-javascript">
+~~~jsx
 _renderChart() {
     const { w, h } = this.props;
     const dataset = this.state.dataset;
-    
+
     let xScale = d3.scale.ordinal()
       .domain(d3.range(dataset.length))
       .rangeRoundBands([0, w], 0.05);
@@ -194,22 +194,22 @@ _renderChart() {
       .attr("x", -xScale.rangeBand()) // Exit to the left side
       .remove();
   }
-</code></pre>
+~~~
 
 ### componentDidMount
 
 componentDidMount發生在此component第一次render完畢，此時可以存取this.refs.chart，用來初始化放圖表用的svg：
 
-<pre><code class="language-javascript">
+~~~jsx
 componentDidMount() {
     this.svg = d3.select(this.refs.chart)
       .append('svg')
       .attr('width', this.props.w)
       .attr('height', this.props.h);
-    
+
     this._renderChart();
 }
-</code></pre>
+~~~
 
 放完後呼叫this._renderChart()，讓d3根據資料畫出第一次的圖表。
 
@@ -217,11 +217,11 @@ componentDidMount() {
 
 componentDidUpdate發生在component update完，此時的state已是更新後的狀態，可以呼叫_renderChart()重繪：
 
-<pre><code class="language-javascript">
+~~~jsx
 componentDidUpdate() {
     this._renderChart();
 }
-</code></pre>
+~~~
 
 ## 結論
 
