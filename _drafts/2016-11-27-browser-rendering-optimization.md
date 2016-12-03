@@ -1,38 +1,46 @@
+這篇是[Browser Rendering Optimization](https://classroom.udacity.com/courses/ud860)的筆記。
+
 # Critical Rendering Path
 
-## What goes into a frame?
+## What Goes Into One Frame?
 
-Parse HTML
+每個frame瀏覽器會執行下面的動作：
 
-=> Build DOM & CSSOM  to Render Tree (element + style) (*Recalculate Styles*)
+1. 建立 DOM & CSSOM to Render Tree (element + style) (*Recalculate Styles*) 
 
-=> layout算出元素實際的長寬和位置 (*Layout*)
+2. 算出元素實際的長寬和位置 (*Layout*)
 
-=> 實際在螢幕上畫出pixel，raster(在螢幕上描點)，畫出長方形(*Paint*)
+3. 實際在螢幕上畫出pixel，例如：raster(在螢幕上描點)，畫出長方形等動作 (*Paint*)
 
-=> 把畫好的layer疊起來(*Composite*)
+4. 把畫好的layer疊起來 (*Composite*)
+
+再加上可能會在frame的一開始用JS做style的修改，所以每個frame裡執行的動作依序為：
+
+**JS > Style > Layout > Paint > Composite**
 
 ## Layout and Paint
 
-1. `margin-left` (those will change dimension)
+每種CSS屬性，依據其特性，會觸發不同的動作，例如：
 
-JS > Style > Layout > Paint > Composite
+1. `margin-left` (會改變長寬的屬性，會觸發layout)
 
-2. `color` (those only changes appearance)
+  JS > Style > Layout > Paint > Composite
 
-JS > Style > -- > Paint > Composite
+2. `color` (只改變外觀不改變長寬的屬性，不觸發Layout，但會觸發Paint)
 
-3. `transform`
+  JS > Style > -- > Paint > Composite
 
-JS > Style > -- > Paint > Composite
+3. `transform` (只是改變Layer和Layer之間的相對位置，不觸發layout和paint，只觸發composite)
 
-[csstriggers.com](https://csstriggers.com/)
+  JS > Style > -- > -- > Composite
+  
+觸發越多動作，效能就越差，較容易造成畫面卡卡。
+
+CSS屬性會觸發哪些動作，可參閱[csstriggers.com](https://csstriggers.com/)
 
 # App Lifecycles
 
-RAIL (Response, Animate, Idle, Load)
-
-載入順序：Load > Idle > Animate > Response
+App的狀態可粗分成以下四類：RAIL (Response, Animate, Idle, Load)
 
 |Item|Time|Description
 |---|---|---|
@@ -41,33 +49,34 @@ RAIL (Response, Animate, Idle, Load)
 |Idle|50ms|頁面上有東西到使用者開始跟頁面互動的間隔|
 |Load|1s|頁面初始到第一次看到畫面上有東西的間隔|
 
-例：[FLIP, or First Last Invert Play](https://www.youtube.com/watch?v=7N1vvNUavVU)
+頁面初始的載入順序：Load > Idle > Animate > Response。
 
-原理是先做繁重的計算，之後的動畫就會很順暢，只要計算落在100ms的response time裡，使用者就不會感覺到LAG。(opacity和transform只會觸發composite，但clipRect會觸發layout，效能有差別)
+**Load**: 要看*Critical Rendering Path*，想辦法加速讓頁面可以在一秒內render出頁面上最重要的資訊。
 
-# Weapons of Jank Destruction
+**Idle**: 50ms之後使用者就會開始點頁面上的東西，所以如果有額外資料要下載要趁現在。
 
-請愛用Chrome DevTool Timeline，手機可也測唷～
+**Animate**: 每個frame保守估計只有10ms左右讓你執行JS，不能在裡面做繁重的運算或是下載資源。
+
+**Response**: 使用者點某個按鈕，他會預期最遲100ms後畫面會有反應（例如動畫之類的），所以如果動畫不順，可以利用這100ms先做運算，幫助之後的動畫變順暢，例：[FLIP, or First Last Invert Play](https://www.youtube.com/watch?v=7N1vvNUavVU)
 
 # JavaScript
 
 ## Request Animation Frame
 
-requestAnimationFrame讓你在每個frame的一開始可以執行JS
+60fps等於每個frame必須要在16ms內執行完。如果要用JS做動畫，瀏覽器提供`requestAnimationFrame`的API，讓你在每個frame的一開始可以執行JS。
 
-這是每個frame要做的事情：
-JS > Style > Layout > Paint > Composite
+為何要在每個frame的開始執行JS? 因為若是在Style > Layout > Paint > Composite的過程間執行JS並且改變style，那這整個過程極有可能要重新來過，容易超過16ms的限制。
 
-每次執行JS最好不要超過3ms~4ms，因為每個frame最多只有16ms，扣掉瀏覽器的工作，保守估計10ms裡還要做style ~ composite。
+有了`requestAnimationFrame`可以盡量確保在每個frame的開始就執行JS，但每次執行JS最好不要超過3ms~4ms，因為每個frame最多只有16ms，扣掉瀏覽器的工作，保守估計剩10ms的時間裡還要做Style > Layout > Paint > Composite等工作。
 
 用法：
 
 ~~~jsx
 function animate() {
-  ...
-  requestAnimationFrame(animate)
+  ... // 執行一格動畫
+  requestAnimationFrame(animate) // 排程下一格的動畫
 }
-animate()
+animate() // 開始動畫
 ~~~
 
 ## Web Worker
