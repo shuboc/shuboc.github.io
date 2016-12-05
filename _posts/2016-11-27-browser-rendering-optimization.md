@@ -1,4 +1,20 @@
-這篇是[Browser Rendering Optimization](https://classroom.udacity.com/courses/ud860)的筆記。
+---
+layout: post
+title: "Browser Rendering Optimization"
+---
+
+這篇是線上課程[Browser Rendering Optimization](https://classroom.udacity.com/courses/ud860)的筆記。
+
+課程使用Chrome DevTool，可以看到很多CSS和JS在無意間造成頁面render效能的瓶頸的例子，也呼應了課程不斷強調的最重要的一件事：**在最佳化之前先對網站作profile。**
+
+# TL;DR
+
+1. 瀏覽器每個Frame固定執行的步驟：JS > Style > Layout > Paint > Composite
+2. RAIL: 使用者在各個使用情況下的反應時間不同，亦即Response(100s), Animation(16ms), Idle(50ms), Loading(1s)，超出限制將會感覺畫面頓頓的。
+3. 如果要用JS呈現動畫，請愛用`requestAnimationFrame`，並且將運算壓在3~4ms間；大量運算請愛用web worker。
+4. 小心*Forced Synchronous Layout*，亦即在JS中引發大量重複計算Layout
+5. CSS的selector matching，越簡單(層數越少)效能越好。
+6. CSS的屬性，依性質可能觸發Layout/Paint/Composite，觸發越少效能越好。可用CSS增加畫面的Layer，減少Layout或Paint的次數。
 
 # Critical Rendering Path
 
@@ -81,7 +97,9 @@ animate() // 開始動畫
 
 ## Web Worker
 
-JS通常是single thread，所以如果跑需要大量計算的JS，main thread沒辦法做其他事，畫面看起來就會變慢或是凍結。web worker可以跑script在另外一個thread上，main thread透過postMessage跟worker thread溝通，同樣地worker也透過postMessage和main thread溝通。
+JS是single thread，所以如果跑需要大量計算的JS，main thread沒辦法做其他事，畫面看起來就會凍結。web worker可以跑script在另外一個thread上，main thread透過`postMessage`跟worker thread溝通，同樣地worker也透過`postMessage`和main thread溝通。
+
+例：起一個worker做image processing，做完通知main thread結果
 
 main.js
 
@@ -121,8 +139,6 @@ Selector Matching越簡單越快。（在CSSOM tree裡面上下搜尋的次數�
 
 ## Layout Thrashing
 
-render步驟：JS > Style > Layout > Paint > Composite
-
 ~~~jsx
 for (var p = 0; p < paragraphs; ++p) {
   var blockWidth = greenBlock.offsetWidth;
@@ -130,11 +146,13 @@ for (var p = 0; p < paragraphs; ++p) {
 }
 ~~~
 
-JS讀offsetWidth需要先layout才知道，所以迴圈的每一輪都會重跑一次layout，稱為Forced Synchronous Layout (FSL)
+記得每個frame被執行的動作：JS > Style > Layout > Paint > Composite
 
-layout完馬上改變style，導致迴圈的下一輪又要重新layout，在JS執行的階段做多次的FSL，導致執行時間超過一個frame，稱作Layout Thrashing。
+JS讀`offsetWidth`需要先layout才知道，所以迴圈的每一輪都會重跑一次layout，稱為**Forced Synchronous Layout** (FSL)。注意每次Layout都會花不少時間。
 
-解法：只讀一次style，可以避掉迴圈重複layout的步驟，並且batch修改style
+Layout完馬上改變style，導致迴圈的下一輪又要重新layout。在JS執行的階段做多次的FSL，導致執行時間太長，稱作Layout Thrashing。
+
+解法：只讀一次style，並且batch修改style，可以避掉迴圈重複layout的步驟，
 
 ~~~jsx
 var blockWidth = greenBlock.offsetWidth;
@@ -155,19 +173,17 @@ Chrome DevTool > More Tools > Rendering > Paint Flashing
 
 頁面上的元素可以分成不同的layer，在composite的階段會把畫好的layer疊在一起，變成最終呈現在螢幕上的樣子。
 
-例如頁面上有主頁和menu兩個元素，menu會從畫面側邊滑入/滑出。瀏覽器可以像皮影戲一般每個frame都重畫(Painting)主頁和Menu，但是painting是很花資源的。
+例如頁面上有主頁和menu兩個元素，menu會從畫面側邊滑入/滑出。瀏覽器可以每個frame都重畫(*Paint*)主頁和Menu，但是paint是很花資源的。
 
-瀏覽器可以預先在Paint階段分別畫好主頁和menu兩個layer，composite階段只要調整menu的水平位置，並且依位置蓋住主頁。之後的frame就可以略過Painting的步驟了，因為已經畫過了。
+如果設定得當，瀏覽器可以預先在Paint階段分別畫好主頁和menu兩個layer，Composite階段只要調整menu的水平位置蓋在主頁上面，之後就不需要重複Paint了。
 
 ## 如何產生layer
 
 No transform hack:
 
 ~~~css
-// Chrome, Firefox
-will-change: transform; // or any visual property
-// Safari
+/* Chrome, Firefox */
+will-change: transform; /* or any visual property */
+/* Other */
 transform: translateZ(0);
 ~~~
-
-可以針對一些資源做優化。
