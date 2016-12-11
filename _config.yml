@@ -7,10 +7,10 @@
 
 # Site settings
 # title: "{name: \"趙勗博\"}"
-title: '{Chris Chao: "blogging"}'
-email: chaoshubo@gmail.com
+title: '{"Shubo": "FED Notes"}'
+email: shubochao@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  程式設計，網頁設計，學習筆記，讀書心得...
+  前端學習筆記
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://shuboc.github.io" # the base hostname & protocol for your site
 twitter_username: apiggy0204
