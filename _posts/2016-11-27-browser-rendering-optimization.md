@@ -58,7 +58,7 @@ CSS屬性會觸發哪些動作，可參閱[csstriggers.com](https://csstriggers.
 
 App的狀態可粗分成以下四類：RAIL (Response, Animate, Idle, Load)
 
-|Item|Time|Description
+|Item|Time|Description|
 |---|---|---|
 |Response|100ms|使用者與頁面互動到頁面反饋的間隔|
 |Animate|16ms|60fps => 1000ms/60f = 16ms/f|
