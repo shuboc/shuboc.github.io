@@ -234,6 +234,7 @@ $header-height: 70px;
 
     h2 {
         font-size: 32px;
+        margin-top: $spacing-unit * 2; // Maintain vertical rhythm
 
         @include media-query($on-laptop) {
             font-size: 28px;
