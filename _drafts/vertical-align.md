@@ -15,7 +15,7 @@
 1. 事先知道容器高度，而且確定內文不會換行 => 用height + line-height
 2. 事先不知道容器高度 e.g.內容會越長越高 => 用display: table-cell + vertical-align: middle
 
-vertical-align和display: table-cell一起用的時候會有不同的意義：表示如何對齊一個table-cell的內容。將table-cell的vertical-align: middle => 內容會被垂直置中。(但注意內容的元素間可能有高有低，所以還需要調整他們的vertical-align屬性) 
+vertical-align和display: table-cell一起用的時候會有不同的意義：表示如何對齊一個table-cell的內容。將table-cell的vertical-align: middle => 內容會被垂直置中。(但注意內容的元素間可能有高有低，所以還需要調整他們的vertical-align屬性)
 
 #table layout
 
@@ -37,3 +37,8 @@ e.g. //TODO
 3. 當欄位寬度不固定時，display: table-cell可以用width: 100%盡量撐滿寬度
 
 
+http://christopheraue.net/2014/03/05/vertical-align/
+
+vertical-align
+
+baseline
