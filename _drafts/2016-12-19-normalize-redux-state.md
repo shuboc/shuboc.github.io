@@ -8,12 +8,12 @@ todos: [
     id: 1,
     text: 'hey',
     completed: true,
-  }, 
+  },
   {
     id: 2,
     text: 'ho',
     completed: true,
-  }, 
+  },
   {
     id: 3,
     text: 'let’s go',
@@ -278,7 +278,11 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
 
 thunk middleware
 
-~~~js
+Redux只能處理plain object形式的action，所以如果要處理thunk必須要有專屬的middleware。
+
+thunk middleware要處理的事情大致上就是:如果action是一個function的話就執行他，並且把dispatch跟getState作為參數餵進去:
+
+~~~jsx
 const thunk = (store) => (next) => (action) =>
   typeof action === 'function' ?
     action(store.dispatch, store.getState) :
