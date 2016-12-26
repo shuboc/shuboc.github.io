@@ -176,7 +176,7 @@ const idsByFilter = combineReducers({
 })
 ~~~
 
-`createList`回傳list reducer：
+`createList`回傳list reducer（須判斷filter是否和此list reducer相同）：
 
 ~~~jsx
 const createList = (filter) => {
@@ -196,10 +196,10 @@ const createList = (filter) => {
 
 export default createList
 
-export const getIds = (state) => state
+export const getIds = (state) => state // Selector
 ~~~
 
-`byId`用來
+`byId`用來存放`todo`實體：
 
 ~~~jsx
 const byId = (state = {}, action) => {
@@ -217,18 +217,19 @@ const byId = (state = {}, action) => {
 
 export default byId
 
-export const getTodo = (state, id) => state[id]
+export const getTodo = (state, id) => state[id] // Selector
 ~~~
 
-並export `getIds` selector
-
-id => todo，並export `getTodo` selector
-
-最後，export `getVisibleTodos` selector，其中會用到`getIds`和`getTodo`selector
+最後，export `getVisibleTodos` selector，其中會用到`getIds`把filter對應的`id` array取出，再分別對每個`id`用`getTodo` selector取出對應的`todo`實體。
 
 ~~~js
 import byId, * as fromById from './byId'
 import createList, * as fromList from './createList'
+
+const todos = combineReducers({
+  byId,
+  idsByFilter
+})
 
 export const getVisibleTodos = (state, filter) => {
   const ids = fromList.getIds(state.idsByFilter[filter])
@@ -238,13 +239,32 @@ export const getVisibleTodos = (state, filter) => {
 
 ## Thunk
 
-> abstraction that represents multiple actions dispatched over a period of time
+取資料的動作通常需要分成很多步，例如打api時先dispatch開始的action，等到api回傳結果後再dispatch另外一個表示成功或失敗的action：
 
-打api前先dispatch開始的action， api回傳後再打
+~~~jsx
+class VisibleTodoList extends Component {
+  fetchData() {
+    const { filter, receiveTodos } = this.props
+    fetchTodos(filter).then(todos => {
+      receiveTodos(filter, todos)
+    })
+  }
+  
+  ...
+}
+~~~
 
-returning a promise by a thunk can be useful
+將這一組動作抽象成一個單一的action，比較直觀，減少重複，也較不容易漏掉一連串動作之後的任何一步（例如：error handling等等）。
 
-典型的api fetching action：
+這個抽象的方法稱為**thunk**。
+
+thunk基本上可以想成是一個函數，擁有以下的形式：
+
+~~~jsx
+(dispatch, getState) => { // Do something ... }
+~~~
+
+那麼fetchTodos可以寫成以下形式：
 
 ~~~js
 export const fetchTodos = (filter) => (dispatch, getState) => {
@@ -252,11 +272,13 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
     return Promise.resolve()
   }
 
+  // 改變狀態成為loading
   dispatch({
     type: 'FETCH_TODOS_REQUEST',
     filter
   })
 
+  // 打API，根據回傳值做處理
   return api.fetchTodos(filter).then(
     response => {
       dispatch({
