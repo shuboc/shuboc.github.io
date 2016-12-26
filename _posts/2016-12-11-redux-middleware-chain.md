@@ -20,7 +20,7 @@ middleware可以用`store.dispatch`當作原料，製造出一個新的patch過�
 ~~~jsx
 const logger = (store) => {
   const rawDispatch = store.dispatch
-  
+
   // Patched dispatch
   return (action) => {
     console.group(action.type)
@@ -69,7 +69,7 @@ const promise = (store) => {
     if (typeof action.then === 'function') {
       return action.then(rawDispatch)
     }
-    
+
     return rawDispatch(action)
   }
 }
@@ -124,7 +124,7 @@ const promise = (store) => {
     if (typeof action.then === 'function') {
       return action.then(next)
     }
-    
+
     return next(action)
   }
 }
@@ -204,7 +204,7 @@ const applyMiddleware = (store, middlewares) => {
   middlewares.slice().reverse().forEach(middleware => {
     dispatch = middleware(store)(dispatch)
   })
-  
+
   // Return a copy of store where dispatch() is patched
   return {...store, dispatch}
 }
@@ -212,7 +212,17 @@ const applyMiddleware = (store, middlewares) => {
 
 ## applyMiddleware
 
-講了一大串，其實只是為了更加理解middleware，實際上我們身為開發者不需要自己寫`applyMiddleware `，因為redux本身就提供了`applyMiddleware`。（鬆了一口氣）
+上面的`applyMiddleware`版本並不應該在真實的環境中使用，只是為了更加理解middleware，實際上redux原生就提供了[applyMiddleware](https://github.com/reactjs/redux/blob/master/src/applyMiddleware.js) API。
+
+實際參考原生版本的`applyMiddleware`，可以發現跟我們自己寫的差異是:
+
+原生版apply middlewares時所使用的參數為 `middleware({getState, dispatch})(store.dispatch)`，其中`getState`和`dispatch`都是redux原生未經修改的版本。因此middleware會變成`({getState, dispatch}) => (next) => { // Do something... }`的形式。
+
+這表示:
+
+1. 在middleware裡面看到的`dispatch`對應到redux原生的`dispatch`
+2. 比起上面的版本，在middleware裡面會多看到`getState`，對應到redux原生的`getState`
+3. 而`next`對應到middleware chain中的下一個middleware。
 
 當然`logger`和`promise`都有現成的，分別為`redux-logger`和`redux-promise`。
 
@@ -236,13 +246,8 @@ const configureStore = () => {
 }
 ~~~
 
-## 後記
-
-參考了Redux作者的兩篇教學，整理完之後發現根本就只是英翻中而已（而且還是翻得不好那種...汗），總之覺得Redux用起來簡單但又充滿了學問，希望之後有時間和動力來拜讀Redux的原始碼～
-
 ## 參考資料
 
 [Middleware](http://redux.js.org/docs/advanced/Middleware.html)
 
 [Redux: The Middleware Chain](https://egghead.io/lessons/javascript-redux-the-middleware-chain)
-
