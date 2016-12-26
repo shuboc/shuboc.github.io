@@ -15,7 +15,7 @@ JS最大的特色之一就是原型繼承(prototypal inheritance)。JS的每個�
 
 那要如何使用建構式呢？舉個例子，如果要建構`Cat`物件，並且每個物件都有各自的`name`特性(property)，那我們可以定義`Cat`建構式如下：
 
-~~~js
+~~~jsx
 // Constructor
 function Cat(name) {
 	this.name = name;
@@ -24,7 +24,7 @@ function Cat(name) {
 
 那要如何定義物件的方法呢？ＪＳ的每個函式都內建`prototype`特性，我們只需要將方法定義在`prototype`特性裡，如下：
 
-~~~js
+~~~jsx
 // Define 'speak' method for Cat objects
 Cat.prototype.speak = function() {
 	console.log(this.name + ": meow!");
@@ -33,7 +33,7 @@ Cat.prototype.speak = function() {
 
 定義完建構式和方法後，我們用`new`運算子呼叫建構式：
 
-~~~js
+~~~jsx
 var kitty = new Cat("Kitty");
 kitty.speak(); // Kitty: meow!
 ~~~
@@ -67,7 +67,7 @@ kitty.speak(); // Kitty: meow!
 
 除此之外，建構式必須和`new`運算子搭配使用，但萬一我們忘了，直接呼叫建構式：
 
-~~~js
+~~~jsx
 var kitty = Cat("kitty");
 ~~~
 
@@ -81,7 +81,7 @@ ES5中提供了`Object.create()`的方法，用來創造新物件。使用方法
 
 傳入作為參數的`proto`物件，將會被當作回傳新物件的prototype。舉例而言，我們可以創造一個物件`cat`。裡面定義了`speak()`方法：
 
-~~~js
+~~~jsx
 var cat = {
 	speak: function() {
 		console.log(this.name + ": meow!");
@@ -91,7 +91,7 @@ var cat = {
 
 當我們呼叫`Object.create(cat)`時，回傳的新物件將會繼承自`cat`。
 
-~~~js
+~~~jsx
 // Create a new cat
 var kitty = Object.create(cat);
 kitty.name = "Kitty";
@@ -104,7 +104,7 @@ kitty.speak(); // Kitty: meow!
 
 被傳進作為參數的物件，將會被當成新物件的原型物件。所以`Object.create()`的內部可能會長得像這樣（示意）：
 
-~~~js
+~~~jsx
 if (!Object.create) {
 	Object.create = function(o) {
 		function F() {}
