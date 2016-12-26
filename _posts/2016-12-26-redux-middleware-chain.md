@@ -138,7 +138,7 @@ const promise = (store) => {
 
 按照`[promise, logger]`的順序，`rawDispatch`自然就會變成middleware chain中的下一個`dispatch`，例如：`promise`裡的`rawDispatch `是`logger`回傳的`dispatch`。而`logger`的`rawDispatch `是原版的`store.dispatch`。
 
-所以我們可以給予`rawDispatch`一個更恰當的稱呼：`next`。
+所以我們可以給予`rawDispatch`一個更容易理解的稱呼：`next`。
 
 ## Apply middlewares
 
@@ -210,21 +210,102 @@ const applyMiddleware = (store, middlewares) => {
 }
 ~~~
 
-## applyMiddleware
+## applyMiddleware API
 
 上面的`applyMiddleware`版本並不應該在真實的環境中使用，只是為了更加理解middleware，實際上redux原生就提供了[applyMiddleware](https://github.com/reactjs/redux/blob/master/src/applyMiddleware.js) API。
 
-實際參考原生版本的`applyMiddleware`，可以發現跟我們自己寫的差異是:
+實際的程式碼並不長，但這段程式碼其實大有學問：
 
-原生版apply middlewares時所使用的參數為 `middleware({getState, dispatch})(store.dispatch)`，其中`getState`和`dispatch`都是redux原生未經修改的版本。因此middleware會變成`({getState, dispatch}) => (next) => { // Do something... }`的形式。
+~~~jsx
+export default function applyMiddleware(...middlewares) {
+  return (createStore) => (reducer, preloadedState, enhancer) => {
+    var store = createStore(reducer, preloadedState, enhancer)
+    var dispatch = store.dispatch
+    var chain = []
 
-這表示:
+    var middlewareAPI = {
+      getState: store.getState,
+      dispatch: (action) => dispatch(action)
+    }
+    chain = middlewares.map(middleware => middleware(middlewareAPI))
+    dispatch = compose(...chain)(store.dispatch)
 
-1. 在middleware裡面看到的`dispatch`對應到redux原生的`dispatch`
-2. 比起上面的版本，在middleware裡面會多看到`getState`，對應到redux原生的`getState`
+    return {
+      ...store,
+      dispatch
+    }
+  }
+}
+~~~
+
+middleware的形式為`({dispatch, getState}) => next => action => {...}`，所以第一步是將`getState`和`dispatch`注入middleware：
+
+~~~jsx
+var middlewareAPI = {
+  getState: store.getState,
+  dispatch: (action) => dispatch(action)
+}
+chain = middlewares.map(middleware => middleware(middlewareAPI))
+~~~
+
+下一步是將`next`注入middleware，這裡用到了[`compose`](https://github.com/reactjs/redux/blob/master/src/compose.js) API，其功能顧名思義是將一連串的function組合起來，例如：`compose(f, g, h)`會回傳`(...args) => f(g(h(...args)))`。
+
+不斷地把下一個middleware回傳的function當作`next`參數注入當前的middleware，一層一層把`store.dispatch`包起來以後，就可以得到最終版的`dispatch`：
+
+~~~jsx
+dispatch = compose(...chain)(store.dispatch)
+~~~
+
+最後有一個很重要的關鍵，就是被注入的`middleware.dispatch`實際上用了閉包的形式，也就是`action => dispatch`存了`dispatch`這個變數，並且在最後用`dispatch = compose(...chain)(store.dispatch)`改寫`dispatch`這個變數，也就是說**實際上被注入middleware的`dispatch`變數是加上所有middleware功能的最終版**。
+
+~~~jsx
+var dispatch = store.dispatch
+...
+middlewareAPI = {
+  ...,
+  dispatch: (action) => dispatch(action)
+}
+...
+dispatch = compose(...chain)(store.dispatch)
+~~~
+
+總結以上，原生版本的`applyMiddleware`跟我們自己寫的差異主要有以下幾點：
+
+1. **在middleware裡面看到的`dispatch`對應到加上所有middleware功能的最終版`dispatch`**。
+2. 在middleware裡面會多看到`getState`，對應到redux原生的`getState`。
 3. 而`next`對應到middleware chain中的下一個middleware。
 
-當然`logger`和`promise`都有現成的，分別為`redux-logger`和`redux-promise`。
+在官方文件對於middleware的[說明](http://redux.js.org/docs/advanced/Middleware.html#attempt-6-naïvely-applying-the-middleware)中，可以看到以下說明：
+
+> It does a bit of trickery to make sure that if you call `store.dispatch(action)` from your middleware instead of `next(action)`, the action will actually travel the whole middleware chain again, including the current middleware. This is useful for asynchronous middleware, as we have seen previously.
+
+我想所謂的trickery，指的就是將擁有所有middleware功能的`dispatch`注入至middleware，如此一來透過`dispatch`呼叫的action都必然會完整經過middleware chain的每一環。
+
+[redux-thunk](https://github.com/gaearon/redux-thunk)中就運用了類似的特性。thunk是一種利用function的形式來表示一連串的async actions：
+
+~~~jsx
+const someAsyncAction = () => (dispatch, getState) => {
+  dispatch(anotherAsyncAction())
+}
+
+dispatch(someAsyncAction())
+~~~
+
+thunk middleware的[實作](https://github.com/gaearon/redux-thunk/blob/master/src/index.js)大致上是將`dispatch`注入到thunk中，讓thunk自行控制內部非同步機制如何實作：
+
+~~~jsx
+const thunkMiddleware = ({ dispatch, getState }) => next => action => {
+  if (typeof action === 'function') {
+    return action(dispatch, getState)
+  }
+
+  return next(action);
+}
+~~~
+
+thunk最方便的功能之一就是thunk裡面可以`dispatch`其他的async thunk，靠的就是applyMiddleware的實作中注入了有全部middleware功能的`dispatch`，保證任何被`dispatch`的thunk一定會被thunk middleware處理到。
+
+### API Usage
 
 ~~~jsx
 import { createStore, applyMiddleware } from 'redux';
@@ -248,6 +329,10 @@ const configureStore = () => {
 
 ## 參考資料
 
-[Middleware](http://redux.js.org/docs/advanced/Middleware.html)
+[redux.js.org](http://redux.js.org/docs/advanced/Middleware.html)
 
-[Redux: The Middleware Chain](https://egghead.io/lessons/javascript-redux-the-middleware-chain)
+[Egghead](https://egghead.io/lessons/javascript-redux-the-middleware-chain)
+
+[深入理解Redux的Middleware](http://guoyongfeng.github.io/idoc/html/React%E8%AF%BE%E7%A8%8B%E4%B8%93%E9%A2%98/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Redux%E7%9A%84Middleware.html)
+
+[Understanding Redux Middleware](https://medium.com/@meagle/understanding-87566abcfb7a#.oxsw8x1if)
