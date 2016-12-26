@@ -1,3 +1,8 @@
+---
+layout: post
+title: "Normalize Reudx State"
+---
+
 ## Normalize the shape
 
 假設todo list的資料格式如下：
@@ -254,17 +259,17 @@ class VisibleTodoList extends Component {
 }
 ~~~
 
-將這一組動作抽象成一個單一的action，比較直觀，減少重複，也較不容易漏掉一連串動作之後的任何一步（例如：error handling等等）。
+將這一組動作抽象成一個單一的action，比較直觀，減少重複，也較不容易漏掉一連串動作之後的任何一步（例如：error handling等）。
 
 這個抽象的方法稱為**thunk**。
 
-thunk基本上可以想成是一個函數，擁有以下的形式：
+thunk基本上可以想成是一個擁有以下的形式的function：
 
 ~~~jsx
 (dispatch, getState) => { // Do something ... }
 ~~~
 
-那麼fetchTodos可以寫成以下形式：
+`fetchTodos`的一連串步驟可以寫成thunk的形式：
 
 ~~~js
 export const fetchTodos = (filter) => (dispatch, getState) => {
@@ -298,11 +303,11 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
 }
 ~~~
 
-thunk middleware
+## Thunk Middleware
 
-Redux只能處理plain object形式的action，所以如果要處理thunk必須要有專屬的middleware。
+Redux只能處理plain object形式的action，所以如果要處理thunk必須要用middleware。
 
-thunk middleware要處理的事情大致上就是:如果action是一個function的話就執行他，並且把dispatch跟getState作為參數餵進去:
+thunk middleware要處理的事情大致上是：如果action是一個function的話就執行，並且把`dispatch`跟`getState`作為參數餵進去:
 
 ~~~jsx
 const thunk = (store) => (next) => (action) =>
