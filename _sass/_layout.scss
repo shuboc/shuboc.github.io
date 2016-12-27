@@ -182,6 +182,10 @@ $header-height: 70px;
   background-color: $background-color;
   padding: $spacing-unit 2*$spacing-unit;
   border-radius: 1em;
+
+  @include media-query($on-laptop) {
+    padding: 0.5 * $spacing-unit;
+  }
 }
 
 .post-list {
@@ -198,6 +202,10 @@ $header-height: 70px;
         background-color: $background-color;
         padding: $spacing-unit 2*$spacing-unit;
         border-radius: 1em;
+
+        @include media-query($on-laptop) {
+            padding: 0.5 * $spacing-unit;
+        };
     }
 }
 
@@ -232,9 +240,14 @@ $header-height: 70px;
 .post-content {
     margin-bottom: $spacing-unit;
 
+    h2,
+    h3,
+    h4 {
+      margin: $spacing-unit 0;
+    }
+
     h2 {
         font-size: 32px;
-        margin-top: $spacing-unit * 2; // Maintain vertical rhythm
 
         @include media-query($on-laptop) {
             font-size: 28px;
