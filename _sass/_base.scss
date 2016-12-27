@@ -149,6 +149,17 @@ pre {
 }
 
 
+table {
+  border-collapse: collapse;
+  border: 1px solid #EEE;
+
+  th, td {
+    height: $spacing-unit;
+    padding: 0 0.5 * $spacing-unit;
+  }
+}
+
+
 
 /**
  * Wrapper
