@@ -115,7 +115,7 @@ bars.exit().remove();
 
 定義某個元件的ref屬性：
 
-~~~jsx
+~~~markup
 <div ref="myDiv" />
 ~~~
 
@@ -140,9 +140,9 @@ React提供介面，讓你在生命週期的一些階段裡可以安全操作你
 
 ~~~jsx
 <div>
-    <div ref="chart"></div>
-    <button onClick={e => this.handleAdd()}>Add</button>
-    <button onClick={e => this.handleRemove()}>Remove</button>
+  <div ref="chart"></div>
+  <button onClick={e => this.handleAdd()}>Add</button>
+  <button onClick={e => this.handleRemove()}>Remove</button>
 </div>
 ~~~
 

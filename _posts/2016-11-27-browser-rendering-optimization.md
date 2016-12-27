@@ -178,7 +178,7 @@ Chrome DevTool > More Tools > Rendering > Paint Flashing
 
 No transform hack:
 
-~~~css
+~~~css-extras
 /* Chrome, Firefox */
 will-change: transform; /* or any visual property */
 /* Other */

@@ -14,9 +14,9 @@ title: "CSS 平行四邊形"
 
 將長方形的元素套用skew的效果後，就變成平行四邊形了。
 
-<pre><code class="language-css">
+~~~css-extras
 transform: skewX(-30deg);
-</code></pre>
+~~~
 
 問題：標籤裡的文字也會跟著變斜。
 
@@ -26,16 +26,16 @@ transform: skewX(-30deg);
 
 母元素:
 
-<pre><code class="language-css">
+~~~css-extras
 .tag {
     display: inline-block;
     position: relative;
 }
-</code></pre>
+~~~
 
 Pseudo element:
 
-<pre><code class="language-css">
+~~~css-extras
 .tag::before {
     position: absolute;
     z-index: -1;
@@ -44,7 +44,7 @@ Pseudo element:
     background: #58a;
     transform: skew(-30deg);
 }
-</code></pre>
+~~~
 
 幾個重點：
 

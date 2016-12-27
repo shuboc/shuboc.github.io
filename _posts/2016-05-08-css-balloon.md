@@ -13,38 +13,38 @@ title: "How to Make a CSS Balloon/Tooltip"
 
 三角形：設定上方邊界的顏色及寬度(三角形的高，8px)，下方無邊界，左右邊界設定透明及寬度（三角形的底，8px + 8px = 16px）：
 
-~~~scss
-  &:before {
-    content: "";
-    border-top: solid 8px $balloon-color;
-    border-left: solid 8px transparent;
-    border-right: solid 8px transparent;
-  }
+~~~css-extras
+&:before {
+  content: "";
+  border-top: solid 8px $balloon-color;
+  border-left: solid 8px transparent;
+  border-right: solid 8px transparent;
+}
 ~~~
 
 氣球的本體：利用`content`屬性秀出文字內容，`attr(balloon-data)`會去讀元素的`balloon-data`屬性。
 
-~~~scss
-  &:after {
-    content: attr(balloon-data);
-  }
+~~~css-extras
+&:after {
+  content: attr(balloon-data);
+}
 ~~~
 
 可以直接在html元素裡用`balloon-data`屬性設定氣球的文字內容：
 
-~~~html
-  <button 
-    class="button balloon"
-    balloon-data="Hello."> <!-- Balloon content -->
-    Hover me!
-  </button>
+~~~markup
+<button
+  class="button balloon"
+  balloon-data="Hello."> <!-- Balloon content -->
+  Hover me!
+</button>
 ~~~
 
 ## 如何定位
 
 讓氣球相對於按鈕定位：調整`position`屬性，利用`absolute`元素的定位，是相對於他所處上層容器的特性，來達到相對定位的效果。參考：[關於 position 屬性](http://zh-tw.learnlayout.com/position.html)
 
-~~~scss
+~~~css-extras
 .balloon {
   position: relative;
   &:before, &:after {
@@ -59,27 +59,27 @@ title: "How to Make a CSS Balloon/Tooltip"
 
 > Adding top/left of 50% moves the top/left margin edge of the element to the middle of the parent, and translate() function with the (negative) value of -50% moves the element by the half of its size. Hence the element will be positioned at the middle.
 
-~~~scss
-  &:before, &:after {
-    bottom: 100%;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
+~~~css-extras
+&:before, &:after {
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 ~~~
 
 ## Hover效果
 
 hover前後改變`opacity`屬性並設定轉場效果：
 
-~~~scss
-  &:before, &:after {
-    transition: all 0.18s ease-out 0.18s;
-    opacity: 0;
-  }
+~~~css-extras
+&:before, &:after {
+  transition: all 0.18s ease-out 0.18s;
+  opacity: 0;
+}
   
-  &:hover:before, &:hover:after {
-    opacity: 1;
-  }
+&:hover:before, &:hover:after {
+  opacity: 1;
+}
 ~~~
 
 ## 心得

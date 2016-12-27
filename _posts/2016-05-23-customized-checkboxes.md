@@ -14,7 +14,7 @@ title: "iOS Toggle Button in Pure CSS"
 
 checkbox通常是由一個核取方塊(input)加一段文字(label)構成：
 
-~~~html
+~~~markup
 <input type="checkbox" id="chkbox" />
 <label for="chkbox">Some description</label>
 ~~~
@@ -26,7 +26,7 @@ checkbox通常是由一個核取方塊(input)加一段文字(label)構成：
 
 ⬆︎ 自訂的核取方塊：
 
-~~~css
+~~~css-extras
 input[type="checkbox"] + label::before {
   content: '\a0';
   display: inline-block;
@@ -38,7 +38,7 @@ input[type="checkbox"] + label::before {
 
 ⬆︎ 用pseudo element做一個白底的方形，替代原本的方塊。
 
-~~~css
+~~~css-extras
 input[type="checkbox"]:checked + label::before {
   content: '\2713';
   background: yellowgreen;
@@ -47,7 +47,7 @@ input[type="checkbox"]:checked + label::before {
 
 ⬆︎ 打勾的時候顯示✓，背景變成黃綠色。
 
-~~~css
+~~~css-extras
 input[type="checkbox"]:disabled + label::before {
   background: #DDD;
   color: #AAA;
@@ -56,7 +56,7 @@ input[type="checkbox"]:disabled + label::before {
 
 ⬆︎ 也可以設定disabled時的樣式喔。
 
-~~~css
+~~~css-extras
 input[type="checkbox"] {
   position: absolute;
   clip: rect(0, 0, 0, 0);
@@ -70,7 +70,7 @@ input[type="checkbox"] {
 
 iOS的toggle button，其實沒啥學問，就只是一個橢圓形加一個圓形的組合ＸＤ。正好虛擬元素剛也有兩個可以用，這邊拿label::before做橢圓形，另外一個label::after做圓形。
 
-~~~css
+~~~css-extras
 .list-item input[type="checkbox"] + label {
   position: relative;
   width: 100%;
@@ -91,7 +91,7 @@ iOS的toggle button，其實沒啥學問，就只是一個橢圓形加一個圓�
 
 ### Change Color: Using Box-Shadow
 
-~~~css
+~~~css-extras
 .list-item input[type="checkbox"] + label::before {
   box-shadow: 0 0 0 gray inset;
   transition: all 0.25s ease-in-out 0s;
@@ -111,7 +111,7 @@ iOS的toggle button，其實沒啥學問，就只是一個橢圓形加一個圓�
 * 調整line-height = height (似乎只對單行的純文字有效，加進img span 虛擬元素等等就歪了)
 * 不死心，試著調整`label * { vertical-align: middle;}`，還是會上下飄。加進虛擬元素似乎會改變一個元素的高度，讓他垂直對不齊。如果是img之類的東西也沒辦法用這方法跟文字同時置中對齊。放棄。
 
-~~~css
+~~~css-extras
 .list-item {
   display: flex;
   align-items: center;
@@ -124,7 +124,7 @@ iOS的toggle button，其實沒啥學問，就只是一個橢圓形加一個圓�
 
 ⬆︎ 最後還是用flexbox的align-items屬性，瞬間把所有事情都搞定ＸＤ。然後設定label的flex: 1將寬度延展到最長，按鈕才能定位在最右邊。
 
-~~~scss
+~~~css-extras
 @mixin vertical-align {
   top: 50%;
   transform: translateY(-50%);
@@ -139,7 +139,7 @@ iOS的toggle button，其實沒啥學問，就只是一個橢圓形加一個圓�
 
 今天用了虛擬元素來自訂checkbox。最棒的地方在於，HTML還是和原本一樣簡潔，也不用額外的JS！
 
-~~~html
+~~~markup
 <input type="checkbox" id="chkbox" />
 <label for="chkbox">Some description</label>
 ~~~
@@ -149,4 +149,4 @@ iOS的toggle button，其實沒啥學問，就只是一個橢圓形加一個圓�
 ### Reference
 
 * [CSS版面配置](http://zh-tw.learnlayout.com/position.html)
-* [iOS 6 switch style checkboxes with pure CSS](http://lea.verou.me/2013/03/ios-6-switch-style-checkboxes-with-pure-css/)
+* [iOS 6 switch style checkboxes with pure CSS](http://lea.verou.me/2013/03/ios-6-switch-style-checkboxes-with-pure-css/)~~~markup
