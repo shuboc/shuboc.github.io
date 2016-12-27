@@ -7,7 +7,7 @@ title: "Browser Rendering Optimization"
 
 課程使用Chrome DevTool，可以看到很多CSS和JS在無意間造成頁面render效能的瓶頸的例子，也呼應了課程不斷強調的最重要的一件事：**在最佳化之前先對網站作profile。**
 
-# TL;DR
+## TL;DR
 
 1. 瀏覽器每個Frame固定執行的步驟：JS > Style > Layout > Paint > Composite
 2. RAIL: 使用者在各個使用情況下的反應時間不同，亦即Response(100s), Animation(16ms), Idle(50ms), Loading(1s)，超出限制將會感覺畫面頓頓的。
@@ -16,25 +16,22 @@ title: "Browser Rendering Optimization"
 5. CSS的selector matching，越簡單(層數越少)效能越好。
 6. CSS的屬性，依性質可能觸發Layout/Paint/Composite，觸發越少效能越好。可用CSS增加畫面的Layer，減少Layout或Paint的次數。
 
-# Critical Rendering Path
+## Critical Rendering Path
 
-## What Goes Into One Frame?
+### What Goes Into One Frame?
 
 每個frame瀏覽器會執行下面的動作：
 
-1. 建立 DOM & CSSOM to Render Tree (element + style) (*Recalculate Styles*) 
-
-2. 算出元素實際的長寬和位置 (*Layout*)
-
-3. 實際在螢幕上畫出pixel，例如：raster(在螢幕上描點)，畫出長方形等動作 (*Paint*)
-
-4. 把畫好的layer疊起來 (*Composite*)
+1. 建立 DOM & CSSOM to Render Tree (element + style) (**Recalculate Styles**) 
+2. 算出元素實際的長寬和位置 (**Layout**)
+3. 實際在螢幕上畫出pixel，例如：raster(在螢幕上描點)，畫出長方形等動作 (**Paint**)
+4. 把畫好的layer疊起來 (**Composite**)
 
 再加上可能會在frame的一開始用JS做style的修改，所以每個frame裡執行的動作依序為：
 
 **JS > Style > Layout > Paint > Composite**
 
-## Layout and Paint
+### Layout and Paint
 
 每種CSS屬性，依據其特性，會觸發不同的動作，例如：
 
@@ -54,16 +51,16 @@ title: "Browser Rendering Optimization"
 
 CSS屬性會觸發哪些動作，可參閱[csstriggers.com](https://csstriggers.com/)
 
-# App Lifecycles
+## App Lifecycles
 
 App的狀態可粗分成以下四類：RAIL (Response, Animate, Idle, Load)
 
-|Item|Time|Description|
-|---|---|---|
-|Response|100ms|使用者與頁面互動到頁面反饋的間隔|
-|Animate|16ms|60fps => 1000ms/60f = 16ms/f|
-|Idle|50ms|頁面上有東西到使用者開始跟頁面互動的間隔|
-|Load|1s|頁面初始到第一次看到畫面上有東西的間隔|
+|Item    |Time |Description                      |
+|:-------|:----|:--------------------------------|
+|Response|100ms|使用者與頁面互動到頁面反饋的間隔      |
+|Animate |16ms |60fps => 1000ms/60f = 16ms/f     |
+|Idle    |50ms |頁面上有東西到使用者開始跟頁面互動的間隔|
+|Load    |1s   |頁面初始到第一次看到畫面上有東西的間隔  |
 
 頁面初始的載入順序：Load > Idle > Animate > Response。
 
@@ -75,9 +72,9 @@ App的狀態可粗分成以下四類：RAIL (Response, Animate, Idle, Load)
 
 **Response**: 使用者點某個按鈕，他會預期最遲100ms後畫面會有反應（例如動畫之類的），所以如果動畫不順，可以利用這100ms先做運算，幫助之後的動畫變順暢，例：[FLIP, or First Last Invert Play](https://www.youtube.com/watch?v=7N1vvNUavVU)
 
-# JavaScript
+## JavaScript
 
-## Request Animation Frame
+### Request Animation Frame
 
 60fps等於每個frame必須要在16ms內執行完。如果要用JS做動畫，瀏覽器提供`requestAnimationFrame`的API，讓你在每個frame的一開始可以執行JS。
 
@@ -95,7 +92,7 @@ function animate() {
 animate() // 開始動畫
 ~~~
 
-## Web Worker
+### Web Worker
 
 JS是single thread，所以如果跑需要大量計算的JS，main thread沒辦法做其他事，畫面看起來就會凍結。web worker可以跑script在另外一個thread上，main thread透過`postMessage`跟worker thread溝通，同樣地worker也透過`postMessage`和main thread溝通。
 
@@ -123,7 +120,7 @@ this.onmessage = function(e) {
 }
 ~~~
 
-## GC
+### GC
 
 Some helpful links:
 
@@ -131,13 +128,13 @@ https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascrip
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management
 http://buildnewgames.com/garbage-collector-friendly-code/
 
-# Styles and Layout
+## Styles and Layout
 
-## Selector Matching
+### Selector Matching
 
 Selector Matching越簡單越快。（在CSSOM tree裡面上下搜尋的次數越少越好）
 
-## Layout Thrashing
+### Layout Thrashing
 
 ~~~jsx
 for (var p = 0; p < paragraphs; ++p) {
@@ -161,15 +158,15 @@ for (var p = 0; p < paragraphs; ++p) {
 }
 ~~~
 
-# Compositing and Painting
+## Compositing and Painting
 
-## Painting
+### Painting
 
 Chrome DevTool > More Tools > Rendering > Paint Flashing
 
 在網頁上操作時可以看到哪些部分被重繪。
 
-## Composite
+### Composite
 
 頁面上的元素可以分成不同的layer，在composite的階段會把畫好的layer疊在一起，變成最終呈現在螢幕上的樣子。
 
@@ -177,7 +174,7 @@ Chrome DevTool > More Tools > Rendering > Paint Flashing
 
 如果設定得當，瀏覽器可以預先在Paint階段分別畫好主頁和menu兩個layer，Composite階段只要調整menu的水平位置蓋在主頁上面，之後就不需要重複Paint了。
 
-## 如何產生layer
+### 如何產生layer
 
 No transform hack:
 
