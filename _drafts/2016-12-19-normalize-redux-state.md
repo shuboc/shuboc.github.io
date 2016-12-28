@@ -244,12 +244,14 @@ export const getVisibleTodos = (state, filter) => {
 
 ## Thunk
 
-取資料的動作通常需要分成很多步，例如打api時先dispatch開始的action，等到api回傳結果後再dispatch另外一個表示成功或失敗的action：
+打API動作通常有很多步驟，而且經常是非同步的。例如打API時先dispatch開始的action`requestTodos`，讓狀態變成loading中，dispatch打API的action`fetchTodos`，等到API回傳結果後，再dispatch`receiveTodos`來更新結果：
 
 ~~~jsx
 class VisibleTodoList extends Component {
   fetchData() {
-    const { filter, receiveTodos } = this.props
+    const { filter, receiveTodos, fetchTodos } = this.props
+    requestTodos(filter)
+
     fetchTodos(filter).then(todos => {
       receiveTodos(filter, todos)
     })
@@ -259,20 +261,21 @@ class VisibleTodoList extends Component {
 }
 ~~~
 
-將這一組動作抽象成一個單一的action，比較直觀，減少重複，也較不容易漏掉一連串動作之後的任何一步（例如：error handling等）。
+這一連串動作一定得一起使用，容易漏掉一連串動作之中的單獨一步。如果能夠將這一組動作抽象成一個單一的action，比較不容易出錯，也更容易復用。
 
-這個抽象的方法稱為**thunk**。
+這種抽象的方法稱為**thunk**。
 
-thunk基本上可以想成是一個擁有以下的形式的function：
+thunk就是一個回傳function的function，更精確一點可以想成是一個擁有以下的形式的function：
 
 ~~~jsx
-(dispatch, getState) => { // Do something ... }
+(...args) => (dispatch, getState) => { // Do something ... }
 ~~~
 
-`fetchTodos`的一連串步驟可以寫成thunk的形式：
+如果把一連串的動作都抽象在一個`fetchTodos`的thunk內，大致如下：
 
-~~~js
+~~~jsx
 export const fetchTodos = (filter) => (dispatch, getState) => {
+  // 判斷是否正在打API
   if (getIsFetching(getState(), filter)) {
     return Promise.resolve()
   }
@@ -283,7 +286,7 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
     filter
   })
 
-  // 打API，根據回傳值做處理
+  // 打API，根據回傳值成功或失敗分別做處理
   return api.fetchTodos(filter).then(
     response => {
       dispatch({
@@ -305,22 +308,20 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
 
 ## Thunk Middleware
 
-Redux只能處理plain object形式的action，所以如果要處理thunk必須要用middleware。
+Redux只能處理plain object形式的action，所以如果要處理thunk必須要用專屬的middleware。
 
-thunk middleware要處理的事情大致上是：如果action是一個function的話就執行，並且把`dispatch`跟`getState`作為參數餵進去:
+thunk middleware的核心很短，大概只有以下幾行：
 
 ~~~jsx
-const thunk = (store) => (next) => (action) =>
+const thunk = store => next => action =>
   typeof action === 'function' ?
     action(store.dispatch, store.getState) :
     next(action)
 ~~~
 
-next跟store.dispatch差在哪，為什麼是action(store.dispatch)而不是action(next)?
+Thunk middleware要處理的事情大致上是：如果action是一個function的話就執行，並且把`dispatch`跟`getState`作為參數餵進thunk。如此一來thunk能夠存取到`dispatch`，就能夠自行決定各種同步/非同步`dispatch`的流程，也能根據當下state做流程控制。
 
-因為thunk middleware中任何被dispatch的action可以從頭到尾跑過一次middleware chain，所以在thunk裡面再dispatch thunk也沒問題
-
-store.dispatch是被所有middlewares層層包裝過的完成品，next是只包了前幾層middleware的半成品，所以可以想成需要完整被所有middleware處理過的action就是用store.dispatch，否則就用next把action給下一個middleware處理
+值得注意的是Thunk middleware中任何被`dispatch`的action可以從頭到尾跑過一次middleware chain，所以在thunk裡面再`dispatch`thunk也沒問題喔，因為會被thunk middleware處理到。（關於dispatch的更詳細的說明可以參考[Redux Middleware Chain](/2016/12/26/redux-middleware-chain.html)。）
 
 ## Normalizr
 
