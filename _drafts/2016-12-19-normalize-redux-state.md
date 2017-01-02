@@ -3,9 +3,9 @@ layout: post
 title: "Normalize Reudx State"
 ---
 
-## Normalize the shape
+## Normalize the State Shape
 
-假設todo list的資料格式如下：
+假設todo list的API response以Array的形式回傳：
 
 ~~~jsx
 todos: [
@@ -27,10 +27,10 @@ todos: [
 ]
 ~~~
 
-我們可以將`todos` reducer分成兩部分：
+如果我們使用Redux來管理我們的資料，可以將`todos` reducer分成兩部分：
 
-1. 以`id`為key的`todos`的集合
-2. `id`的array
+1. **`byId`**: 以`id`為key的`todos`的集合
+2. **`allIds`**: `id`的array
 
 用`combineReducer` API寫起來就像這樣：
 
@@ -101,68 +101,15 @@ const allIds = (state = [], action) => {
 }
 ~~~
 
-## Fetch data when filter changes
+## Why Normalized State?
 
-如果要打API拿資料，在`componentDidMount`和`componentDidUpdate`裡面做：
+我們也可以將API回傳的Array原封不動存進Redux state裡面，為什麼要用上面那麼麻煩的作法呢？
 
-~~~jsx
-class VisibleTodoList extends Component {
-  fetchData() {
-    const { filter, receiveTodos } = this.props
-    fetchTodos(filter).then(todos => {
-      receiveTodos(filter, todos)
-    })
-  }
+考慮一個情境：假設現在todo list要加進filter的功能，分別有`all`, `active`, `completed`三種filter，那我們會需要三個list存三種filter的結果，其中不同的list可能包含重複的實體，比方說`active`的結果必然出現在`all`的結果之中。這種設計下，假設某一筆Todo實體更新的話，必然要對所有list遍歷更新對應的實體，既沒有效率又容易忘記更新。
 
-  componentDidMount() {
-    this.fetchData()
-  }
+Redux的中心思想是：**相同的資料只有一份，並且集中管理**。如果我們用Normalized過後的形式來存這三個list，就會變成用一個mapping table存`todo`的實體，及三個list分別存filter過後的`id` array。
 
-  // filter改變時重新取資料
-  componentDidUpdate(prevProps) {
-    if (this.props.filter !== prevProps.filter) {
-      this.fetchData()
-    }
-  }
-
-  render() {
-    const { toggleTodo, ...rest } = this.props
-    return (
-      <TodoList
-        {...rest}
-        onTodoClick={toggleTodo}
-      />
-    )
-  }
-}
-~~~
-
-用react-redux把資料餵進Component：
-
-~~~js
-import * as actions from '../actions';
-
-VisibleTodoList = withRouter(connect(
-  mapStateToProps,
-  actions
-)(VisibleTodoList));
-~~~
-
-注意`mapDispatchToProps`參數可以直接傳`actions`物件，可以在`this.props`裡存取與action同名的方法。例如：直接呼叫`this.props.receiveTodos`可以dispatch `receiveTodo` action
-
-~~~js
-fetchData() {
-  const { filter, receiveTodos } = this.props
-  fetchTodos(filter).then(todos => {
-    receiveTodos(filter, todos)
-  })
-}
-~~~
-
-
-## Update the state with the fetched data
-
-假設現在todo list要加進filter的功能，分別有all active completed三種filter，我們可以用一個object存`todo`的實體，及三個list分別存filter過後的`id` array。
+這麼一來好處就很明顯：這樣的state shape確保了相同的資料只有一份。維護state也很容易和高效率。如果其中一個list更動，我只需要將整個`id` array替換掉，毋須改變實體；如果實體改變，我只需要改變實體，靠著`id` array能夠對應到修改過後的實體。
 
 ~~~jsx
 const todos = combineReducers({
@@ -242,6 +189,66 @@ export const getVisibleTodos = (state, filter) => {
 };
 ~~~
 
+## Fetch data
+
+如果要打API拿資料，在`componentDidMount`和`componentDidUpdate`裡面做：
+
+~~~jsx
+class VisibleTodoList extends Component {
+  fetchData() {
+    const { 
+      filter, 
+      requestTodos, 
+      receiveTodos, 
+      fetchTodos 
+    } = this.props
+    
+    requestTodos(filter)
+    fetchTodos(filter).then(todos => {
+      receiveTodos(filter, todos)
+    })
+  }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  // filter改變時重新取資料
+  componentDidUpdate(prevProps) {
+    if (this.props.filter !== prevProps.filter) {
+      this.fetchData()
+    }
+  }
+
+  render() {
+    const { toggleTodo, ...rest } = this.props
+    return (
+      <TodoList
+        {...rest}
+        onTodoClick={toggleTodo}
+      />
+    )
+  }
+}
+~~~
+
+用react-redux的`connect` API把資料餵進Component：
+
+~~~js
+import * as actions from '../actions';
+
+class VisibleTodoList extends Component {
+  ...
+}
+
+VisibleTodoList = withRouter(connect(
+  mapStateToProps,
+  actions
+)(VisibleTodoList));
+~~~
+
+注意`mapDispatchToProps`參數直接傳`actions`物件，可以在`this.props`裡存取與action同名的方法，亦即呼叫`this.props.fetchTodos`可以dispatch `fetchTodos` action。
+
 ## Thunk
 
 打API動作通常有很多步驟，而且經常是非同步的。例如打API時先dispatch開始的action`requestTodos`，讓狀態變成loading中，dispatch打API的action`fetchTodos`，等到API回傳結果後，再dispatch`receiveTodos`來更新結果：
@@ -249,9 +256,14 @@ export const getVisibleTodos = (state, filter) => {
 ~~~jsx
 class VisibleTodoList extends Component {
   fetchData() {
-    const { filter, receiveTodos, fetchTodos } = this.props
+    const { 
+      filter, 
+      requestTodos, 
+      receiveTodos, 
+      fetchTodos 
+    } = this.props
+    
     requestTodos(filter)
-
     fetchTodos(filter).then(todos => {
       receiveTodos(filter, todos)
     })
@@ -321,14 +333,49 @@ const thunk = store => next => action =>
 
 Thunk middleware要處理的事情大致上是：如果action是一個function的話就執行，並且把`dispatch`跟`getState`作為參數餵進thunk。如此一來thunk能夠存取到`dispatch`，就能夠自行決定各種同步/非同步`dispatch`的流程，也能根據當下state做流程控制。
 
-值得注意的是Thunk middleware中任何被`dispatch`的action可以從頭到尾跑過一次middleware chain，所以在thunk裡面再`dispatch`thunk也沒問題喔，因為會被thunk middleware處理到。（關於dispatch的更詳細的說明可以參考[Redux Middleware Chain](/2016/12/26/redux-middleware-chain.html)。）
+值得注意的是Thunk middleware中任何被`dispatch`的action可以從頭到尾跑過一次middleware chain，所以在thunk裡面再`dispatch`thunk也沒問題喔，因為會被thunk middleware處理到。（關於`dispatch`的更詳細的說明可以參考[Redux Middleware Chain](/2016/12/26/redux-middleware-chain.html)。）
 
 ## Normalizr
 
+我們從`fetchTodo` API得到的repsonse會是以array的形式返回：
+
+~~~jsx
+// Before
+[
+  {
+    "id": "ee05070a-eda5-4fcc-a685-a5cf4be6dc60",
+    "text": "hey",
+    "completed": true
+  },
+  {
+    "id": "0bce8ddb-4f8a-44cf-9050-203ecdbb0d93",
+    "text": "ho",
+    "completed": true
+  },
+  {
+    "id": "91451381-2fd6-4f81-b316-cc93f927c34a",
+    "text": "let’s go",
+    "completed": false
+  }
+]
+~~~
+
+而`addTodo` API會回傳新增的單筆`Todo`：
+
+~~~jsx
+{
+  "id": "d6a1c390-e729-4c7f-87b2-2f9cb728d6c2",
+  "text": "test",
+  "completed": false
+}
+~~~
+
 ### addTodo
 
+action
+
 ~~~js
-// action
+// Thunk as an action
 export const addTodo = text => dispatch => {
   api.addTodo(text).then(response =>
     dispatch({
@@ -338,6 +385,8 @@ export const addTodo = text => dispatch => {
   )
 }
 ~~~
+
+reducer
 
 ~~~js
   // reducer for id
@@ -357,29 +406,50 @@ export const addTodo = text => dispatch => {
   }
 ~~~
 
-### response
+### Define schema
 
 ~~~js
-// Before
-[
-  {
-    "id": "ee05070a-eda5-4fcc-a685-a5cf4be6dc60",
-    "text": "hey",
-    "completed": true
-  },
-  {
-    "id": "0bce8ddb-4f8a-44cf-9050-203ecdbb0d93",
-    "text": "ho",
-    "completed": true
-  },
-  {
-    "id": "91451381-2fd6-4f81-b316-cc93f927c34a",
-    "text": "let’s go",
-    "completed": false
-  }
-]
+import { Schema, arrayOf } from 'normalizr'
 
-// After
+export const todo = new Schema('todos')
+export const arrayOfTodos = arrayOf(todo)
+~~~
+
+addTodo - using normalizr
+
+~~~js
+export const addTodo = text => dispatch => {
+  api.addTodo(text).then(response => {
+    dispatch({
+      type: 'ADD_TODO_SUCCESS',
+      response: normalize(response, schema.todo)
+    })
+  })
+}
+~~~
+
+fetchTodos - using normalizr
+
+~~~js
+export const fetchTodos = (filter) => (dispatch, getState) => {
+
+  // ...
+
+  api.fetchTodos(filter).then(
+    response => {
+      dispatch({
+        type: 'FETCH_TODOS_SUCCESS',
+        filter,
+        response: normalize(response, schema.arrayOfTodos)
+      })
+    },
+~~~
+
+### Normalized Response
+
+`fetchTodos` API
+
+~~~js
 {
   "entities": {
     "todos": {
@@ -408,15 +478,9 @@ export const addTodo = text => dispatch => {
 }
 ~~~
 
-~~~js
-// Before
-{
-  "id": "d6a1c390-e729-4c7f-87b2-2f9cb728d6c2",
-  "text": "test",
-  "completed": false
-}
+`addTodo` API
 
-// After
+~~~js
 {
   "entities": {
     "todos": {
@@ -431,57 +495,26 @@ export const addTodo = text => dispatch => {
 }
 ~~~
 
-### define schema
+### Simplify Reducer
 
-~~~js
-import { Schema, arrayOf } from 'normalizr'
+`byId` reducer (before)
 
-export const todo = new Schema('todos')
-export const arrayOfTodos = arrayOf(todo)
-~~~
-
-action
-
-~~~js
-export const addTodo = text => dispatch => {
-  api.addTodo(text).then(response => {
-    dispatch({
-      type: 'ADD_TODO_SUCCESS',
-      response: normalize(response, schema.todo)
-    })
-  })
+~~~jsx
+const byId = (state = {}, action) => {
+  switch(action.type) {
+  	case 'ADD_TODO':
+  	case 'TOGGLE_TODO':
+  	  return {
+  	    ...state,
+  	    [action.id]: todo(state[action.id], action) // Update the entity
+  	  }
+  	default:
+  	  return state
+  }  
 }
 ~~~
 
-normalize response
-
-~~~js
-export const fetchTodos = (filter) => (dispatch, getState) => {
-
-  // ...
-
-  api.fetchTodos(filter).then(
-    response => {
-      dispatch({
-        type: 'FETCH_TODOS_SUCCESS',
-        filter,
-        response: normalize(response, schema.arrayOfTodos)
-      })
-    },
-~~~
-
-~~~js
-export const addTodo = text => dispatch => {
-  api.addTodo(text).then(response => {
-    dispatch({
-      type: 'ADD_TODO_SUCCESS',
-      response: normalize(response, schema.todo)
-    })
-  })
-}
-~~~
-
-simplify reducer
+`byId` reducer (after)
 
 ~~~js
 const byId = (state = {}, action) => {
@@ -495,6 +528,28 @@ const byId = (state = {}, action) => {
   return state
 };
 ~~~
+
+`ids` reducer (before)
+
+~~~js
+  // reducer for id
+  const ids = (state = [], action) => {
+    switch (action.type) {
+      case 'FETCH_TODOS_SUCCESS':
+        return action.filter === filter ?
+          action.response.map(todo => todo.id) :
+          state
+      case 'ADD_TODO_SUCCESS':
+        return filter !== 'completed' ?
+          [...state, action.response.id] :
+          state
+      default:
+        return state
+    }
+  }
+~~~
+
+`ids` reducer (after)
 
 ~~~js
 const ids = (state = [], action) => {
