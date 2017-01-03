@@ -370,43 +370,11 @@ Thunk middleware要處理的事情大致上是：如果action是一個function�
 }
 ~~~
 
-### addTodo
-
-action
-
-~~~js
-// Thunk as an action
-export const addTodo = text => dispatch => {
-  api.addTodo(text).then(response =>
-    dispatch({
-      type: 'ADD_TODO_SUCCESS',
-      response
-    })
-  )
-}
-~~~
-
-reducer
-
-~~~js
-  // reducer for id
-  const ids = (state = [], action) => {
-    switch (action.type) {
-      case 'FETCH_TODOS_SUCCESS':
-        return action.filter === filter ?
-          action.response.map(todo => todo.id) :
-          state
-      case 'ADD_TODO_SUCCESS':
-        return filter !== 'completed' ?
-          [...state, action.response.id] :
-          state
-      default:
-        return state
-    }
-  }
-~~~
+如果我們要從array形式的response轉換成normalized的形式，可以利用`normalizr`這個library。
 
 ### Define schema
+
+首先我們要定義資料的schema。我們的todo回傳值可能有單筆或多筆資料，因此我們定義`const todo = Schema('todos')`以及`const arrayOfTodos = arrayOf(todo)`兩種schema。
 
 ~~~js
 import { Schema, arrayOf } from 'normalizr'
@@ -415,9 +383,11 @@ export const todo = new Schema('todos')
 export const arrayOfTodos = arrayOf(todo)
 ~~~
 
-addTodo - using normalizr
+用`normalize(response, schema.todo)`轉換`addTodo` API的`response`：
 
 ~~~js
+import {normalize} from 'normalizr'
+
 export const addTodo = text => dispatch => {
   api.addTodo(text).then(response => {
     dispatch({
@@ -428,9 +398,28 @@ export const addTodo = text => dispatch => {
 }
 ~~~
 
-fetchTodos - using normalizr
+轉換之後的結果：
 
 ~~~js
+{
+  "entities": {
+    "todos": {
+      "d6a1c390-e729-4c7f-87b2-2f9cb728d6c2": {
+        "id": "d6a1c390-e729-4c7f-87b2-2f9cb728d6c2",
+        "text": "test",
+        "completed": false
+      }
+    }
+  },
+  "result": "d6a1c390-e729-4c7f-87b2-2f9cb728d6c2"
+}
+~~~
+
+用`normalize(response, schema.arrayOfTodos)`轉換`fetchTodos` API的`response`：
+
+~~~js
+import {normalize} from 'normalizr'
+
 export const fetchTodos = (filter) => (dispatch, getState) => {
 
   // ...
@@ -443,11 +432,17 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
         response: normalize(response, schema.arrayOfTodos)
       })
     },
+    error => {
+      dispatch({
+        type: 'FETCH_TODOS_FAILURE',
+        filter,
+        message: error.message || 'Something went wrong!'
+      })
+    }
+  )
 ~~~
 
-### Normalized Response
-
-`fetchTodos` API
+轉換之後的結果：
 
 ~~~js
 {
@@ -478,43 +473,16 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
 }
 ~~~
 
-`addTodo` API
+可以看到轉換的結果，都分成兩個部分：
 
-~~~js
-{
-  "entities": {
-    "todos": {
-      "d6a1c390-e729-4c7f-87b2-2f9cb728d6c2": {
-        "id": "d6a1c390-e729-4c7f-87b2-2f9cb728d6c2",
-        "text": "test",
-        "completed": false
-      }
-    }
-  },
-  "result": "d6a1c390-e729-4c7f-87b2-2f9cb728d6c2"
-}
-~~~
+1. `entities`：一個mapping table，key值對應我們定義的`todos` schema，value是todo實體的集合：一個以todo的`id`為key，`todo`實體為value的object。
+2. `result`：todo的`id`，差別在於`addTodo`回傳的是單筆`id`，而`fetchTodos`回傳的是`id` array。
 
 ### Simplify Reducer
 
-`byId` reducer (before)
+`normalizr`處理過後的格式可以完美對應到我們想要的normalized state。
 
-~~~jsx
-const byId = (state = {}, action) => {
-  switch(action.type) {
-  	case 'ADD_TODO':
-  	case 'TOGGLE_TODO':
-  	  return {
-  	    ...state,
-  	    [action.id]: todo(state[action.id], action) // Update the entity
-  	  }
-  	default:
-  	  return state
-  }  
-}
-~~~
-
-`byId` reducer (after)
+`byId` reducer：`action.response.entities.todos`就是`byId` state所表示的todo實體mapping table，所以只要將`action.response.entities.todos`合併進原本的state即可。
 
 ~~~js
 const byId = (state = {}, action) => {
@@ -529,27 +497,7 @@ const byId = (state = {}, action) => {
 };
 ~~~
 
-`ids` reducer (before)
-
-~~~js
-  // reducer for id
-  const ids = (state = [], action) => {
-    switch (action.type) {
-      case 'FETCH_TODOS_SUCCESS':
-        return action.filter === filter ?
-          action.response.map(todo => todo.id) :
-          state
-      case 'ADD_TODO_SUCCESS':
-        return filter !== 'completed' ?
-          [...state, action.response.id] :
-          state
-      default:
-        return state
-    }
-  }
-~~~
-
-`ids` reducer (after)
+`ids` reducer：`action.response.result`就是`ids` state所表示的todo array。在`ADD_TODO_SUCCESS`的情況下，`result`為單筆，append至state尾端即可；在`FETCH_TODO_SUCCESS`的情況下，`result`為array，直接取代原本的state即可。
 
 ~~~js
 const ids = (state = [], action) => {
