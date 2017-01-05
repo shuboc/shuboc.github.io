@@ -1,38 +1,52 @@
 ---
 layout: post
-title: "Normalize Reudx State"
+title: "Normalize Redux State"
 ---
+
+這篇主要整理Redux如何透過API存取遠端資料，以及如何儲存從API取得的資料。
+
+## TL;DR
+
+使用Redux存資料時，推薦存成normalized的形式，可以確保相同的資料只會有一份，減少資料更新時同步的錯誤。
+
+打API時建議使用thunk的形式。
+
+可以透過`normalizr`將API的回應轉換成normalized的形式。
 
 ## Normalize the State Shape
 
-假設todo list的API response以Array的形式回傳：
+假設我們今天要做一個todo list的應用，API response以array的形式回傳：
 
 ~~~jsx
-todos: [
-  {
-    id: 1,
-    text: 'hey',
-    completed: true,
-  },
-  {
-    id: 2,
-    text: 'ho',
-    completed: true,
-  },
-  {
-    id: 3,
-    text: 'let’s go',
-    completed: false,
-  }
-]
+{
+  todos: [
+    {
+      id: 1,
+      text: 'hey',
+      completed: true,
+    },
+    {
+      id: 2,
+      text: 'ho',
+      completed: true,
+    },
+    {
+      id: 3,
+      text: 'let’s go',
+      completed: false,
+    }
+  ]
+}
 ~~~
 
-如果我們使用Redux來管理我們的資料，可以將`todos` reducer分成兩部分：
+使用Redux來管理資料的情況，要如何規劃儲存的資料結構呢？
+
+假設每筆`todo.id`都是唯一的，我們可以將`todos` reducer分成兩部分：
 
 1. **`byId`**: 以`id`為key的`todos`的集合
 2. **`allIds`**: `id`的array
 
-用`combineReducer` API寫起來就像這樣：
+用`combineReducer` API組合reducer如下：
 
 ~~~jsx
 const todos = combineReducer({
@@ -41,11 +55,11 @@ const todos = combineReducer({
 })
 ~~~
 
-### `byId`
+### `byId` reducer
 
 用來存放`todo`實體。實際上的資料結構是一個object，以`todo.id`為key，`todo`實體作為value。
 
-在`ADD_TODO`和`TOGGLE_TODO`時要去更新`todo`實體：
+在`ADD_TODO`和`TOGGLE_TODO`時更新`todo`實體：
 
 ~~~jsx
 const byId = (state = {}, action) => {
@@ -84,11 +98,11 @@ const todo = (state = {}, action) => {
 }
 ~~~
 
-### `allIds`
+### `allIds` reducer
 
 用來存放`id`的array。
 
-當`ADD_TODO`時需要往array新增一筆`todo.id`；當`TOGGLE_TODO`時，因已透過`byId`更新對應的實體，在此處不需做處理：
+當`ADD_TODO`時，向array新增一筆`todo.id`：
 
 ~~~jsx
 const allIds = (state = [], action) => {
@@ -105,50 +119,21 @@ const allIds = (state = [], action) => {
 
 我們也可以將API回傳的Array原封不動存進Redux state裡面，為什麼要用上面那麼麻煩的作法呢？
 
-考慮一個情境：假設現在todo list要加進filter的功能，分別有`all`, `active`, `completed`三種filter，那我們會需要三個list存三種filter的結果，其中不同的list可能包含重複的實體，比方說`active`的結果必然出現在`all`的結果之中。這種設計下，假設某一筆Todo實體更新的話，必然要對所有list遍歷更新對應的實體，既沒有效率又容易忘記更新。
+考慮一個情境：假設現在todo list要加進filter的功能，分別有`all`, `active`, `completed`三種filter，那我們會需要三個list存三種filter的結果，其中不同的list可能包含重複的實體（例如：`active`的結果必然出現在`all`的結果之中）。這種設計下，假設某一筆Todo實體更新的話，必然要對所有list遍歷更新對應的實體，既沒有效率又容易忘記更新。
 
-Redux的中心思想是：**相同的資料只有一份，並且集中管理**。如果我們用Normalized過後的形式來存這三個list，就會變成用一個mapping table存`todo`的實體，及三個list分別存filter過後的`id` array。
+Redux的中心思想是：**相同的資料只有一份，並且集中管理**。如果我們用normalized的形式來存這三個list，就會變成用一個mapping table存`todo`的實體，及三個list分別存filter過後的`id` array。
 
-這麼一來好處就很明顯：這樣的state shape確保了相同的資料只有一份。維護state也很容易和高效率。如果其中一個list更動，我只需要將整個`id` array替換掉，毋須改變實體；如果實體改變，我只需要改變實體，靠著`id` array能夠對應到修改過後的實體。
+資料放在實體的集合中，可以確保**相同的資料只有一份**。如果實體改變了，只需要更新實體的集合一次，每個list靠著`id`就能夠對應到修改過後的實體。
+
+### Reducer with Filter
+
+Reducer實作如下：
 
 ~~~jsx
 const todos = combineReducers({
   byId,
   idsByFilter
 })
-~~~
-
-`idsByFilter`用來存放三個filtered list：
-
-~~~jsx
-const idsByFilter = combineReducers({
-  all: createList('all'),
-  active: createList('active'),
-  completed: createList('completed')
-})
-~~~
-
-`createList`回傳list reducer（須判斷filter是否和此list reducer相同）：
-
-~~~jsx
-const createList = (filter) => {
-  return (state = [], action) => {
-    if (action.filter !== filter) {
-      return state
-    }
-
-    switch (action.type) {
-      case 'RECEIVE_TODOS':
-        return action.response.map(todo => todo.id)
-      default:
-        return state
-    }
-  }
-}
-
-export default createList
-
-export const getIds = (state) => state // Selector
 ~~~
 
 `byId`用來存放`todo`實體：
@@ -172,9 +157,43 @@ export default byId
 export const getTodo = (state, id) => state[id] // Selector
 ~~~
 
-最後，export `getVisibleTodos` selector，其中會用到`getIds`把filter對應的`id` array取出，再分別對每個`id`用`getTodo` selector取出對應的`todo`實體。
 
-~~~js
+`idsByFilter`用來存放三個filtered list：
+
+~~~jsx
+const idsByFilter = combineReducers({
+  all: createList('all'),
+  active: createList('active'),
+  completed: createList('completed')
+})
+~~~
+
+`createList`回傳list reducer（須檢查`action.filter`）：
+
+~~~jsx
+const createList = (filter) => {
+  return (state = [], action) => {
+    if (action.filter !== filter) {
+      return state
+    }
+
+    switch (action.type) {
+      case 'RECEIVE_TODOS':
+        return action.response.map(todo => todo.id)
+      default:
+        return state
+    }
+  }
+}
+
+export default createList
+
+export const getIds = state => state // Selector
+~~~
+
+最後export `getVisibleTodos` selector，其中會用到`getIds`把filter對應的`id` array取出，再分別對每個`id`用`getTodo` selector取出對應的`todo`實體：
+
+~~~jsx
 import byId, * as fromById from './byId'
 import createList, * as fromList from './createList'
 
@@ -189,9 +208,9 @@ export const getVisibleTodos = (state, filter) => {
 };
 ~~~
 
-## Fetch data
+## Fetch Data from API
 
-如果要打API拿資料，在`componentDidMount`和`componentDidUpdate`裡面做：
+如果要打API拿資料，可以寫一個`fetchData()`，在`componentDidMount()`和`componentDidUpdate()`裡面呼叫：
 
 ~~~jsx
 class VisibleTodoList extends Component {
@@ -232,26 +251,26 @@ class VisibleTodoList extends Component {
 }
 ~~~
 
-用react-redux的`connect` API把資料餵進Component：
+用`react-redux`的`connect` API把資料餵進`Component`：
 
-~~~js
-import * as actions from '../actions';
+~~~jsx
+import * as actions from '../actions'
 
 class VisibleTodoList extends Component {
   ...
 }
 
-VisibleTodoList = withRouter(connect(
+VisibleTodoList = connect(
   mapStateToProps,
   actions
-)(VisibleTodoList));
+)(VisibleTodoList)
 ~~~
 
-注意`mapDispatchToProps`參數直接傳`actions`物件，可以在`this.props`裡存取與action同名的方法，亦即呼叫`this.props.fetchTodos`可以dispatch `fetchTodos` action。
+注意如果`mapDispatchToProps`參數傳的是`actions`物件，和action同名的方法會被注入至`this.props`，亦即呼叫`this.props.fetchTodos`可以`dispatch` `fetchTodos` action。
 
-## Thunk
+### Thunk
 
-打API動作通常有很多步驟，而且經常是非同步的。例如打API時先dispatch開始的action`requestTodos`，讓狀態變成loading中，dispatch打API的action`fetchTodos`，等到API回傳結果後，再dispatch`receiveTodos`來更新結果：
+打API動作通常有很多步驟，而且經常是非同步的。例如打API時先`dispatch`開始的action`requestTodos`，讓頁面狀態變成loading，`dispatch`打API的action`fetchTodos`，等到API回傳結果後，再dispatch`receiveTodos`來更新結果：
 
 ~~~jsx
 class VisibleTodoList extends Component {
@@ -277,13 +296,13 @@ class VisibleTodoList extends Component {
 
 這種抽象的方法稱為**thunk**。
 
-thunk就是一個回傳function的function，更精確一點可以想成是一個擁有以下的形式的function：
+Thunk就是一個**回傳function的function**，在redux的使用情境下，可以更精確定義成以下形式的function：
 
 ~~~jsx
 (...args) => (dispatch, getState) => { // Do something ... }
 ~~~
 
-如果把一連串的動作都抽象在一個`fetchTodos`的thunk內，大致如下：
+舉例來說，如果把一連串的動作都抽象在一個`fetchTodos`的thunk內，大致如下：
 
 ~~~jsx
 export const fetchTodos = (filter) => (dispatch, getState) => {
@@ -318,11 +337,11 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
 }
 ~~~
 
-## Thunk Middleware
+### Redux Thunk Middleware
 
 Redux只能處理plain object形式的action，所以如果要處理thunk必須要用專屬的middleware。
 
-thunk middleware的核心很短，大概只有以下幾行：
+thunk middleware的核心大致上可以濃縮成以下幾行：
 
 ~~~jsx
 const thunk = store => next => action =>
@@ -331,11 +350,11 @@ const thunk = store => next => action =>
     next(action)
 ~~~
 
-Thunk middleware要處理的事情大致上是：如果action是一個function的話就執行，並且把`dispatch`跟`getState`作為參數餵進thunk。如此一來thunk能夠存取到`dispatch`，就能夠自行決定各種同步/非同步`dispatch`的流程，也能根據當下state做流程控制。
+Thunk middleware要處理的事情大致上是：如果action是一個function的話就執行，並且把`dispatch`跟`getState`作為參數餵進thunk。如此一來thunk內部能夠使用`dispatch`，能夠自行決定各種同步/非同步的流程，以及何時要`dispatch`，也能根據當下store的資料做流程控制。
 
 值得注意的是Thunk middleware中任何被`dispatch`的action可以從頭到尾跑過一次middleware chain，所以在thunk裡面再`dispatch`thunk也沒問題喔，因為會被thunk middleware處理到。（關於`dispatch`的更詳細的說明可以參考[Redux Middleware Chain](/2016/12/26/redux-middleware-chain.html)。）
 
-## Normalizr
+## Using [`normalizr`](https://github.com/paularmstrong/normalizr)
 
 我們從`fetchTodo` API得到的repsonse會是以array的形式返回：
 
@@ -370,13 +389,13 @@ Thunk middleware要處理的事情大致上是：如果action是一個function�
 }
 ~~~
 
-如果我們要從array形式的response轉換成normalized的形式，可以利用`normalizr`這個library。
+如果我們要從array形式的response轉換成normalized的形式，可以利用[`normalizr`](https://github.com/paularmstrong/normalizr)這個library。
 
-### Define schema
+### Define Schema
 
 首先我們要定義資料的schema。我們的todo回傳值可能有單筆或多筆資料，因此我們定義`const todo = Schema('todos')`以及`const arrayOfTodos = arrayOf(todo)`兩種schema。
 
-~~~js
+~~~jsx
 import { Schema, arrayOf } from 'normalizr'
 
 export const todo = new Schema('todos')
@@ -385,7 +404,7 @@ export const arrayOfTodos = arrayOf(todo)
 
 用`normalize(response, schema.todo)`轉換`addTodo` API的`response`：
 
-~~~js
+~~~jsx
 import {normalize} from 'normalizr'
 
 export const addTodo = text => dispatch => {
@@ -400,7 +419,7 @@ export const addTodo = text => dispatch => {
 
 轉換之後的結果：
 
-~~~js
+~~~jsx
 {
   "entities": {
     "todos": {
@@ -417,7 +436,7 @@ export const addTodo = text => dispatch => {
 
 用`normalize(response, schema.arrayOfTodos)`轉換`fetchTodos` API的`response`：
 
-~~~js
+~~~jsx
 import {normalize} from 'normalizr'
 
 export const fetchTodos = (filter) => (dispatch, getState) => {
@@ -444,7 +463,7 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
 
 轉換之後的結果：
 
-~~~js
+~~~jsx
 {
   "entities": {
     "todos": {
@@ -473,18 +492,18 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
 }
 ~~~
 
-可以看到轉換的結果，都分成兩個部分：
+可以看到轉換的結果，分成兩個部分：
 
-1. `entities`：一個mapping table，key值對應我們定義的`todos` schema，value是todo實體的集合：一個以todo的`id`為key，`todo`實體為value的object。
+1. `entities`：一個mapping table，`entities.todos`對應我們定義的`todos` schema，是todo實體的集合。
 2. `result`：todo的`id`，差別在於`addTodo`回傳的是單筆`id`，而`fetchTodos`回傳的是`id` array。
 
 ### Simplify Reducer
 
-`normalizr`處理過後的格式可以完美對應到我們想要的normalized state。
+`normalizr`處理過後的格式可以很好地對應到我們想要的normalized state。
 
-`byId` reducer：`action.response.entities.todos`就是`byId` state所表示的todo實體mapping table，所以只要將`action.response.entities.todos`合併進原本的state即可。
+`byId` reducer：`action.response.entities.todos`就是todo實體，所以只要直接合併進原本的state即可。
 
-~~~js
+~~~jsx
 const byId = (state = {}, action) => {
   if (action.response) {
     return {
@@ -499,7 +518,7 @@ const byId = (state = {}, action) => {
 
 `ids` reducer：`action.response.result`就是`ids` state所表示的todo array。在`ADD_TODO_SUCCESS`的情況下，`result`為單筆，append至state尾端即可；在`FETCH_TODO_SUCCESS`的情況下，`result`為array，直接取代原本的state即可。
 
-~~~js
+~~~jsx
 const ids = (state = [], action) => {
     switch (action.type) {
       case 'FETCH_TODOS_SUCCESS':
@@ -515,3 +534,11 @@ const ids = (state = [], action) => {
     }
   }
 ~~~
+
+## 參考資料
+
+[Redux Official Website](http://redux.js.org/)
+
+[Building React Applications with Idiomatic Redux](https://egghead.io/courses/building-react-applications-with-idiomatic-redux)
+
+[`normalizr`](https://github.com/paularmstrong/normalizr)
