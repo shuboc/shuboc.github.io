@@ -219,10 +219,6 @@ $header-height: 70px;
     display: block;
 }
 
-.post-tags {
-  color: $grey-color;
-}
-
 .post-tag {
   text-transform: uppercase;
   margin-left: 0.3em;
@@ -230,6 +226,7 @@ $header-height: 70px;
 
   &:hover {
     color: $grey-color-dark;
+    text-decoration: underline;
   }
 }
 

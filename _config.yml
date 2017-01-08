@@ -22,3 +22,12 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "shubo"

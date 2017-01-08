@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "How to Normalize Redux State"
 tags: [redux, normalizr]
 ---

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-permalink: /about/
+permalink: /author/shubo/
 ---
 
 Hi，我是勗博(Shubo)，這個部落格是用來放我平常學習（主要是前端）技術的筆記。
