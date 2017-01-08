@@ -352,7 +352,7 @@ const thunk = store => next => action =>
 
 Thunk middleware要處理的事情大致上是：如果action是一個function的話就執行，並且把`dispatch`跟`getState`作為參數餵進thunk。如此一來thunk內部能夠使用`dispatch`，能夠自行決定各種同步/非同步的流程，以及何時要`dispatch`，也能根據當下store的資料做流程控制。
 
-值得注意的是Thunk middleware中任何被`dispatch`的action可以從頭到尾跑過一次middleware chain，所以在thunk裡面再`dispatch`thunk也沒問題喔，因為會被thunk middleware處理到。（關於`dispatch`的更詳細的說明可以參考[Redux Middleware Chain](/2016/12/26/redux-middleware-chain.html)。）
+值得注意的是Thunk middleware中任何被`dispatch`的action可以從頭到尾跑過一次middleware chain，所以在thunk裡面再`dispatch`thunk也沒問題喔，因為會被thunk middleware處理到。（關於`dispatch`的更詳細的說明可以參考[Redux Middleware Chain](/2016/12/26/redux-middleware-chain.html#applymiddleware-api)。）
 
 ## Using [`normalizr`](https://github.com/paularmstrong/normalizr)
 
