@@ -12,7 +12,7 @@ email: shubochao@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   勗博的前端學習筆記
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://shuboc.github.io" # the base hostname & protocol for your site
+url: "http://shubo.io" # the base hostname & protocol for your site
 twitter_username: apiggy0204
 github_username:  shuboc
 facebook_username: chris.chao.10
