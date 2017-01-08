@@ -11,7 +11,15 @@ layout: default
         </h1>
         <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
         {{ post.excerpt }}
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">(more...)</a>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+          <p>(more...)</p>
+        </a>
+        <p class="post-tags">
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          {% for tag in post.tags %}
+            <a class="post-tag" href='{{ "/tags/#" | append: tag | post.url | prepend: site.baseurl }}'>{{ tag | slugify }}</a>
+          {% endfor }%}
+        </p>
       </li>
     {% endfor %}
   </ul>
