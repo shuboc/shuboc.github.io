@@ -6,7 +6,7 @@
 
 
 // Our variables
-$base-font-family: Helvetica, Arial, sans-serif;
+$base-font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $base-font-size:   16px;
 $base-font-weight: 400;
 $small-font-size:  $base-font-size * 0.875;
@@ -15,7 +15,8 @@ $base-line-height: 1.5;
 $header-font-family: 'Cabin Sketch', cursive;
 $header-text-color: #FFF;
 $title-font-family: $base-font-family;
-$meta-font-family: 'Fredericka the Great', cursive;
+// $meta-font-family: 'Fredericka the Great', cursive;
+$meta-font-family: $base-font-family;
 
 $spacing-unit:     30px;
 
