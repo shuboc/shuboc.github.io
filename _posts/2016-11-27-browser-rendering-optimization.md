@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Browser Rendering Optimization"
+tags: [web performance]
 ---
 
 這篇是線上課程[Browser Rendering Optimization](https://classroom.udacity.com/courses/ud860)的筆記。

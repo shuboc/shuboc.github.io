@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Build a Blog with GitHub Pages and Jekyll
+tags: [jekyll]
 ---
 
 Github Pages的部落格服務是免費的，支援用Markdown語法寫文章，搭建快速，並保有客製化版面和功能的彈性，是個方便又功能強大的部落格服務！

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Redux筆記：如何和React Router搭配使用"
+tags: [redux, react router]
 ---
 
 React Router是一個管理URL的庫，能根據瀏覽器的URL決定要渲染哪些元件。

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "How to Make a CSS Balloon/Tooltip"
+tags: [css]
 ---
 <p data-height="210" data-theme-id="0" data-slug-hash="pydPWd" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/pydPWd/">css-balloon</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>

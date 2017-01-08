@@ -1,6 +1,6 @@
 ---
 title: "How to Normalize Redux State"
-tags: [redux, normalizr]
+tags: [redux]
 ---
 
 這篇主要整理Redux如何透過API存取遠端資料，以及如何儲存從API取得的資料。

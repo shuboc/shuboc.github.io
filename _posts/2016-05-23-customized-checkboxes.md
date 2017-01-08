@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "iOS Toggle Button in Pure CSS"
+tags: [css]
 ---
 
 <p data-height="224" data-theme-id="0" data-slug-hash="GZVKgN" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/GZVKgN/">iOS toggle button</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
