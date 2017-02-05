@@ -18,6 +18,8 @@ github_username:  shuboc
 facebook_username: chris.chao.10
 
 # Build settings
+gems:
+  - jekyll-sitemap
 markdown: kramdown
 kramdown:
   input: GFM
