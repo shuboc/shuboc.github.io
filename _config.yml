@@ -7,10 +7,10 @@
 
 # Site settings
 # title: "{name: \"趙勗博\"}"
-title: '{"Shubo": "FED Notes"}'
+title: '{"Shubo": "Programming Notes"}'
 email: shubochao@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  勗博的前端學習筆記
+  趙勗博的程式技術筆記，主題涵蓋前端開發（JavaScript、CSS、HTML)、演算法等，歡迎同好留言分享交流( ͡° ͜ʖ ͡°)
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://shubo.io" # the base hostname & protocol for your site
 twitter_username: apiggy0204
@@ -21,6 +21,7 @@ facebook_username: chris.chao.10
 gems:
   - jemoji
   - jekyll-sitemap
+  - jekyll-seo-tag
 markdown: kramdown
 kramdown:
   input: GFM
