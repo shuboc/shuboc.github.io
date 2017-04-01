@@ -13,6 +13,16 @@ description: > # this means to ignore newlines until "baseurl:"
   趙勗博的程式技術筆記，主題涵蓋前端開發（JavaScript、CSS、HTML)、演算法等，歡迎同好留言分享交流( ͡° ͜ʖ ͡°)
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://shubo.io" # the base hostname & protocol for your site
+twitter:
+  username: apiggy0204
+social:
+  name: Shubo chao
+  links:
+    - https://twitter.com/apiggy0204
+    - https://www.facebook.com/chris.chao.10
+    - https://www.linkedin.com/in/shu-bo-chao-a0a97a8b/
+    - https://github.com/shuboc
+
 twitter_username: apiggy0204
 github_username:  shuboc
 facebook_username: chris.chao.10
