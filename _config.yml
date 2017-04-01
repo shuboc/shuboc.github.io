@@ -19,6 +19,7 @@ facebook_username: chris.chao.10
 
 # Build settings
 gems:
+  - jemoji
   - jekyll-sitemap
 markdown: kramdown
 kramdown:

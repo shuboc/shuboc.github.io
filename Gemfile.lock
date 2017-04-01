@@ -126,6 +126,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-sitemap
+  jemoji
 
 BUNDLED WITH
    1.13.5
