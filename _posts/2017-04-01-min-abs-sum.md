@@ -3,7 +3,7 @@ title: "Min Abs Sum"
 tags: [algorithm, dynamic programming]
 ---
 
-給定A = [a0, a1, ..., an-1]，如何找到一組S = [s0, s1, ... sn-1], sj ∈ {-1, 1}, 使得abs(sum(ai * si))有最小值？
+給定A = [a0, a1, ..., an-1]，如何找到一組S = [s0, s1, ... sn-1], sj ∈ {-1, 1}, 使得abs(sum(ai * si))有最小值？關鍵在於對於`A`中的每個元素a能夠產生的sum作動態規劃。
 
 ## 思路
 
