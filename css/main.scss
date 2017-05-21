@@ -18,7 +18,7 @@ $title-font-family: $base-font-family;
 // $meta-font-family: 'Fredericka the Great', cursive;
 $meta-font-family: $base-font-family;
 
-$spacing-unit:     30px;
+$spacing-unit:     $base-font-size * $base-line-height;
 
 // Colors
 $theme-color:            #3AA6D0;
@@ -38,10 +38,9 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    960px;
+$content-width:    800px;
 
 $on-palm:          600px;
-$on-laptop:        800px;
 
 
 
@@ -58,7 +57,19 @@ $on-laptop:        800px;
     }
 }
 
-
+// 不知道會不會用到，先留著
+$font-multiplier: 1.25;
+$font-size: (
+  1: $base-font-size * $font-multiplier * $font-multiplier * $font-multiplier * $font-multiplier,
+  2: $base-font-size * $font-multiplier * $font-multiplier * $font-multiplier,
+  3: $base-font-size * $font-multiplier * $font-multiplier,
+  4: $base-font-size * $font-multiplier,
+  5: $base-font-size,
+  6: $base-font-size / $font-multiplier
+);
+@mixin level($_level) {
+  font-size: map-get($font-size, $_level);
+}
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
