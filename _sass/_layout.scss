@@ -143,7 +143,7 @@ $header-height: 70px;
     width:         calc(45% - (#{$spacing-unit} / 2));
 }
 
-@include media-query($on-laptop) {
+@include media-query($on-palm) {
     .footer-col-1,
     .footer-col-2 {
         width: -webkit-calc(50% - (#{$spacing-unit} / 2));
@@ -183,7 +183,7 @@ $header-height: 70px;
   padding: $spacing-unit 2*$spacing-unit;
   border-radius: 1em;
 
-  @include media-query($on-laptop) {
+  @include media-query($on-palm) {
     padding: 0.5 * $spacing-unit;
   }
 }
@@ -199,7 +199,7 @@ $header-height: 70px;
         padding: $spacing-unit 2 * $spacing-unit;
         border-radius: 1em;
 
-        @include media-query($on-laptop) {
+        @include media-query($on-palm) {
             padding: 0.5 * $spacing-unit $spacing-unit;
         };
     }
