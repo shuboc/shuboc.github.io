@@ -128,9 +128,9 @@ blockquote {
  */
 pre,
 code {
-    // border: 1px solid $grey-color-light;
-    // border-radius: 3px;
-    // background-color: #eef; // This is annoying to read
+    border: 1px solid $grey-color-light;
+    border-radius: 3px;
+    background-color: #eee;
 }
 
 code {
