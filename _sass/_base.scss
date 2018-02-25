@@ -200,6 +200,12 @@ table {
 /**
  * Icons
  */
+
+span.icon {
+    display: inline-block;
+    margin-right: 0.3em;
+}
+
 .icon {
 
     > svg {

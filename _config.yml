@@ -7,10 +7,10 @@
 
 # Site settings
 # title: "{name: \"趙勗博\"}"
-title: "Shubo's Programming Notes"
+title: "Shubo's Notes"
 email: shubochao@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  趙勗博的程式技術筆記，主題涵蓋前後端開發、演算法等，歡迎同好留言分享交流～
+  這裡是Shubo的部落格，用來紀錄他在程式設計的學習心得，以及分享有趣的事物。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://shubo.io" # the base hostname & protocol for your site
 twitter:
@@ -20,12 +20,13 @@ social:
   links:
     - https://twitter.com/apiggy0204
     - https://www.facebook.com/chris.chao.10
-    - https://www.linkedin.com/in/shu-bo-chao-a0a97a8b/
+    - https://www.linkedin.com/in/shubo-chao-a0a97a8b/
     - https://github.com/shuboc
 
 twitter_username: apiggy0204
 github_username:  shuboc
 facebook_username: chris.chao.10
+linkedin_username: shubo-chao-a0a97a8b
 
 # Build settings
 gems:
