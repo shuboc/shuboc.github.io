@@ -10,13 +10,13 @@
 title: "Shubo's Notes"
 email: shubochao@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  這裡是Shubo的部落格，用來紀錄他在程式設計的學習心得，以及分享有趣的事物。
+  Shubo的程式設計教學、書籍推薦、心得分享。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://shubo.io" # the base hostname & protocol for your site
 twitter:
   username: apiggy0204
 social:
-  name: Shubo chao
+  name: Shubo Chao
   links:
     - https://twitter.com/apiggy0204
     - https://www.facebook.com/chris.chao.10
