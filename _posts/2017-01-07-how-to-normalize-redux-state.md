@@ -1,6 +1,7 @@
 ---
 title: "How to Normalize Redux State"
 tags: [redux]
+redirect_from: /2017/01/07/how-to-normalize-redux-state
 ---
 
 這篇主要整理Redux如何透過API存取遠端資料，以及如何儲存從API取得的資料。
@@ -72,7 +73,7 @@ const byId = (state = {}, action) => {
   	  }
   	default:
   	  return state
-  }  
+  }
 }
 ~~~
 
@@ -215,13 +216,13 @@ export const getVisibleTodos = (state, filter) => {
 ~~~jsx
 class VisibleTodoList extends Component {
   fetchData() {
-    const { 
-      filter, 
-      requestTodos, 
-      receiveTodos, 
-      fetchTodos 
+    const {
+      filter,
+      requestTodos,
+      receiveTodos,
+      fetchTodos
     } = this.props
-    
+
     requestTodos(filter)
     fetchTodos(filter).then(todos => {
       receiveTodos(filter, todos)
@@ -275,19 +276,19 @@ VisibleTodoList = connect(
 ~~~jsx
 class VisibleTodoList extends Component {
   fetchData() {
-    const { 
-      filter, 
-      requestTodos, 
-      receiveTodos, 
-      fetchTodos 
+    const {
+      filter,
+      requestTodos,
+      receiveTodos,
+      fetchTodos
     } = this.props
-    
+
     requestTodos(filter)
     fetchTodos(filter).then(todos => {
       receiveTodos(filter, todos)
     })
   }
-  
+
   ...
 }
 ~~~

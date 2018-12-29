@@ -1,6 +1,7 @@
 ---
 title: "Min Abs Sum"
 tags: [algorithm, dynamic programming]
+redirect_from: /2017/04/01/min-abs-sum
 ---
 
 給定A = [a0, a1, ..., an-1]，如何找到一組S = [s0, s1, ... sn-1], sj ∈ {-1, 1}, 使得abs(sum(ai * si))有最小值？關鍵在於對於`A`中的每個元素a能夠產生的sum作動態規劃。
@@ -36,17 +37,17 @@ int solution(vector<int> &A) {
         M = max(M, A[i]);
         S += A[i];
     }
-    
+
     int count[M+1] = {0};
     for (int i = 0; i < N; ++i) {
         count[A[i]] += 1;
     }
-    
+
     int dp[S+1] = {0};
     for (int i = 1; i < S+1; ++i) {
         dp[i] = -1;
     }
-    
+
     for (int a = 1; a < M+1; ++a) {
         if (count[a] > 0) {
             for (int j = 0; j < S; ++j) {
@@ -58,14 +59,14 @@ int solution(vector<int> &A) {
             }
         }
     }
-    
+
     int res = S;
     for (int i = 0; i < S/2 + 1; ++i) {
         if (dp[i] >= 0) {
             res = min(res, S - 2*i);
         }
     }
-    
+
     return res;
 }
 ~~~

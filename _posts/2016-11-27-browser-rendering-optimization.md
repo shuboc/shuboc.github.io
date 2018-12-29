@@ -2,6 +2,7 @@
 layout: post
 title: "Browser Rendering Optimization"
 tags: [web performance]
+redirect_from: /2016/11/27/browser-rendering-optimization
 ---
 
 這篇是線上課程[Browser Rendering Optimization](https://classroom.udacity.com/courses/ud860)的筆記。
@@ -23,7 +24,7 @@ tags: [web performance]
 
 每個frame瀏覽器會執行下面的動作：
 
-1. 建立 DOM & CSSOM to Render Tree (element + style) (**Recalculate Styles**) 
+1. 建立 DOM & CSSOM to Render Tree (element + style) (**Recalculate Styles**)
 2. 算出元素實際的長寬和位置 (**Layout**)
 3. 實際在螢幕上畫出pixel，例如：raster(在螢幕上描點)，畫出長方形等動作 (**Paint**)
 4. 把畫好的layer疊起來 (**Composite**)
@@ -47,7 +48,7 @@ tags: [web performance]
 3. `transform` (只是改變Layer和Layer之間的相對位置，不觸發layout和paint，只觸發composite)
 
   JS > Style > -- > -- > Composite
-  
+
 觸發越多動作，效能就越差，較容易造成畫面卡卡。
 
 CSS屬性會觸發哪些動作，可參閱[csstriggers.com](https://csstriggers.com/)

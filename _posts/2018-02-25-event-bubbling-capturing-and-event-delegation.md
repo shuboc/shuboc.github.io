@@ -1,6 +1,7 @@
 ---
 title: "瀏覽器事件：Event Bubbling, Event Capturing 及 Event Delegation"
 tags: ["javascript", "browser event"]
+redirect_from: /2018/02/25/event-bubbling-capturing-and-event-delegation
 ---
 
 這篇文章是我閱讀 [javacript.info](http://javascript.info/) 的 [Introduction into Events](http://javascript.info/events) 篇的筆記，簡單整理了瀏覽器事件的運作機制 (event bubbling, event capturing)，以及以其為基礎的event delegation機制。
@@ -64,7 +65,7 @@ Event delegation指的是：假設同時有很多DOM element都有相同的event
   <li data-num="1"><em>1</em></li>
   <li data-num="2"><em>2</em></li>
   <li data-num="3"><em>3</em></li>
-  <li data-num="4"><em>4</em></li>  
+  <li data-num="4"><em>4</em></li>
 </ol>
 ```
 
@@ -75,7 +76,7 @@ list.addEventListener('click', e => {
   // 檢查被按的元件確實在這個list裡面
   const li = e.target.closest('li')
   if (!li || !list.contains(li)) return
-  
+
   alert(li.dataset.num)
 })
 ```

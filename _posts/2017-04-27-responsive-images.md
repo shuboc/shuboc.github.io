@@ -1,6 +1,7 @@
 ---
 title: "Responsive Image: img srcset"
 tags: [rwd, html5]
+redirect_from: /2017/05/20/javascript-promise
 ---
 
 這篇要介紹如何利用`img`的`srcset`屬性，為一張圖片指定多個版本的原始路徑，為不同的裝置載入大小最適合的圖片。
@@ -91,8 +92,8 @@ tags: [rwd, html5]
 `sizes`單位可以用`px`或`vw`，也支援media query的形式：
 
 ~~~jsx
-<img src="clock-demo-thumb-200.png" 
-      alt="Clock" 
+<img src="clock-demo-thumb-200.png"
+      alt="Clock"
       srcset="clock-demo-thumb-200.png 200w,
           clock-demo-thumb-400.png 400w"
       sizes="(min-width: 600px) 200px, 50vw">

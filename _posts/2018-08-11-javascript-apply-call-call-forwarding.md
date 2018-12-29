@@ -1,6 +1,7 @@
 ---
 title: "JavaScript中的Apply, Call和Call Forwarding"
 tags: ["javascript"]
+redirect_from: /2018/08/11/javascript-apply-call-call-forwarding
 ---
 
 JavaScript中的`Function.prototype.apply`和`Function.prototype.call`的使用很重要，也很常在3rd-party library的程式碼中看到，但說實話自己並不是非常了解用法和使用時機，工作上也只是偶爾用到的程度。直到讀到了[JavaScript Info](http://javascript.info/call-apply-decorators)中關於Call Forwarding的說明以後，似乎稍微有點感覺了！以下把重點整理成一篇筆記。
@@ -28,7 +29,7 @@ function wrapper(func) {
     // Some custom logic...
     return result
   }
-  
+
   return wrappedFunction
 }
 
@@ -105,7 +106,7 @@ function cachingDecorator(func) {
     if (cache.has(key)) {
       return cache.get(key) // Retrieve value from the cache
     }
-    
+
     const result = func.apply(this, arguments) // Compute result
 
     cache.set(key, result) // Save value to the cache

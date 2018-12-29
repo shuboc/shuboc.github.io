@@ -1,6 +1,7 @@
 ---
 title: "簡介JavaScript Promise"
 tags: ["promise", "es2015", "javascript"]
+redirect_from: /2017/05/20/javascript-promise
 ---
 
 JavaScript Promise可以讓非同步流程處理起來更方便，告別callback hell！這篇會簡介如何利用`.then()`串接非同步流程，`.catch()`簡化錯誤處理，以及利用`Promise.all()`平行化非同步流程。
@@ -58,7 +59,7 @@ function ready() {
         resolve()
       }
     }
-    
+
     document.addEventListener('readystatechange', checkstate)
     checkstate()
   })

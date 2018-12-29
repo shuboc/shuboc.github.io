@@ -2,6 +2,7 @@
 layout: post
 title: "CSS 平行四邊形"
 tags: [css]
+redirect_from: /2016/06/30/parallelogram-tag
 ---
 
 今天的主題是平行四邊形的標籤。稍稍改變一下平淡無奇的長方形標籤，或許能替網頁增添一些活潑的感覺？實際在網頁中運用大概像這樣子：

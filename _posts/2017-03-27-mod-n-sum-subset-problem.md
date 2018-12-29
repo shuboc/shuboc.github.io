@@ -1,6 +1,7 @@
 ---
 title: "0 mod n Sum Subset Problem"
 tags: [algorithm]
+redirect_from: /2017/04/01/maximum-slice-problem
 ---
 
 Given a set of numbers {a1-an}, what is the best way to come up with a nonempty subset such that the sum of its elements is 0 mod n, where n is the size of the original set?

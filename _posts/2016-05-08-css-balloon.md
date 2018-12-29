@@ -2,6 +2,7 @@
 layout: post
 title: "How to Make a CSS Balloon/Tooltip"
 tags: [css]
+redirect_from: /2016/05/08/css-balloon
 ---
 <p data-height="210" data-theme-id="0" data-slug-hash="pydPWd" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/pydPWd/">css-balloon</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
@@ -77,7 +78,7 @@ hover前後改變`opacity`屬性並設定轉場效果：
   transition: all 0.18s ease-out 0.18s;
   opacity: 0;
 }
-  
+
 &:hover:before, &:hover:after {
   opacity: 1;
 }

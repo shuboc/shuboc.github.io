@@ -13,6 +13,8 @@ description: > # this means to ignore newlines until "baseurl:"
   Shubo的程式設計教學、書籍推薦、心得分享。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://shubo.io" # the base hostname & protocol for your site
+permalink: /:categories/:title/
+
 twitter:
   username: apiggy0204
 social:
@@ -33,6 +35,8 @@ gems:
   - jemoji
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-redirect-from
+
 markdown: kramdown
 kramdown:
   input: GFM

@@ -1,6 +1,7 @@
 ---
 title: "Iteratively Traverse Binary Tree"
 tags: [algorithm, binary tree]
+redirect_from: /2017/04/17/iterative-binary-tree-traversal
 ---
 
 Binary Tree Traversal有三種：preorder, inorder和postorder。Recursive的做法都滿直觀的，所以這篇會著重在整理iterative的做法。為了符合traverse的順序，有些節點需要晚點再拜訪，因此實作上會用到stack的資料結構。
@@ -31,7 +32,7 @@ Preorder需先拜訪父節點再拜訪子節點。利用stack實作，將stack�
 vector<int> preorderTraversal(TreeNode *root) {
   vector<int> res;
   if (!root) return res;
-  
+
   stack<TreeNode*> s;
   s.push(root);
   while (s.size() > 0) {
@@ -41,7 +42,7 @@ vector<int> preorderTraversal(TreeNode *root) {
     if (node->right) s.push(node->right);
     if (node->left) s.push(node->left);
   }
-  
+
   return res;
 }
 ~~~
@@ -68,7 +69,7 @@ vector<int> inorderTraversal(TreeNode* root) {
       cur = node->right;
     }
   }
-  
+
   return res;
 }
 ~~~
@@ -84,25 +85,25 @@ vector<int> inorderTraversal(TreeNode* root) {
 
   stack<TreeNode *> s;
   s.push(root);
-  
+
   while (s.size()) {
     TreeNode *node = s.top();
     if (!node->left && !node->right) {
       s.pop();
       res.push_back(node->val);
     }
-    
+
     if (node->right) {
       s.push(node->right);
       node->right = NULL;
     }
-    
+
     if (node->left) {
       s.push(node->left);
       node->left = NULL;
     }
   }
-  
+
   return res;
 }
 ~~~

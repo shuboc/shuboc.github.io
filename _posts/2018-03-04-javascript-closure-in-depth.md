@@ -1,6 +1,7 @@
 ---
 title: "深入了解JavaScript Closure(閉包)的概念以及實際應用"
 tags: ["javascript", "closure"]
+redirect_from: /2018/03/04/javascript-closure-in-depth
 ---
 
 如果你是常碰JavaScript的人，相信一定有聽過Closure(閉包)這個名詞。Closure是一種特別的函式，他能夠記住被創造的當下的環境以及變數。Closure有很多不同的用途，是一個很基礎但又非常重要的觀念，相信大家面試的時候也經常遇到ＸＤ，怎麼能不了解它呢！這篇文章將會帶你深入了解JavaScript Closure(閉包)的概念以及實際應用。
@@ -144,7 +145,7 @@ const counter = (function() {
   function changeBy(val) {
     count += val
   }
-  
+
   return {
     increment: function() {
       changeBy(1)
@@ -182,7 +183,7 @@ const makeCounter = function() {
   function changeBy(val) {
     count += val
   }
-  
+
   return {
     increment: function() {
       changeBy(1)
