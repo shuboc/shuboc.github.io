@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "How to Make a CSS Balloon/Tooltip"
+title: "[教學] 純CSS氣泡提示框"
 tags: [css]
 redirect_from: /2016/05/08/css-balloon
 ---
 <p data-height="210" data-theme-id="0" data-slug-hash="pydPWd" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/pydPWd/">css-balloon</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
-偶然之間看到了[Balloon.css](https://kazzkiq.github.io/balloon.css/)，很好奇這種常見的氣球提示要怎麼用CSS效果做出來！於是參考了他的程式碼，練習做看看。今天的目標是做一個按鈕，hover的時候會顯示氣球提示。
+前端元件hover的時候顯示氣泡提示框(tooltip/balloon)是常見的效果，也有許多現成的library如[Balloon.css](https://kazzkiq.github.io/balloon.css/)可用。這篇教學教你如何用純CSS手刻。
 
 ## 氣球的形狀
 

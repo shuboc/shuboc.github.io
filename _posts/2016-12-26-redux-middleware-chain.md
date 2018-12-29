@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Redux Middleware Chain"
+title: "[教學] Redux Middleware Chain"
 tags: [redux]
 redirect_from: /2016/12/26/redux-middleware-chain
 ---
 
-這篇主要是整理Redux middleware的原理，如何實作，以及如何理解middleware chain的順序。
+這篇教學主要是整理Redux middleware的原理，如何實作，以及如何理解middleware chain的順序。
 
 ## Middleware
 

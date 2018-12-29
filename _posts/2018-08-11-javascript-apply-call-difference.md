@@ -1,10 +1,12 @@
 ---
-title: "JavaScript中的Apply, Call和Call Forwarding"
+title: "[教學] JavaScript中的Apply和Call的差別？"
 tags: ["javascript"]
 redirect_from: /2018/08/11/javascript-apply-call-call-forwarding
 ---
 
-JavaScript中的`Function.prototype.apply`和`Function.prototype.call`的使用很重要，也很常在3rd-party library的程式碼中看到，但說實話自己並不是非常了解用法和使用時機，工作上也只是偶爾用到的程度。直到讀到了[JavaScript Info](http://javascript.info/call-apply-decorators)中關於Call Forwarding的說明以後，似乎稍微有點感覺了！以下把重點整理成一篇筆記。
+這篇教學會介紹JavaScript中的`Function.prototype.apply`和`Function.prototype.call`有什麼差別，又分別會在什麼場合會應用到？
+
+重點主要參考[JavaScript Info](http://javascript.info/call-apply-decorators)中關於Call Forwarding的說明。
 
 ## Call Forwarding
 

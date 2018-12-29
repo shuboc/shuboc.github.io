@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "Redux Selector"
+title: "[教學] Redux Selector"
 tags: [redux]
 redirect_from: /2016/11/12/redux-selector
 ---
+
+這篇教學介紹Redux中常用到的Selector函式，其作用是將容器中特定狀態取出。
 
 在`mapStateToProps()`裡面，通常會將state經過一番計算後轉換成props，例如：經過filter過濾後的todos。我們通常會寫一個`getVisibleTodos(todos, filter)`作轉換的工作：
 

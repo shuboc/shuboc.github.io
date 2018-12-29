@@ -1,10 +1,12 @@
 ---
-title: "Iteratively Traverse Binary Tree"
+title: "[教學] 迭代遍歷二元樹 (Iteratively Traverse Binary Tree)"
 tags: [algorithm, binary tree]
 redirect_from: /2017/04/17/iterative-binary-tree-traversal
 ---
 
-Binary Tree Traversal有三種：preorder, inorder和postorder。Recursive的做法都滿直觀的，所以這篇會著重在整理iterative的做法。為了符合traverse的順序，有些節點需要晚點再拜訪，因此實作上會用到stack的資料結構。
+這篇筆記整理了迭代法遍歷二元樹(Iteratively Binary Tree Traversal)的三種順序(pre-order/in-order/post-order)的寫法。
+
+迭代(iteratively)相對於遞迴(recursively)的遍歷二元樹(binary tree traversal)方法較為不直觀，為了符合traverse的順序，有些節點需要晚點再拜訪，實作上會用到stack的資料結構。
 
 ## Tree Traversal
 

@@ -1,12 +1,12 @@
 ---
-title: "瀏覽器事件：Event Bubbling, Event Capturing 及 Event Delegation"
+title: "[教學] 瀏覽器事件：Event Bubbling, Event Capturing 及 Event Delegation"
 tags: ["javascript", "browser event"]
 redirect_from: /2018/02/25/event-bubbling-capturing-and-event-delegation
 ---
 
-這篇文章是我閱讀 [javacript.info](http://javascript.info/) 的 [Introduction into Events](http://javascript.info/events) 篇的筆記，簡單整理了瀏覽器事件的運作機制 (event bubbling, event capturing)，以及以其為基礎的event delegation機制。
+這篇教學介紹瀏覽器事件的運作原理，包含event bubbling、event capturing。第二部分介紹event delegation的寫法及應用時機。教學內容主要參考[javacript.info](http://javascript.info/) 的 [Introduction into Events](http://javascript.info/events)。
 
-順帶一提[javacript.info](http://javascript.info/)這個網站真的做得很不錯，雖然自稱前端工程師但是其實很多零碎的東西沒有花心思弄懂（遮臉），他都整理得滿清楚的，也有許多範例幫助理解，篇幅不會太長，適合每天抽空讀一點（雖然我還沒看完～），真心推薦！
+順帶一提[javacript.info](http://javascript.info/)這個網站非常有系統地整理JavaScript的基礎原理，對我的幫助很大！
 
 # Event Bubbling
 

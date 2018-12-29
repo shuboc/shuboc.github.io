@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Browser Rendering Optimization"
+title: "[教學] 瀏覽器轉譯/渲染(Browser Rendering)原理"
 tags: [web performance]
 redirect_from: /2016/11/27/browser-rendering-optimization
 ---
 
-這篇是線上課程[Browser Rendering Optimization](https://classroom.udacity.com/courses/ud860)的筆記。
+這篇教學簡介瀏覽器轉譯/渲染(Browser Rendering)的原理，如何使用Chrome DevTool找到效能瓶頸，以及如何避開導致效能瓶頸的作法。
 
-課程使用Chrome DevTool，可以看到很多CSS和JS在無意間造成頁面render效能的瓶頸的例子，也呼應了課程不斷強調的最重要的一件事：**在最佳化之前先對網站作profile。**
+主要內容擷取自[轉譯效能 | Google Developers](https://developers.google.com/web/fundamentals/performance/rendering/)，以及線上課程[Browser Rendering Optimization](https://classroom.udacity.com/courses/ud860)。課程使用Chrome DevTool，可以看到很多CSS和JS在無意間造成頁面render效能的瓶頸的例子，也呼應了課程不斷強調的最重要的一件事：**在最佳化之前先對網站作profile。**
 
 ## TL;DR
 

@@ -1,14 +1,16 @@
 ---
 layout: post
-title: "CSS 平行四邊形"
+title: "[教學] 純CSS平行四邊形"
 tags: [css]
 redirect_from: /2016/06/30/parallelogram-tag
 ---
 
-今天的主題是平行四邊形的標籤。稍稍改變一下平淡無奇的長方形標籤，或許能替網頁增添一些活潑的感覺？實際在網頁中運用大概像這樣子：
-
 <p data-height="421" data-theme-id="0" data-slug-hash="KMaELj" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/KMaELj/">parallelogram</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+這篇教學會介紹如何用純CSS做出平行四邊形的標籤。
+
+稍稍改變一下平淡無奇的長方形標籤，或許能替網頁增添一些活潑的感覺？實際在網頁中運用大概像這樣子：
 
 （參考資料：[CSS Secrets](http://www.tenlong.com.tw/items/9863478741?item_id=1010373)）
 

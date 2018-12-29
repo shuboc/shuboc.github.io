@@ -1,14 +1,14 @@
 ---
-title: "How to Normalize Redux State"
+title: "[教學] 正規化 (Normalize) Redux State"
 tags: [redux]
 redirect_from: /2017/01/07/how-to-normalize-redux-state
 ---
 
-這篇主要整理Redux如何透過API存取遠端資料，以及如何儲存從API取得的資料。
+這篇教學介紹Redux如何用正規化(normalization)的方式，儲存從API取得的遠端資料。
 
 ## TL;DR
 
-使用Redux存資料時，推薦存成normalized的形式，可以確保相同的資料只會有一份，減少資料更新時同步的錯誤。
+Redux如同前端的in-memory小型資料庫，因此存資料時，會推薦存成正規化(normalized)的形式，可以確保相同的資料只會有一份，減少資料更新時同步的錯誤。
 
 打API時建議使用thunk的形式。
 

@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "Redux筆記：如何和React Router搭配使用"
+title: "[教學] Redux如何和React Router搭配使用"
 tags: [redux, react router]
 redirect_from: /2016/10/16/filtering-redux-state-with-react-router-params
 ---
+
+這篇教學會介紹如何從React元件的props拿到url資訊，以及如何使用React Router內建的的HoC `withRouter` 拿到url資訊。
 
 React Router是一個管理URL的庫，能根據瀏覽器的URL決定要渲染哪些元件。
 
@@ -43,7 +45,6 @@ const App = ({ params }) => (
 `VisibleTodoList`只是個container component，作用是利用`react-redux`的`connect()`API把state從redux中讀出來，傳給真正有顯示樣式的presentation component `TodoList`。(presentational and container component可以參照[說明](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.s1cp7e6a7))
 
 `connect()`的`mapStateToProps(state, ownProps)`參數是個callback函數，我們可以從`ownProps`裡讀到傳給`VisibleTodoList`的`filter`的值：
-
 
 ~~~jsx
 const mapStateToProps = (state, ownProps) => ({

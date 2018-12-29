@@ -1,5 +1,5 @@
 ---
-title: "Maximum Subarray Problem"
+title: "最大子數列問題 (Maximum Subarray Problem) 及Kadane's Algorithm"
 tags: [algorithm, kadane's algorithm, dynamic programming]
 redirect_from: /2017/04/01/maximum-slice-problem
 ---
