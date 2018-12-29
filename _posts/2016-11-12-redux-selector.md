@@ -3,6 +3,7 @@ layout: post
 title: "[教學] Redux Selector"
 tags: [redux]
 redirect_from: /2016/11/12/redux-selector
+last_modified_at: 2018/12/29
 ---
 
 這篇教學介紹Redux中常用到的Selector函式，其作用是將容器中特定狀態取出。

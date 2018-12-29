@@ -3,6 +3,7 @@ layout: post
 title: "[教學] 純CSS氣泡提示框"
 tags: [css]
 redirect_from: /2016/05/08/css-balloon
+last_modified_at: 2018/12/29
 ---
 <p data-height="210" data-theme-id="0" data-slug-hash="pydPWd" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/pydPWd/">css-balloon</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>

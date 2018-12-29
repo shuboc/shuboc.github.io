@@ -3,6 +3,7 @@ layout: post
 title: "[教學] 純CSS iOS開關"
 tags: [css]
 redirect_from: /2016/05/23/customized-checkboxes
+last_modified_at: 2018/12/29
 ---
 
 <p data-height="224" data-theme-id="0" data-slug-hash="GZVKgN" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/GZVKgN/">iOS toggle button</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>

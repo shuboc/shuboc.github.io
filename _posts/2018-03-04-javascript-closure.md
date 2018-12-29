@@ -2,6 +2,7 @@
 title: "[教學] 簡介JavaScript閉包(Closure)的原理及應用"
 tags: ["javascript", "closure"]
 redirect_from: /2018/03/04/javascript-closure-in-depth
+last_modified_at: 2018/12/29
 ---
 
 這篇教學介紹什麼是JavaScript的閉包(Closure)，以及如何應用。閉包(Closure)是一種很特別的函式，他能夠記住被創造的當下的環境以及變數，因此閉包(Closure)有非常多不同的用途，是一個很基礎但又非常重要的觀念，相信大家面試的時候也經常遇到ＸＤ，怎麼能不了解它呢！這篇文章將會快速帶你了解閉包(Closure)的概念以及實際應用。

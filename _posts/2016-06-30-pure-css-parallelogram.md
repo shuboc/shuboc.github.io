@@ -3,6 +3,7 @@ layout: post
 title: "[教學] 純CSS平行四邊形"
 tags: [css]
 redirect_from: /2016/06/30/parallelogram-tag
+last_modified_at: 2018/12/29
 ---
 
 <p data-height="421" data-theme-id="0" data-slug-hash="KMaELj" data-default-tab="result" data-user="shubochao" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/shubochao/pen/KMaELj/">parallelogram</a> by Shubo Chao (<a href="http://codepen.io/shubochao">@shubochao</a>) on <a href="http://codepen.io">CodePen</a>.</p>

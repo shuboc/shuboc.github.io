@@ -2,6 +2,7 @@
 title: "[教學] JavaScript Promise"
 tags: ["promise", "es2015", "javascript"]
 redirect_from: /2017/05/20/javascript-promise
+last_modified_at: 2018/12/29
 ---
 
 這篇教學會介紹JavaScript的Promise，如何利用`.then()`串接非同步流程，`.catch()`簡化錯誤處理，以及利用`Promise.all()`平行化非同步流程，讓非同步流程處理起來更方便，告別callback hell！

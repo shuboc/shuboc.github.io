@@ -3,6 +3,7 @@ layout: post
 title: "[教學] JavaScript中2種建立物件的方法"
 tags: [javascript]
 redirect_from: /2016/04/23/prototype-and-object-creation-in-javascript
+last_modified_at: 2018/12/29
 ---
 
 這篇教學介紹JavaScript中2種建立物件的方法及原理: 1. 使用new運算子及建構函式(Function Constructor)，2. 使用`Object.assign`。

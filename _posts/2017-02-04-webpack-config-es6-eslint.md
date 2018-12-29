@@ -2,6 +2,7 @@
 title: "[教學] Webpack基礎設定 (支援ES6、ESLint)"
 tags: [webpack, react, eslint, babel]
 redirect_from: /2017/02/04/webpack-config-01-basic-babel-eslint-wds
+last_modified_at: 2018/12/29
 ---
 
 這篇教學介紹React專案的基本webpack設定。包含支援ES6需要的Babel，程式碼風格檢查的ESLint和開發工具`webpack-dev-server`。

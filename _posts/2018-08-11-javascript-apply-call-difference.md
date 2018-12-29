@@ -2,6 +2,7 @@
 title: "[教學] JavaScript中的Apply和Call的差別？"
 tags: ["javascript"]
 redirect_from: /2018/08/11/javascript-apply-call-call-forwarding
+last_modified_at: 2018/12/29
 ---
 
 這篇教學會介紹JavaScript中的`Function.prototype.apply`和`Function.prototype.call`有什麼差別，又分別會在什麼場合會應用到？
