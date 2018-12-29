@@ -1,17 +1,13 @@
 ---
 layout: post
-title: Prototypal Inheritance and Object Creation in JS
+title: "[教學] JavaScript建立物件: new運算子、建構函式(Function Constructor)及Object.assign"
 tags: [javascript]
 redirect_from: /2016/04/23/prototype-and-object-creation-in-javascript
 ---
 
-JS最大的特色之一就是原型繼承(prototypal inheritance)。JS的每個物件都繼承自一個原型委託(delegate prototype)物件。如果對物件查詢某個特性失敗時，就會去查詢他的原型物件上是否存在這個特性。
+這篇教學要介紹JavaScript中幾種建立物件的方法及原理: 1. 使用new運算子及建構函式(Function Constructor)，2. 使用`Object.assign`。
 
-這個機制使我們可以在prototype物件上定義特性或方法，所有繼承同一個prototype的物件都可以透過原型委託使用這些特性或方法。
-
-知道了這個特性之後，在JS中創造物件時，到底該如何理解和運用原型的概念呢？
-
-## 用建構式(constructor)創造物件
+## 用new運算子和建構函式(Function Constructor)創造物件
 
 簡單地說，建構式就是一個用來創造新物件的函式。
 
@@ -48,9 +44,13 @@ kitty.speak(); // Kitty: meow!
 2. 將方法定義在建構式的`prototype`特性裡
 3. 用`new`運算子呼叫建構式
 
-### 建構式是如何運作的？
+### new運算子和建構函式(Function Constructor)是如何運作的？
 
-為什麼完成這些步驟，新物件就能夠呼叫我們定義的方法呢？更進一步，物件是如何使用JS的原型機制呢？要回答這個問題，首先我們需要瞭解`new`運算子的機制。
+要了解其運作原理，首先我們要了解何謂原型繼承(Prototypal Inheritance)。
+
+**原型繼承**用一句話形容就是：JS的每個物件都繼承自一個原型委託(delegate prototype)物件，如果對物件查詢某個特性(property)失敗時，就會去查詢他的原型物件上是否存在這個特性。這個機制使我們可以在prototype物件上定義特性或方法，所有繼承同一個prototype的物件都可以透過原型委託使用這些特性或方法。
+
+接著我們來瞭解`new`運算子的機制。
 
 當我們呼叫`new Cat("Kitty")`的時候，JS在背後做了幾件事:
 

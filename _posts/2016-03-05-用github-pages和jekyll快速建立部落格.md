@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Build a Blog with GitHub Pages and Jekyll
+title: "[教學] 用Github Pages和Jekyll快速建立免費部落格"
 tags: [jekyll]
 redirect_from: /2016/03/05/build-your-own-blog-using-jekyll-and-github-pages
 ---
 
-Github Pages的部落格服務是免費的，支援用Markdown語法寫文章，搭建快速，並保有客製化版面和功能的彈性，是個方便又功能強大的部落格服務！
+這篇教學將介紹如何用Github Pages和Jekyll搭建部落格。其優點是快速、免費、免架站，相較於wordpress客製化彈性高，更支援用Markdown語法寫文章。推薦給廣大工程師朋友們！
 
 ## 簡介
 
