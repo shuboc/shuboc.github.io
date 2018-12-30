@@ -1,13 +1,13 @@
 ---
-title: "[教學] 快速了解JavaScript的call()和apply()的應用"
+title: "[教學] 3個JavaScript的call()和apply()的應用範例"
 tags: ["javascript"]
 redirect_from: /2018/08/11/javascript-apply-call-call-forwarding
 last_modified_at: 2018/12/30
 ---
 
-這篇教學會介紹JavaScript中的`apply()`和`call()`有什麼差別，以及2種常見的應用場合：Call Forwarding及Method Borrowing。
+這篇教學會用3個JavaScript中運用到`apply()`和`call()`的例子，讓你快速了解`apply()`和`call()`的使用方法。
 
-## Call Forwarding
+## 範例應用1: Call Forwarding
 
 有時候，我們想要在一個函式原本的功能之上附加額外的功能，這個時候可以使用**Call Forwarding**的技巧。
 
@@ -44,15 +44,15 @@ wrappedFoo(bar, baz)
 
 核心在執行`func`的這一行`(*)`，也就是`func.apply(this, arguments)`。
 
-### `arguments`
+### 補充說明：`arguments`
 
 `arguments`是一個函式內部特別的變數，對應到函式被呼叫時傳進來的引數。
 
 我們需要用到`wrappedFunction`的`arguments`變數，因為我們會用和`func`一樣的參數呼叫`wrappedFunction`，但是我們事先不知道`func`會有幾個參數。
 
-### `Function.prototype.apply`
+### 補充說明：`apply()`
 
-`Function.prototype.apply`是函式物件的一個方法，用法是
+`apply()`是函式物件的一個方法，用法是
 
 ```jsx
 someFunction.apply(context, arguments)
@@ -85,7 +85,7 @@ worker.slow()
 
 如此一來`wrappedFunction`呼叫起來跟原本的函式幾乎一模一樣，但是又加上了自己想要的邏輯。
 
-## 範例應用: Cache
+## 範例應用2: Cache
 
 假設有個計算量非常費時的函式：
 
@@ -121,7 +121,7 @@ slow(1) // Cached!
 slow(1) // Cached!
 ```
 
-## Method Borrowing
+## 範例應用3: Method Borrowing
 
 上例中的`hash()`的實作需要注意。
 

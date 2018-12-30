@@ -2,10 +2,12 @@
 title: "[教學] 簡介JavaScript閉包(Closure)的原理及應用"
 tags: ["javascript", "closure"]
 redirect_from: /2018/03/04/javascript-closure-in-depth
-last_modified_at: 2018/12/29
+last_modified_at: 2018/12/30
 ---
 
-這篇教學介紹什麼是JavaScript的閉包(Closure)，以及如何應用。閉包(Closure)是一種很特別的函式，他能夠記住被創造的當下的環境以及變數，因此閉包(Closure)有非常多不同的用途，是一個很基礎但又非常重要的觀念，相信大家面試的時候也經常遇到ＸＤ，怎麼能不了解它呢！這篇文章將會快速帶你了解閉包(Closure)的概念以及實際應用。
+這篇教學介紹什麼是JavaScript的閉包(Closure)，以及如何應用。閉包(Closure)是一種很特別的函式，他能夠記住被創造的當下的環境以及變數。
+
+因此閉包(Closure)有非常多不同的用途，是一個很基礎但又非常重要的觀念。相信大家面試的時候也經常遇到ＸＤ，怎麼能不了解它呢！這篇文章將會快速帶你了解閉包(Closure)的概念以及實際應用。
 
 ## 閉包(Closure)的定義
 
@@ -286,7 +288,7 @@ for (let i = 0; i < 5; ++i) {
 }
 ```
 
-## 補充說明：Lexical Environment
+### 補充說明：Lexical Environment
 
 上面一直提到環境(Lexical Environment)這個詞彙，這邊稍加補充說明。
 
@@ -301,11 +303,11 @@ JavaScript中，一段code能夠存取哪些變數，是由Code所在的Lexical 
 
 這就是內層的function存取外層宣告的變數的原理。
 
-# 結語
+## 結語
 
 看到這裡，希望你已經對JavaScript Closure(閉包)的概念以及實際應用有了深入了解！這篇文章的例子和說明大部分都是參考自[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)與[JavaScript.info](http://javascript.info/closure)，有興趣更深入了解Closure的朋友可以再去看看喔！
 
-# Reference
+## Reference
 
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
-http://javascript.info/closure
+[Closures - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+[Closure - javascript.info](http://javascript.info/closure)
