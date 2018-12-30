@@ -1,13 +1,11 @@
 ---
-title: "[教學] JavaScript中的Apply和Call的差別？"
+title: "[教學] 快速了解JavaScript的call()和apply()的應用"
 tags: ["javascript"]
 redirect_from: /2018/08/11/javascript-apply-call-call-forwarding
-last_modified_at: 2018/12/29
+last_modified_at: 2018/12/30
 ---
 
-這篇教學會介紹JavaScript中的`Function.prototype.apply`和`Function.prototype.call`有什麼差別，又分別會在什麼場合會應用到？
-
-重點主要參考[JavaScript Info](http://javascript.info/call-apply-decorators)中關於Call Forwarding的說明。
+這篇教學會介紹JavaScript中的`apply()`和`call()`有什麼差別，以及2種常見的應用場合：Call Forwarding及Method Borrowing。
 
 ## Call Forwarding
 
@@ -145,8 +143,8 @@ function hash() {
 
 ## Reference
 
-* [Decorators and forwarding, call/apply](http://javascript.info/call-apply-decorators)
-* [Arguments object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
-* [Function.prototype.apply()
+* [Decorators and forwarding, call/apply - JavaScript Info](http://javascript.info/call-apply-decorators)
+* [Arguments object - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
+* [Function.prototype.apply - MDN
 ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
 
