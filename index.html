@@ -15,8 +15,8 @@ layout: default
           </p>
         </header>
         {{ post.excerpt }}
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-          <p>(more...)</p>
+        <a class="post-link post-readmore" href="{{ post.url | prepend: site.baseurl }}">
+          <p>(閱讀全文...)</p>
         </a>
         {% if post.tags.size > 0 %}
           <p class="post-meta">

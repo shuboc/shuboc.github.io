@@ -13,12 +13,16 @@ $header-height: 70px;
     .site-title {
         color: $header-text-color;
         font-size: 36px;
-        font-weight: normal;
+        font-weight: bold;
         line-height: $header-height;
         letter-spacing: 1px;
         margin-bottom: 0;
         float: left;
         font-family: $header-font-family;
+
+        @include media-query($on-palm) {
+            font-size: 24px;
+        }
     }
 }
 
@@ -181,7 +185,7 @@ $header-height: 70px;
   margin-bottom: $spacing-unit;
   background-color: $background-color;
   padding: $spacing-unit 2*$spacing-unit;
-  border-radius: 1em;
+  border-radius: 5px;
 
   @include media-query($on-palm) {
     padding: 0.5 * $spacing-unit;
@@ -197,7 +201,7 @@ $header-height: 70px;
         margin-bottom: $spacing-unit;
         background-color: $background-color;
         padding: $spacing-unit 2 * $spacing-unit;
-        border-radius: 1em;
+        border-radius: 5px;
 
         @include media-query($on-palm) {
             padding: 0.5 * $spacing-unit $spacing-unit;
@@ -208,17 +212,18 @@ $header-height: 70px;
 .post-meta {
     color: $grey-color;
     font-family: $meta-font-family;
-    text-transform: uppercase;
 }
 
 .post-link {
     display: block;
 }
 
+.post-readmore {
+    margin-top: $spacing-unit;
+}
+
 .post-tag {
-  text-transform: uppercase;
   margin-left: 0.3em;
-  color: inherit;
 
   &:hover {
     color: $grey-color-dark;
@@ -234,16 +239,30 @@ $header-height: 70px;
 }
 
 .post-title {
-    // font-size: 36px;
+    font-size: 28px;
+
+    @include media-query($on-palm) {
+    font-size: 22px;
+    }
 }
 
 .post-content {
     h2 {
+      font-size: 28px;
       margin-top: 2 * $spacing-unit;
+
+      @include media-query($on-palm) {
+        font-size: 22px;
+      }
     }
 
     h3 {
-      margin-top: $spacing-unit;
+      font-size: 24px;
+      margin-top: 1.5 * $spacing-unit;
+
+      @include media-query($on-palm) {
+        font-size: 18px;
+      }
     }
 
     // h2 {
@@ -300,6 +319,6 @@ h6:hover .header-link {
   }
 }
 
-.tag-title {
-  text-transform: uppercase;
+.related-posts {
+    margin-bottom: 2 * $spacing-unit;
 }

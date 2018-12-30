@@ -12,10 +12,9 @@ $base-font-weight: 400;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
-$header-font-family: 'Cabin Sketch', cursive;
+$header-font-family: $base-font-family;
 $header-text-color: #FFF;
 $title-font-family: $base-font-family;
-// $meta-font-family: 'Fredericka the Great', cursive;
 $meta-font-family: $base-font-family;
 
 $spacing-unit:     $base-font-size * $base-line-height;
