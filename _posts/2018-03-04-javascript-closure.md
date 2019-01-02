@@ -1,5 +1,5 @@
 ---
-title: "[教學] 簡介JavaScript閉包(Closure)的原理及應用"
+title: "[教學] 秒懂JavaScript closure(閉包)的原理及應用"
 tags: ["javascript", "closure"]
 redirect_from: /2018/03/04/javascript-closure-in-depth
 last_modified_at: 2018/12/30
