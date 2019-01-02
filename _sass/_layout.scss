@@ -257,12 +257,19 @@ $header-height: 70px;
     }
 
     h3 {
-      font-size: 24px;
-      margin-top: 1.5 * $spacing-unit;
+      font-size: 20px;
+      margin-top: 2 * $spacing-unit;
 
       @include media-query($on-palm) {
         font-size: 18px;
       }
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    p, blockquote, pre,
+    ul, ol, dl, figure,
+    %vertical-rhythm {
+        margin-bottom: 1 * $spacing-unit;
     }
 
     // h2 {
