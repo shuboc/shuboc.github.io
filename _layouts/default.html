@@ -9,7 +9,38 @@
 
     <div class="page-content">
       <div class="wrapper">
-        {{ content }}
+        <div class="column-container">
+            <div class="main-column">
+                {{ content }}
+            </div>
+            <aside class="side-column">
+                <h1>最新文章</h1>
+                <ul>
+                  {% for post in site.posts limit: 5 %}
+                    <li><a href="{{ post.url }}" target="_blank">{{ post.title }}</a></li>
+                  {% endfor %}
+                </ul>
+
+                <h1>文章標籤分類</h1>
+                {% capture tags %}
+                  {% for tag in site.tags %}
+                    {{ tag[1].size | plus: 1000 }}#{{ tag[0] }}#{{ tag[1].size }}|
+                  {% endfor %}
+                {% endcapture %}
+
+                {% assign sortedtags = tags | split: '|' | sort %}
+                <ul>
+                  {% for tag in sortedtags reversed %}
+                      {% assign tagitems = tag | split: '#' %}
+                      {% if tagitems.size == 3 %}
+                        {% assign tagname = tagitems[1] %}
+                        {% assign tagcount = tagitems[2] %}
+                        <li><a href="/tags/#{{ tagname | slugify }}" target="_blank">{{ tagname }} ({{ tagcount }})</a></li>
+                      {% endif %}
+                  {% endfor %}
+                </ul>
+            </aside>
+        </div>
       </div>
     </div>
 
