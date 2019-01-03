@@ -1,6 +1,6 @@
 ---
 title: "[教學] Webpack基礎設定 (支援ES6、ESLint)"
-tags: [webpack, react, eslint, babel]
+tags: [webpack, react]
 redirect_from: /2017/02/04/webpack-config-01-basic-babel-eslint-wds
 last_modified_at: 2018/12/29
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[教學] 瀏覽器轉譯/渲染(Browser Rendering)原理"
-tags: [web performance]
+tags: [web browser]
 redirect_from: /2016/11/27/browser-rendering-optimization
 last_modified_at: 2018/12/29
 ---

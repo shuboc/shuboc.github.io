@@ -1,6 +1,6 @@
 ---
 title: "[教學] 迭代遍歷二元樹 (Iteratively Traverse Binary Tree)"
-tags: [algorithm, binary tree]
+tags: [algorithm, data structure]
 redirect_from: /2017/04/17/iterative-binary-tree-traversal
 last_modified_at: 2018/12/29
 ---

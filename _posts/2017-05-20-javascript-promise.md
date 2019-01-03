@@ -1,6 +1,6 @@
 ---
 title: "[教學] JavaScript Promise"
-tags: ["promise", "es2015", "javascript"]
+tags: [javascript]
 redirect_from: /2017/05/20/javascript-promise
 last_modified_at: 2018/12/29
 ---

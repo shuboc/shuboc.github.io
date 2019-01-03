@@ -1,6 +1,6 @@
 ---
 title: "[教學] 響應式圖片(Responsive Image): 使用img srcset屬性"
-tags: [rwd, html5]
+tags: [rwd, web browser]
 redirect_from: /2017/05/20/javascript-promise
 last_modified_at: 2018/12/29
 ---

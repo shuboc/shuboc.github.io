@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[教學] Redux Middleware Chain"
-tags: [redux]
+tags: [react]
 redirect_from: /2016/12/26/redux-middleware-chain
 last_modified_at: 2018/12/29
 ---

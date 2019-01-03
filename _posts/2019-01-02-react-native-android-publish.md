@@ -2,7 +2,7 @@
 title: "[教學] 6個步驟，將你的React Native Android APP上架到Google Play"
 description: "這篇教學會一步一步介紹，如何將一個React Native的Android App上架(publish)到Google Play上。"
 image: "https://facebook.github.io/react-native/img/header_logo.png"
-tags: ["react native", "android"]
+tags: ["react", "react native", "android"]
 ---
 
 我最近一年開始接觸用React Native開發APP，因為本身是從前端領域跨進APP開發，所以對於Android的一切不是很熟悉，一開始要上架看文件費了一番力氣QQ，最近終於有空整理成一篇上架的完整流程，希望可以幫助到同樣在開發React Native App的朋友們！

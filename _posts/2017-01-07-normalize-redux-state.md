@@ -1,6 +1,6 @@
 ---
 title: "[教學] 正規化 (Normalize) Redux State"
-tags: [redux]
+tags: [react]
 redirect_from: /2017/01/07/how-to-normalize-redux-state
 last_modified_at: 2018/12/29
 ---
