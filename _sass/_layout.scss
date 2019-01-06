@@ -171,6 +171,55 @@ $header-height: 70px;
 
 
 /**
+ * Page Layout
+ */
+ .column-container {
+    position: relative;
+}
+
+
+
+.main-column {
+    width: $main-column-width;
+    display: inline-block;
+    vertical-align: top;
+
+    @include media-query($on-palm) {
+        width: 100%;
+    }
+}
+
+
+
+.side-column {
+    display: inline-block;
+    vertical-align: top;
+
+    margin: 0 0 $spacing-unit $spacing-unit;
+    width: $content-width - $main-column-width - 3 * $spacing-unit - 4px;
+
+    padding: $spacing-unit;
+    background: $background-color;
+    border-radius: 4px;
+
+    // Fixed to the top while scrolling down
+    position: sticky;
+    top: $spacing-unit;
+
+    // There's no space for side column to be shown on mobile devices
+    @include media-query($on-palm) {
+        display: none;
+    }
+}
+
+
+.search-bar {
+    margin-bottom: $spacing-unit;
+}
+
+
+
+/**
  * Page content
  */
 .page-content {
