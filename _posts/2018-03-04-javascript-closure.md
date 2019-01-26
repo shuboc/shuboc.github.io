@@ -1,57 +1,162 @@
 ---
-title: "[教學] 秒懂JavaScript closure(閉包)的原理及應用"
+title: "[教學] 3分鐘一定能看懂的JavaScript閉包 (Closure)"
 tags: ["javascript"]
 redirect_from: /2018/03/04/javascript-closure-in-depth
-last_modified_at: 2018/12/30
+last_modified_at: 2019/01/26
 ---
 
-這篇教學介紹什麼是JavaScript的閉包(Closure)，以及如何應用。閉包(Closure)是一種很特別的函式，他能夠記住被創造的當下的環境以及變數。
+![JavaScript Closure](/images/javascript-closure.jpg)
 
-因此閉包(Closure)有非常多不同的用途，是一個很基礎但又非常重要的觀念。相信大家面試的時候也經常遇到ＸＤ，怎麼能不了解它呢！這篇文章將會快速帶你了解閉包(Closure)的概念以及實際應用。
+如果你是常碰JavaScript的人，相信一定有聽過Closure(閉包)這個名詞。Closure是一種特別的函式，他能夠記住被創造的當下的環境以及變數。Closure有很多不同的用途，是一個很基礎但又非常重要的觀念，相信大家面試的時候也經常遇到ＸＤ，怎麼能不了解它呢！
 
-## 閉包(Closure)的定義
+這篇文章將會帶你：
 
-先來看看大家最愛的[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)對Closure的定義：
+* 了解JavaScript 閉包 (closure) 的特性
+* 了解JavaScript 閉包 (closure) 有哪些實際應用
+
+## 目錄
+
+* [閉包 (Closure) 的特性](#閉包-closure-的特性)
+    * [特性1️⃣: 函式能夠存取其外層變數](#特性1️⃣-函式能夠存取其外層變數)
+    * [特性2️⃣: 函式可以當作另一個函式的回傳值](#特性2️⃣-函式可以當作另一個函式的回傳值)
+    * [特性3️⃣: 閉包 (closure) 可以「保留」環境](#特性3️⃣-閉包-closure-可以保留環境)
+    * [特性4️⃣: 每次函式被呼叫時，都會創造一組新的環境](#特性4️⃣-每次函式被呼叫時都會創造一組新的環境-lexical-environment)
+    * [閉包的特性: 小結](#閉包的特性-小結)
+* [閉包 (Closure) 的應用](#閉包-closure-的應用)
+    * [應用1️⃣: 用閉包 (Closure) 模擬物件導向中的私有成員 (Private Member)](#應用1️⃣-用閉包-closure-模擬物件導向中的私有成員-private-member)
+    * [應用2️⃣: 用閉包 (Closure) 達到資料隔離的效果](#應用2️⃣-用閉包-closure-達到資料隔離的效果)
+    * [應用3️⃣: 避免for loop中使用callback function的錯誤寫法](#應用3️⃣-避免for-loop中使用callback-function的錯誤寫法)
+        * [解法1️⃣: 整段code用IIFE包起來執行](#解法1️⃣-整段code用iife包起來執行)
+        * [解法2️⃣: 用IIFE產生callback function](#解法2️⃣-用iife產生callback-function)
+        * [解法3️⃣: 用let](#解法3️⃣-用let)
+* [補充說明：Lexical Environment](#補充說明lexical-environment)
+* [結語](#結語)
+* [Reference](#reference)
+
+## 閉包 (Closure) 的特性
+
+只能用一句話解釋閉包的話，我會這樣說：
+
+☝️**閉包 (Closure) 是一種特殊的函式，他能夠存取被宣告當下的環境中的變數。**
+
+真的要深入理解閉包，我們可以來看看[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)上對閉包的定義：
 
 > A closure is the combination of a function and the Lexical Environment within which that function was declared.
 
-翻成中文就是：
+其實滿抽象的，要怎麼去理解這個定義呢？
 
-> 閉包（Closure）是函式的組合，以及該宣告函式所包含的作用域環境（Lexical Environment）。
+這裡提到了閉包是由兩個主體構成：
 
-恩，看不太懂ＸＤ，不過翻成白話文的話大概就是**JavaScript的function可以存取宣告在其外層的變數。**
+1. *函式 (function)*
+2. *Lexical Environment within which that function was declared (函式被宣告時所在的環境)*。
 
-舉例來說：
+我們一項一項分開來看。
+
+首先，由第一句話我們可以知道，閉包 (closure) 是一個函式。
+
+然後，Lexical Environment，你可以把它簡單想像成一個區塊 (scope)，這個區塊裡面包含了一些變數，函式能夠存取這個區塊裡面的變數。
+
+恩...🤔🤔🤔
+
+光看字面意思其實很難理解。
+
+別擔心！
+
+下面我會用一些很簡單的例子，說明閉包的一些特性。
+
+看完之後，再回頭看這段文字，應該會比較有感覺！
+
+讓我們繼續看下去！👇
+
+### 特性1️⃣: 函式能夠存取其外層變數
+
+要理解閉包 (closure)，首先我們要談談JavaScript語言中，關於**變數存取的規則**。
+
+下面直接舉一段程式碼當作例子：
+
+首先，我們宣告一個函式`init()`，在裡頭宣告了一個變數`name`。
+
+緊接著在`init()`內又宣告了另一個函式`displayName()`。
+
+最後我們呼叫`displayName()`，`displayName()`會呼叫`console.log(name)`。
 
 ```Javascript
 function init() {
-  let name = "John" // A variable defined outside inner function
+  let name = "John" // 宣告在displayName外部的變數
   function displayName() {
-    console.log(name) // Can access variables defined outside inner function
+    console.log(name) // 試圖存取宣告在displayName外部的變數
   }
   displayName()
 }
 init()
 ```
 
-上面的例子中，我們在`init`的function body內宣告了另一個function `displayName`。
+🙋問題來了：
 
-`displayName`沒有自己的local變數，但是他可以存取到定義在外層的`name`變數。
+`name`並不是`displayName()`內的區域變數，而是宣告在他的外部環境`init()`的變數。
 
-你可能會覺得：**JavaScript的function可以存取宣告在其外層的變數**，這件事不是理所當然的嗎？感覺Closure沒什麼特別的嘛。
+這種情況下`console.log`會印出什麼呢？
 
-先別急，讓我們耐心看下去。
+1. `undefined`
+2. `"John"`
 
-## Closure(閉包)的特別之處
+.
 
-要解釋JavaScript Closure (閉包)的特別之處，就不能不提JavaScript的另一個特色：**在JavaScript中，函式可以當成函式的回傳值。**
+.
 
-舉個例子：
+.
 
-定義一個函式`makeFunc`：
+答案是 `"John"`。
 
-1. `makeFunc`裡面定義了一個區域變數名為`name`。
-2. 其回傳值`displayName`也是一個函式。因為closure的關係，`displayName`能夠存取`name`變數。
+為什麼呢？🤔
+
+因為JavaScript的變數尋找規則是：
+
+☝️**內層區塊可以存取定義在外層區塊的變數。反過來說，外層區塊沒辦法存取內層區塊的變數。**
+
+所以內層區塊 `displayName` 可以存取定義在外層區塊 `init` 的變數 `name`。
+
+> 這樣的變數查找規則，有個專有名詞叫做 *Lexical Scoping*。大部分的程式語言都採用類似的變數查找規則，另外有一種 *Dynamic Scoping* 的規則，但我就沒詳細研究囉，大家自己有興趣可以看看這篇關於[Lexical Scoping的介紹](https://stackoverflow.com/questions/1047454/what-is-lexical-scope)。
+
+或許你會覺得，這件事不是理所當然的嗎？
+
+先別急，讓我們耐心看下去！👇
+
+### 特性2️⃣: 函式可以當作另一個函式的回傳值
+
+JavaScript的另一個特色是：
+
+☝️**在JavaScript中，函式可以當成另一個函式的回傳值。**
+
+這是什麼意思呢？
+
+在JavaScript中，函式是一種物件。
+
+☝️**因為函式是物件，所以函式可以作為函式的參數傳遞，也可以當作函式的回傳值。**
+
+換句話說，函式在JavaScript中是[一等公民(first-class)](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function)。
+
+你可能會問，函式可以當作回傳值，那又怎樣？
+
+其實這個特性會跟下一個要提到的特性有關。
+
+讓我們往下看！👇
+
+### 特性3️⃣: 閉包 (closure) 可以「保留」環境
+
+第三個特性是：閉包 (closure) 可以「保留」環境。
+
+這個特性會和前面兩個特性有關。
+
+我用下面這個例子來說明：
+
+1. 首先定義一個函式`makeFunc()`。
+2. `makeFunc()`裡面定義了一個區域變數`name`。
+3. `makeFunc()`裡面定義了一個函式`displayName()`。注意：`displayName`能夠存取`name`變數。
+4. **`makeFunc()`的回傳值是`displayName`這個函式。**
+5. 最後，我們將`makeFunc()`的回傳值存在`func1`變數中，並且呼叫`func1`。
+
+當`func1()`被呼叫的時候，實際上就是呼叫`makeFunc()`回傳的`displayName`。
 
 ```Javascript
 function makeFunc() {
@@ -66,37 +171,52 @@ let func1 = makeFunc()
 func1() // What's the result?
 ```
 
-我們將`makeFunc()`的回傳值存在`func1`變數中，並且呼叫`func1`。
+🙋問題來了：
 
-問題來了：
+當`displayName()`被呼叫時，`console.log(name)`會被執行。
 
-`makeFunc`已經回傳了，當`func`被呼叫時，定義在`makeFunc`內的區域變數`name`的值會是什麼呢？
+注意：`name`是定義在`makeFunc()`裡的一個區域變數，而`makeFunc`已經結束執行並回傳了。
+
+那這時候`name`印出來的值會是什麼？
 
 1. `undefined`
 2. `"John"`
-3. 以上皆非
 
-答案是`"John"`。很神奇吧？
+.
 
-在一些程式語言中，如果函式回傳了，定義在其內部的區域變數就會消失。但JavaScript並非如此。原因就跟Closure的特性有關。
+.
 
-**雖然`makeFunc`已經回傳了，但是因為我們保留了一份`func1`的參考，而`func1`是一個Closure，所以JavaScript engine為我們在記憶體中保留了`func1`的環境，讓我們可以繼續存取`name`變數。**
+.
 
-Closure的特性還不只如此喔，讓我們繼續看下去！
+答案是`"John"`。
 
-### 每次函式被呼叫時都會創造一組新的環境 (Lexical Environment)
+為什麼呢？🤔
 
-問題：
+明明`makeFunc()`已經結束執行並回傳了，`name`卻沒有跟著消失呢？
 
-上例的`makeFunc`如果呼叫兩次，產生兩個不同的函式，兩個函式看到的`name`變數會相同還是不同呢？
+原因跟「這個」特性有關👇。
 
-1. 相同
-2. 不同
-3. 我不知道RRRRRR
+在一些程式語言中，如果函式回傳了，定義在其內部的區域變數就會消失。
 
-要回答這個問題，我們可以來做個實驗。
+但在JavaScript並非如此！
 
-定義一個`makeAdder`函式，接受`x`作為參數，回傳一個以`y`作為參數並回傳`x+y`結果的`add`函式。
+☝️**在JavaScript中，即使在外層區塊已經回傳的狀況下，只要內層區塊還保留著一份參考，那麽外層的變數不會隨著回傳而消失，我們依然可以存取外層的變數。**
+
+雖然`makeFunc()`回傳了，但是我們還保留著一份`displayName`的參考 (存在`func1`變數裡)。
+
+因為`displayName`是一個閉包 (closure)，JavaScript engine會在記憶體中為我們繼續保留`displayName`的環境 (包含`name`變數)，所以我們可以繼續存取`name`變數。
+
+看完了這個例子，應該可以了解 **閉包 (closure) 可以「保留」環境** 是什麼意思。
+
+閉包的特性還不只如此喔。
+
+讓我們繼續看下去！👇
+
+### 特性4️⃣: 每次函式被呼叫時，都會創造一組新的環境 (Lexical Environment)
+
+要說明這個特性，我們從一個例子開始思考：
+
+首先，定義一個 `makeAdder` 函式，接受 `x` 作為參數，回傳一個以 `y` 作為參數，並回傳 `x + y` 結果的 `add()` 函式。
 
 ```Javascript
 function makeAdder(x) {
@@ -113,32 +233,62 @@ add5(2) // ?
 add10(2) // ?
 ```
 
-我們呼叫了`makeAdder(5)`和`makeAdder(10)`，並分別將結果存在`add5`和`add10`中。
+我們分別呼叫了 `makeAdder(5)` 和 `makeAdder(10)`，並分別將結果存在 `add5` 和 `add10` 中。
 
-`add5`和`add10`都是closure (閉包)，他們被創造時會記住環境(Lexical Environment)，包括變數`x`。
+因為`add5`和`add10`都是閉包 (closure)，所以他們被創造時會記住宣告當下的環境(Lexical Environment)，包括變數`x`。
 
-問題：
+🙋問題來了：
 
 1. `add5(2)` = ?
 2. `add10(2)` = ?
 
 答案分別是7和12。
 
-為什麼呢？因為**每當function被呼叫時，都會產生一組新的環境(Lexical Environment)。**所以第一次呼叫`makeAdder(5)`的時候，創造了一組`x = 5`的環境，因此`add`函式看到的`x` = 5；而第二次回傳的`add`函式看到的`x` = 10。
+為什麼呢？🤔
 
-總之`add5`和`add10`看到的`x`變數在記憶體中是不一樣的兩個變數。
+要回答這個問題，需要去思考，`add5` 和 `add10` 兩個閉包 (closure) 看到的 `x` 變數值分別是什麼。
 
-Closure的這個特性其實非常有用，用途到底是什麼呢？繼續往下看！
+這裡我就直接破梗講答案囉！
 
-## Closure(閉包)的應用
+對 `add5` 而言，`x = 5`。
 
-Closure概念上就是把function和一組data關聯起來，這對應到物件導向(Object-Oriented Programming)中，物件方法可以存取物件屬性(Property)的特性。
+對 `add10` 而言，`x = 10`。
+
+`add5` 和 `add10` 同樣都是呼叫 `makeAdder` 的回傳結果，但是就結果而言，分別記住了各自的一組環境。
+
+這個結果的原理來自於這個特性：
+
+☝️**每當函式被呼叫時，都會產生一組新的環境 (Lexical Environment)。**
+
+所以第一次呼叫`makeAdder(5)`的時候，創造了一組`x = 5`的環境，因此`add`函式看到的`x` = 5；而第二次回傳的`add`函式看到的`x` = 10。
+
+總之 `add5` 和 `add10` 看到的 `x` 變數在記憶體中是不一樣的兩個變數。
+
+### 閉包的特性: 小結
+
+辛苦了！🙇
+
+看到這裡，你應該大致了解閉包 (closure) 有哪些特性了吧！
+
+那你一定會想知道，閉包有這些特性又怎樣？🤔
+
+到底哪邊會用到閉包？🤔
+
+👇下面我們就來看看一些閉包 (closure) 的應用吧！
+
+## 閉包 (Closure) 的應用
+
+閉包 (closure) 在比較高層次的概念上，可以想成把函式和一組資料關聯起來。
+
+這對應到物件導向程式設計 (Object-Oriented Programming) 中，物件方法可以存取物件屬性 (property) 的特性。
 
 下面我們就來看幾個簡單的應用：
 
-### 1. 用Closure(閉包)模擬物件導向中的private member (Module Pattern)
+### 應用1️⃣: 用閉包 (Closure) 模擬物件導向中的私有成員 (Private Member)
 
 我們可以用Closure的特性模擬物件導向中的私有成員(private member)。
+
+(這個方法有時又被稱作 Module Pattern。)
 
 下面這個例子，我們創造一個`counter`物件，並提供三個方法存取物件內部的`count`變數。
 
@@ -172,13 +322,17 @@ counter.value() // 1
 
 物件的三個方法 (`increment`, `decrement`, `value`) 共同能夠存取同一組環境(Lexical Environment)，因此他們都能夠存取同一組`count`及`changeBy`。
 
-除了透過`counter`物件上的方法以外，我們沒辦法直接存取其內部的`count`變數。`count`就相當於OO中的private member。
+除了透過`counter`物件上的方法以外，我們沒辦法直接存取其內部的`count`變數。
 
-### 2. 用Closure(閉包)達到資料隔離的效果
+☝️`count`就相當於物件導向中的私有成員變數private member。
 
-把上面的例子改寫成工廠函式`makeCounter`。
+### 應用2️⃣: 用閉包 (Closure) 達到資料隔離的效果
 
-這裡產生了兩個物件`counter1`和`counter2`，他們擁有各自的`count`變數，不會互相干擾，達到資料互相隔離的效果。
+我們可以把上面的例子改寫成工廠函式 `makeCounter`，用來產生更多的 counter 物件。
+
+這裡產生了兩個物件`counter1`和`counter2`。
+
+☝️`counter1`和`counter2`擁有各自的`count`變數，不會互相干擾，達到資料互相隔離的效果。
 
 ```Javascript
 const makeCounter = function() {
@@ -212,11 +366,13 @@ counter1.value() // 2
 counter2.value() // -1
 ```
 
-### 3. 避免for loop中使用callback function的錯誤寫法
+### 應用3️⃣: 避免for loop中使用callback function的錯誤寫法
 
 在以前只有`var`的時代，在for loop裡使用callback函式很容易不小心寫錯。
 
-舉個例子，假設現在要寫一段code能夠每隔一秒分別印出0 1 2 3 4，你可能會用`setTimeout`搭配一個for loop去寫：
+舉個例子，假設現在要寫一段code能夠每隔一秒分別印出0 1 2 3 4。
+
+你可能會寫成這樣，用`setTimeout`搭配一個for loop去寫：
 
 ```Javascript
 for (var i = 0; i < 5; ++i) {
@@ -226,9 +382,13 @@ for (var i = 0; i < 5; ++i) {
 }
 ```
 
-但這段code實際上會印出5 5 5 5 5。為什麼呢？
+但這樣寫是錯的❌。
 
-因為`var`宣告的變數是以function作為scope，所以上面那種寫法的`i`可以看成是全域變數：
+這段code實際上會印出 `5 5 5 5 5` 。
+
+為什麼呢？🤔
+
+因為`var`宣告的變數是以函式作為scope，所以上面那種寫法的`i`可以看成是全域變數：
 
 ```Javascript
 var i; // A global variable!
@@ -244,13 +404,21 @@ for (i = 0; i < 5; ++i) {
 
 而跑完for loop後，`i` = 5。當callback function實際被呼叫到時，才會去看`i`實際的值，也就是5，所以才會印出5 5 5 5 5。
 
-如果我們需要讓每個callback function都可以記住各自的`i`，該怎麼做呢？
+那我們到底該怎麼做才對呢？🤔
 
-我們必須要運用closure的特性，讓每個callback function都有各自的環境。實際上的做法就是用一個function包起來。下面的示範會統一用IIFE去做，但是要額外定義helper函式去做也可以唷。
+關鍵是：我們需要讓每個callback function都可以記住各自的`i`。
 
-#### 方法1. 整段code用IIFE包起來執行
+☝️所以我們必須要運用closure的特性，讓每個callback function都有各自的環境。
 
-第一種方法是，把整段`setTimeout`的code包在一個IIFE中。for loop的每個iteration呼叫IIFE時，都會產生一組新的環境，並且`i`的值會copy給`j`，這樣每個callback都會有各自的`j`了。
+實際上的做法就是用一個function包起來。
+
+👇下面列舉了幾種可能的解法：
+
+#### 解法1️⃣: 整段code用IIFE包起來執行
+
+第一種方法是：把整段code包在一個IIFE中去執行。
+
+for loop的每個iteration呼叫IIFE時，都會產生一組新的環境，並且`i`的值會copy給`j`，這樣每個callback都會有各自的`j`了。
 
 ```Javascript
 for (var i = 0; i < 5; ++i) {
@@ -262,9 +430,13 @@ for (var i = 0; i < 5; ++i) {
 }
 ```
 
-#### 方法2. 用IIFE產生callback function
+#### 解法2️⃣: 用IIFE產生callback function
 
-第二種方法是用IIFE直接產生一個`setTimeout` callback。for loop的每個iteration呼叫IIFE時，同樣會產生一組新的環境，也會把`i`的值會copy給`j`。與上面的差別是，IIFE最後要回傳`setTimeout`需要的callback function。
+第二種方法是：用IIFE直接回傳一個callback function。
+
+for loop的每個iteration呼叫IIFE時，同樣會產生一組新的環境，也會把`i`的值會copy給`j`。
+
+與前一種做法的差別是，IIFE最後要回傳`setTimeout`需要的callback function。
 
 ```Javascript
 for (var i = 0; i < 5; ++i) {
@@ -276,7 +448,7 @@ for (var i = 0; i < 5; ++i) {
 }
 ```
 
-#### 方法3. 用`let`
+#### 解法3️⃣: 用`let`
 
 如果沒有硬要用closure解決這個問題的話，其實用`let`解決是最快的：
 
@@ -288,7 +460,7 @@ for (let i = 0; i < 5; ++i) {
 }
 ```
 
-### 補充說明：Lexical Environment
+## 補充說明：Lexical Environment
 
 上面一直提到環境(Lexical Environment)這個詞彙，這邊稍加補充說明。
 
@@ -307,7 +479,10 @@ JavaScript中，一段code能夠存取哪些變數，是由Code所在的Lexical 
 
 看到這裡，希望你已經對JavaScript Closure(閉包)的概念以及實際應用有了深入了解！這篇文章的例子和說明大部分都是參考自[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)與[JavaScript.info](http://javascript.info/closure)，有興趣更深入了解Closure的朋友可以再去看看喔！
 
+有任何問題，或是覺得寫得不清楚的地方，歡迎在下面👇👇👇留言讓我知道喔。
+
 ## Reference
 
 [Closures - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+
 [Closure - javascript.info](http://javascript.info/closure)
