@@ -1,5 +1,5 @@
 ---
-title: "[教學] 3分鐘一定能看懂的JavaScript閉包 (Closure)"
+title: "[教學] 史上最簡單！3分鐘看懂JavaScript閉包 (Closure)"
 tags: ["javascript"]
 redirect_from: /2018/03/04/javascript-closure-in-depth
 last_modified_at: 2019/01/26
