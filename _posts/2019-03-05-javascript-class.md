@@ -385,7 +385,7 @@ rabbit.eat();  // OK
 
 例如 `handleClick = () => { ... }` 這種 Arrow Functions in Class Properties 的寫法，非常有用，可以用來代替正規 `handleClick() { ... }` 加上constructor內呼叫 `this.handleClick = this.handleClick.bind(this);`的寫法。
 
-不過也有人提出看法，[不鼓勵 Arrow Functions in Class Properties 的用法]((https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1))。在獲得語言完全採納某個feature之前，提前採用babel轉譯出的結果可能和想像有落差，小心踩坑！
+不過也有人提出看法，[不鼓勵 Arrow Functions in Class Properties 的用法](https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1)。在獲得語言完全採納某個feature之前，提前採用babel轉譯出的結果可能和想像有落差，小心踩坑！
 
 題外話，我也好奇babel針對 `super` 的case，會做什麼特別的處理？
 
