@@ -1,5 +1,5 @@
 ---
-title: "[筆記] 居然可以這樣寫！JavaScipt 實作亂數排序演算法 (Random Shuffle)"
+title: "[筆記] 居然可以這樣寫！JavaScript 實作亂數排序演算法 (Random Shuffle)"
 tags: ["javascript"]
 ---
 
