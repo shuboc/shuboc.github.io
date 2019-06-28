@@ -12,3 +12,7 @@ function trackViewArticle(event_label) {
 function trackViewArticleList(event_label) {
   gtag('event', 'view_item_list', { event_label });
 }
+
+function trackLead(item) {
+  gtag('event', 'generate_lead', { event_label: item })
+}
