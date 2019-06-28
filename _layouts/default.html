@@ -39,7 +39,7 @@
                 <h1>最新文章</h1>
                 <ul>
                   {% for post in site.posts limit: 5 %}
-                    <li><a href="{{ post.url }}" target="_blank">{{ post.title }}</a></li>
+                    <li><a href="{{ post.url }}" target="_blank" onclick="trackViewArticle(EVENT_LABEL_LATEST_ARTICLES)">{{ post.title }}</a></li>
                   {% endfor %}
                 </ul>
 
@@ -57,7 +57,7 @@
                       {% if tagitems.size == 3 %}
                         {% assign tagname = tagitems[1] %}
                         {% assign tagcount = tagitems[2] %}
-                        <li><a href="/tags/#{{ tagname | slugify }}" target="_blank">{{ tagname }} ({{ tagcount }})</a></li>
+                        <li><a href="/tags/#{{ tagname | slugify }}" target="_blank" onclick="trackViewArticleList(EVENT_LABEL_ARTICLES_BY_TAG)">{{ tagname }} ({{ tagcount }})</a></li>
                       {% endif %}
                   {% endfor %}
                 </ul>
@@ -71,6 +71,7 @@
     <!-- Prism: the syntax-highlighter -->
     <script src="/js/prism.js"></script>
     <script src="/js/anchor.js"></script>
+    <script src="/js/analytics.js"></script>
   </body>
 
 </html>
