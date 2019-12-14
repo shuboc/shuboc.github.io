@@ -5,13 +5,10 @@ tags: ["javascript", "web browser"]
 
 在JavaScript中，取得DOM元素的寬度或高度，可以利用clientHeight/clientWidth/offSetHeight/offsetWidth/scrollHeight/scrollWidth/scrollTop/scrollLeft...等屬性，這篇文章整理了不同屬性之間的區別以及應用。下次遇到時再也不會分不清楚了！
 
-## 總覽
+![clientWidth/clientHeight](https://developer.mozilla.org/@api/deki/files/185/=Dimensions-client.png)
+![offsetWidth/offsetHeight](https://developer.mozilla.org/@api/deki/files/186/=Dimensions-offset.png)
 
-先放一張圖方便對照著看。
-
-![size](/images/size.png)
-
-資料來源：[Element size and scrolling - javascript.info](https://javascript.info/size-and-scroll)。
+上面先放個示意圖方便對照著看，圖片來源：[Determining the dimensions of elements - MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements)
 
 ## 寬度/高度
 
@@ -21,7 +18,7 @@ tags: ["javascript", "web browser"]
 
 * `offsetWidth`/`offsetHeight` 是「元素本身」的寬度/高度，並完整了包含了邊界、捲軸及padding。
 
-* `clientWidth`/`clientHeight` 則是元素所包含的「子元素」的寬度/高度，所以不會將元素本身的padding也算進去。
+* `clientWidth`/`clientHeight` 則是元素所包含的「子元素」的寬度/高度，其中包含了padding，但不包含邊界及捲軸。
 
 * `scrollWidth`/`scrollHeight` 也是元素所包含的「子元素」的「完整」寬度和高度，其中包含了超出捲軸之外的部分的寬度與高度。在沒有捲軸的情況下，這個值就等於 `clientWidth`/`clientHeight`。
 
@@ -59,6 +56,13 @@ tags: ["javascript", "web browser"]
 
 我們會需要利用容器和內容的寬度去計算。捲軸的寬度＝內容的完整寬度 (`child.offsetWidth`) 減去內容實際的寬度 (`parent.clientWidth`)
 
+## Cheetsheet
+
+截圖自：[Element size and scrolling - javascript.info](https://javascript.info/size-and-scroll)。
+
+![size](/images/size.png)
+
 ## Reference
 
-[Element size and scrolling - javascript.info](https://javascript.info/size-and-scroll)
+* [Determining the dimensions of elements - MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements)
+* [Element size and scrolling - javascript.info](https://javascript.info/size-and-scroll)
