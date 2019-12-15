@@ -32,6 +32,25 @@ tags: ["javascript", "web browser"]
 
 * `scrollLeft`/`scrollTop` 是「內容」被捲動的距離，也就是內容頂端和捲軸頂端的相對距離。**這個屬性很常用到，一定要跟他很熟！**
 
+## `document.documentElement`
+
+如果我們想要取得整個文件的寬度/高度，該怎麼做呢？我們可以用  `document.documentElement` 這個特殊的DOM node，他對應到 `<html>` 這個 tag。
+
+上述原則同樣適用於 `document.documentElement`，但是相較一般的DOM node，額外多了一些tricky之處，需要特別注意。
+
+* `clientWidth`/`clientHeight` 是文件「不包括捲軸」的寬度/高度；`document.documentElement` 還有另一組特殊的屬性 `innerWidth`/`innerHeight`，是文件「包括捲軸」的寬度/高度。
+* 文件的完整寬度/高度（包含捲軸之外部分），考慮到瀏覽器相容性的問題，不能用 `scrollWidth`/`scrollHeight`，而要用
+
+```JavaScript
+let scrollHeight = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+);
+```
+
+* 目前捲軸的捲動高度，理論上可以用 `scrollWidth`/`scrollTop`，但是因為瀏覽器相容性的問題，還是改用相容性更佳的 `window.pageXOffset`/`pageYOffset` 比較保險。
+
 ## `getComputedStyle()`
 
 還有另一種方法可以取得元素的寬高資訊，那就是用`getComputedStyle()` 這個 API 取得元素的CSS，然後我們就可以用 `getComputedStyle(elem).width` 取得寬度。
