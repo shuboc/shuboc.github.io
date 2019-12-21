@@ -30,6 +30,7 @@ $header-height: 70px;
     float: right;
     line-height: $header-height;
     font-family: $header-font-family;
+    z-index: 1;
 
     .menu-icon {
         display: none;
@@ -80,6 +81,7 @@ $header-height: 70px;
 
         &:hover .trigger {
             display: block;
+            padding-top: 5px;
             padding-bottom: 5px;
         }
 
