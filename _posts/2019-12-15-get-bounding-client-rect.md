@@ -1,5 +1,5 @@
 ---
-title: "[教學]  getBoundingClientRect用法！學會這招，元素位置計算再也難不倒你"
+title: "[教學] 原來 getBoundingClientRect 用法是這樣！學會這招，元素位置計算再也難不倒你"
 tags: ["javascript", "web browser"]
 ---
 
