@@ -5,7 +5,7 @@
  * @author ocodia
  */
 
-code[class*="language-"],
+code[class*="language-"]:not(.language-plaintext),
 pre[class*="language-"] {
 	color: #f8f8f2;
 	background: none;
