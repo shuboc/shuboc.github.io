@@ -5,10 +5,8 @@ tags: ["react", "webpack"]
 
 Hot Module Replacement (HMR) 是 Webpack 其中一個讓開發過程更方便的功能，它的功用是讓你修改原始碼時不需要重新載入頁面，開發上會快很多！這篇來介紹如何為你的 React 專案設定 HMR。
 
-<!--![Webpack icon](https://webpack.js.org/d19378a95ebe6b15d5ddea281138dcf4.svg)-->
-
-<img src="https://webpack.js.org/d19378a95ebe6b15d5ddea281138dcf4.svg" style="
-    max-width: 200px;
+<img src="/images/webpack.jpg" style="
+    width: 400px;
     margin: 0 auto;
     display: block;
 " />
