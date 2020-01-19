@@ -176,4 +176,4 @@ Pixel density 用白話一點的說法就是：單位長度裡面有幾個實體
 * [Responsive Images - Udacity](https://classroom.udacity.com/courses/ud882)
 * [High DPI Images for Variable Pixel Densities](https://www.html5rocks.com/en/mobile/high-dpi/)
 * [img - MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#Example_4_Using_the_srcset_and_sizes_attributes)
-* [<picture>: The Picture element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
+* [&lt;picture&gt;: The Picture element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
