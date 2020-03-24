@@ -1,9 +1,10 @@
 ---
-title: "[教學] 原來 getBoundingClientRect 用法是這樣！學會這招，元素位置計算再也難不倒你"
+title: "[教學] 如何用 getBoundingClientRect 計算元素在視窗中的相對與絕對位置"
 tags: ["javascript", "web browser"]
+last_modified_at: 2020/03/24
 ---
 
-前端工程師最遇到的問題之一，就是：如何取得元素在視窗中所在位置的座標、以及如何取得元素在文件中的絕對位置的座標。這篇文章說明如何用 `getBoundingClientRect()` 取得元素位於視窗座標系的位置，以及如何簡單方便地轉換成絕對位置。
+如何取得元素在視窗中的相對以及絕對位置，是前端工程師最常需要處理的問題之一。這篇文章將會教你如何用 `getBoundingClientRect()` 取得元素的相對位置，以及如何用一條非常簡單的公式轉換成絕對位置。
 
 ![Rect](https://mdn.mozillademos.org/files/15087/rect.png)
 
