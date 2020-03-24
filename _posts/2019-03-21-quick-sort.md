@@ -1,9 +1,11 @@
 ---
-title: "[教學] 快速排序、快速選擇演算法 (Quick Sort & Quick Select Algorithm)"
-tags: ["algorithm"]
+title: "[教學] 深入淺出 Quick Sort 演算法（以 JavaScript 為例）"
+tags: ["javascript", "algorithm"]
+redirect_from: /quick-sort-quick-selection/
+last_modified_at: 2020/03/24
 ---
 
-排序 (sort) 演算法是寫程式最重要的演算法之一，其中 quick sort (快速排序) 更是最被廣泛應用的排序演算法之一，值得你花個幾分鐘認識！這篇文章將帶你認識快速排序的原理，以及它的變形應用: quick select (快速選擇)。
+Quick Sort (快速排序) 是一種 divide and conquer 的排序方法，這篇文章詳細說明其原理，並以 JavaScript 為例教你如何實作 Quick Sort (快速排序演算法)，最後介紹其進階應用: Quick Select (快速選擇演算法)。
 
 ![Sort](/images/sort.jpg)
 
@@ -45,7 +47,7 @@ function quickSort(arr) {
   if (arr.length <= 1) {
     return arr;
   }
-  
+
   const less = [];
   const greater = [];
   const pivot = arr[arr.length - 1];
@@ -57,7 +59,7 @@ function quickSort(arr) {
       greater.push(num);
     }
   }
-  
+
   return [...quickSort(less), pivot, ...quickSort(greater)];
 }
 ```
@@ -84,11 +86,7 @@ function quickSort(arr) {
 
 * 回傳值 `pivotIndex` 是 pivot 的 index。
 
-。
-
-。
-
-。
+### 所以 `partition` 是如何運作的呢？
 
 接下來講詳細的運作方式。
 
@@ -116,12 +114,14 @@ function partition(arr, start, end) {
       nextLeftIdx++;
     }
   }
-  
+
   swap(arr, nextLeftIdx, end);
-  
+
   return nextLeftIdx;
 }
 ```
+
+### 來看個實際的例子吧！
 
 下面來看實際的操作過程，比較好理解。
 
@@ -145,14 +145,14 @@ i = 1:
  l
 [4, 9, 1, 6, 7, 3, 8, 2, 5] // 4 < 5, swapped
     i
-    
+
     l
 [4, 9, 1, 6, 7, 3, 8, 2, 5] // 4 < 5, l++
     i
 ```
 
 i = 2:
-   
+
 ```
     l
 [4, 9, 1, 6, 7, 3, 8, 2, 5] // 1 < 5, swap(arr, i, l)
@@ -161,7 +161,7 @@ i = 2:
     l
 [4, 1, 9, 6, 7, 3, 8, 2, 5] // 1 < 5, swapped
        i
-       
+
        l
 [4, 1, 9, 6, 7, 3, 8, 2, 5] // 1 < 5, l++
        i
@@ -177,7 +177,7 @@ i = 3:
 
 i = 4:
 
-```       
+```
        l
 [4, 1, 9, 6, 7, 3, 8, 2, 5] // 7 >= 5
              i
@@ -185,23 +185,23 @@ i = 4:
 
 i = 5:
 
-```          
+```
        l
 [4, 1, 9, 6, 7, 3, 8, 2, 5] // 3 < 5, swap(arr, i, l)
                 i
-                
+
        l
 [4, 1, 3, 6, 7, 9, 8, 2, 5] // 3 < 5, swapped
                 i
-                
+
           l
 [4, 1, 3, 6, 7, 9, 8, 2, 5] // 3 < 5, l++
                 i
 ```
 
 i = 6:
-   
-```             
+
+```
           l
 [4, 1, 3, 6, 7, 9, 8, 2, 5] // 8 >= 5
                    i
@@ -209,15 +209,15 @@ i = 6:
 
 i = 7:
 
-```                
+```
           l
 [4, 1, 3, 6, 7, 9, 8, 2, 5] // 2 < 5, swap(arr, i, l)
                       i
-                      
+
           l
 [4, 1, 3, 2, 7, 9, 8, 6, 5] // 2 < 5, swapped
                       i
-                      
+
              l
 [4, 1, 3, 2, 7, 9, 8, 6, 5] // 2 < 5, l++
                       i
@@ -225,7 +225,7 @@ i = 7:
 
 交換 pivot:
 
-```                   
+```
              l
 [4, 1, 3, 2, 7, 9, 8, 6, 5] // swap pivot and l
 
@@ -293,11 +293,7 @@ quickSort(arr, 0, arr.length - 1);
 
 (這裏為了方便說明，先假設 `k` 是 zero-based。`k === 0` 是最小的元素。)
 
-。
-
-。
-
-。
+### Quick Select 是如何運作的呢？
 
 接下來解釋一下 quick select 是如何運作的。
 
@@ -323,7 +319,7 @@ function quickSelect(arr, left, right, k) {
   if (left === right) {
     return arr[left];
   }
-  
+
   const pivotIdx = partition(arr, left, right);
   if (pivotIdx === k) {
     return arr[k];
@@ -342,7 +338,7 @@ function quickSelect(arr, left, right, k) {
   if (left === right) {
     return arr[left];
   }
-  
+
   while (true) {
     const pivotIdx = partition(arr, left, right, k);
     if (pivotIdx === k) {
