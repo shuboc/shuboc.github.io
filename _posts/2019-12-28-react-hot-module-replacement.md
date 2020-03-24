@@ -1,9 +1,10 @@
 ---
-title: "[教學] 如何設定 React 專案熱替換 HMR (Webpack Hot Module Replacement) (2020版)"
+title: "[教學] 如何設定 Webpack HMR + React Hot Loader (2020更新)"
 tags: ["react", "webpack"]
+last_modified_at: 2020/03/24
 ---
 
-Hot Module Replacement (HMR) 是 Webpack 其中一個讓開發過程更方便的功能，它的功用是讓你修改原始碼時不需要重新載入頁面，開發上會快很多！這篇來介紹如何為你的 React 專案設定 HMR。
+Hot Module Replacement (HMR) 是 Webpack 提供方便開發過程的功能，讓你修改原始碼時不需要重新載入頁面，這篇文章將會教你如何設定 Webpack Config 使你的專案支援 HMR，增加團隊的開發效率。
 
 <img src="/images/webpack.jpg" style="
     width: 400px;

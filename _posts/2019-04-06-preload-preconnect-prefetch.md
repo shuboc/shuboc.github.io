@@ -1,9 +1,10 @@
 ---
-title: "[教學] 運用這三種 Resource Hint 技巧，加快網頁載入的速度：preload，preconnect 與 prefetch"
+title: "[教學] Preload, Preconnect 與 Prefetch：三種加快網頁載入速度的技巧用法"
 tags: ["web browser"]
+last_modified_at: 2020/03/24
 ---
 
-現代瀏覽器下載不同的資源，如圖片、JS、CSS等，會有一套猜測優先度的邏輯；然而，瀏覽器並不總是猜得準，也因此影響了我們的網頁載入效能。好消息是，瀏覽器的 resource hint 功能提供了一個機制，讓我們可以提示瀏覽器資源下載的優先順序。本篇將會介紹 `preload`、`preconnect` 及 `prefetch` 這三種常見的 resource hint 技巧，幫助我們優化網頁載入效能。
+現代瀏覽器提供了 `preload`、`preconnect` 及 `prefetch` 等功能，讓你可以用 link tag 提示某個圖片、JS、CSS等資源將會被使用，並且根據 rel 屬性的不同，各自會產生不同優化效果。這篇文章將會教你這三種技巧的使用方法與時機，讓你了解如何優化資源的下載順序並提升網頁載入效能。
 
 ![Fetch](/images/fetch.jpg)
 
@@ -88,7 +89,7 @@ tags: ["web browser"]
 ### Decouple Load from Execution
 
 用 JavaScript 動態觸發 `preload`：
- 
+
 ```Javascript
 function downloadScript(src) {
   var el = document.createElement("link");

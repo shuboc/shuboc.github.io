@@ -1,9 +1,10 @@
 ---
-title: "[教學] Intersection Observer API 簡潔用法學起來！這樣寫輕鬆搞定無限捲軸、lazy loading"
+title: "[教學] 如何用 Intersection Observer API 實作 Infinite Scroll/Lazy Loading"
 tags: ["javascript", "web browser"]
+last_modified_at: 2020/03/24
 ---
 
-Intersection Observer API 是一個較新的瀏覽器 API，只要幾行就可以輕鬆方便地實作無限捲軸、lazy loading等需求，而且效能更好。受夠了監聽 scroll event、用 getBoundingClientRect 計算位置？快來看這篇～
+Infinite Scroll 和 Lazy Loading 是前端常見的需求之一，但是他們都可以用新的 Intersection Observer API 來實現。這篇文章將會教你 Intersection Observer API 的用法，不僅程式碼更簡潔，而且效能比起監聽 scroll event 加上用 `getBoundingClientRect()` 計算位置更好，此外被多數主流瀏覽器支援。
 
 ![Intersect Ratio](https://developers.google.com/web/updates/images/2016/04/intersectionobserver/intersectratio.png)
 

@@ -1,18 +1,13 @@
 ---
-title: "[教學] 史上最簡單！3分鐘看懂JavaScript閉包 (Closure)"
+title: "[教學] 深入淺出 JavaScript 閉包 (Closure)"
 tags: ["javascript"]
 redirect_from: /2018/03/04/javascript-closure-in-depth
-last_modified_at: 2019/01/26
+last_modified_at: 2020/03/24
 ---
 
 ![JavaScript Closure](/images/javascript-closure.jpg)
 
-如果你是常碰JavaScript的人，相信一定有聽過Closure(閉包)這個名詞。Closure是一種特別的函式，他能夠記住被創造的當下的環境以及變數。Closure有很多不同的用途，是一個很基礎但又非常重要的觀念，相信大家面試的時候也經常遇到ＸＤ，怎麼能不了解它呢！
-
-這篇文章將會帶你：
-
-* 了解JavaScript 閉包 (closure) 的特性
-* 了解JavaScript 閉包 (closure) 有哪些實際應用
+Closure (閉包) 在 JavaScript 中是一種特別的函式，它能夠記住被創造的當下的環境以及變數，也是 JavaScript 中最重要卻又最難懂的概念之一。這篇文章將會教你 closure 的特性，以及實際演練常見的應用，例如IIFE、模擬 private member 達到封裝的特性等。
 
 ## 目錄
 
