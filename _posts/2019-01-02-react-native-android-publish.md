@@ -1,17 +1,13 @@
 ---
-title: "[教學] 第一次上架就成功！只要這5個步驟，就能將你的React Native Android APP上架到Google Play"
+title: "[教學] 如何發布上架 React Native Android App 至 Google Play Store (2020年更新)"
 image: "https://facebook.github.io/react-native/img/header_logo.png"
 tags: ["react", "react native", "android"]
-last_modified_at: 2019/01/26
+last_modified_at: 2020/03/24
 ---
 
 ![Google Play](/images/react-native-android-publish/react-native-android-publish.png)
 
-你是否像我一樣，第一次用React Native寫出一個APP，迫不及待地要上架到Google Play上，但是看了文件還是不知道要如何設定？
-
-別擔心！這篇文章我整理了上架的完整流程，
-
-照著這篇文章的步驟做，你將會順利將你的APP上架到Google Play。
+第一次將 React Native Android App 發布上架到 Google Play 有許多繁瑣的設定要搞定，不過別擔心！這篇文章已經將完整的流程整理成簡單的5個步驟，照著步驟做就能順利地將你的 App 發布上架到 Google Play Store 囉。
 
 ## 目錄
 
