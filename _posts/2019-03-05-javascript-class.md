@@ -1,9 +1,10 @@
 ---
-title: "[教學] 深入淺出 JavaScript Class 類別"
+title: "[教學] 深入淺出 JavaScript ES6 Class (類別)"
 tags: ["javascript"]
+last_modified_at: 2020/03/25
 ---
 
-你是否還對 JavaScript Class 類別還有點陌生呢？其實類別一點也不難！這篇文章將會解釋類別的觀念以及使用方法，包含繼承、`super`等，一起來看看吧！
+你是否還對 ES6 JavaScript class 有點陌生呢？其實 JavaScript class 一點也不難！這篇文章將會解釋 JavaScript class 的觀念以及使用方法，包含 class 和 prototype 的關係，如何用 `extends` 達到繼承 (inheritance) 效果、`constructor` 及 `super` 的寫法，以及如何使用 static method/class function (靜態方法)，一起來看看吧！
 
 ![Someone coding](/images/javascript-class.jpg)
 
@@ -37,7 +38,7 @@ class User {
   constructor(name) {
     this.name = name;
   }
-  
+
   sayHi() {
     console.log(this.name);
   }
@@ -47,7 +48,7 @@ class User {
 其中
 
 ```Javascript
-sayHi() { 
+sayHi() {
   ...
 }
 ```
@@ -102,8 +103,8 @@ Article.compare = function(a, b) {
 非常簡單，只要使用 `class Rabbit extends Animal` 語法：
 
 ```Javascript
-class Animal { 
-  // ... 
+class Animal {
+  // ...
   run() {
     // Run...
   }
@@ -298,7 +299,7 @@ rabbit.eat();  // Error calling super
 ```Javascript
 let animal = {
   name: "Animal",
-  eat() { 
+  eat() {
     console.log(`${ this.name } eats!`); // [[HomeObject]] === animal
   }
 };
