@@ -6,9 +6,9 @@ last_modified_at: 2020/03/24
 
 現代瀏覽器提供的 Intersection Observer API 非常適合用來實現 Infinite Scroll 和 Lazy Loading 等前端常見的需求。這篇文章將會教你 Intersection Observer API 的用法，不僅程式碼更簡潔，而且效能比起監聽 scroll event 更好，此外瀏覽器支援度也不錯，就讓我們一起來看看吧！
 
-![Intersect Ratio](https://developers.google.com/web/updates/images/2016/04/intersectionobserver/intersectratio.png)
+![Cat](/images/cat1.jpg)
 
-圖片來源：[IntersectionObserver’s Coming into View - Google Developer](https://developers.google.com/web/updates/2016/04/intersectionobserver)
+Photo by Nirzar Pangarkar on Unsplash
 
 ## Intersection Observer API
 
