@@ -6,6 +6,7 @@ const EVENT_LABEL_HOME_PAGINATION = 'home_pagination';
 const EVENT_LABEL_RELATED_ARTICLES = 'related_articles';
 const EVENT_LABEL_LATEST_ARTICLES = 'latest_articles';
 const EVENT_LABEL_ARTICLES_BY_TAG = 'articles_by_tag';
+const EVENT_LABEL_ARTICLES_BY_TAG_MORE = 'articles_by_tag_more';
 
 function trackViewArticle(event_label) {
   gtag('event', 'view_item', { event_label });

@@ -4,14 +4,9 @@
   {% include head.html %}
 
   <body>
+    <!-- FB plugin -->
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.2&appId=163895163672009&autoLogAppEvents=1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v6.0&appId=1994883547264823&autoLogAppEvents=1"></script>
 
     {% include header.html %}
 
@@ -43,17 +38,16 @@
                     <li><a href="{{ post.url }}" onclick="trackViewArticle(EVENT_LABEL_LATEST_ARTICLES)">{{ post.title }}</a></li>
                   {% endfor %}
                 </ul>
-
-                <h1>文章標籤分類</h1>
+                <h1>文章分類</h1>
                 {% capture tags %}
                   {% for tag in site.tags %}
                     {{ tag[1].size | plus: 1000 }}#{{ tag[0] }}#{{ tag[1].size }}|
                   {% endfor %}
                 {% endcapture %}
 
-                {% assign sortedtags = tags | split: '|' | sort %}
+                {% assign sortedtags = tags | split: '|' | sort | reverse | slice: 0, 6 %}
                 <ul>
-                  {% for tag in sortedtags reversed %}
+                  {% for tag in sortedtags %}
                       {% assign tagitems = tag | split: '#' %}
                       {% if tagitems.size == 3 %}
                         {% assign tagname = tagitems[1] %}
@@ -61,7 +55,9 @@
                         <li><a href="/tags/#{{ tagname | slugify }}" onclick="trackViewArticleList(EVENT_LABEL_ARTICLES_BY_TAG)">{{ tagname }} ({{ tagcount }})</a></li>
                       {% endif %}
                   {% endfor %}
+                  <li><a href="/tags/" onclick="trackViewArticleList(EVENT_LABEL_ARTICLES_BY_TAG_MORE)">更多分類...</a></li>
                 </ul>
+                <div class="fb-page" data-href="https://www.facebook.com/shubo.code/" data-tabs="" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/shubo.code/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/shubo.code/">Shubo 寫個 Code</a></blockquote></div>
             </aside>
         </div>
       </div>
