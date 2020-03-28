@@ -309,7 +309,7 @@ $header-height: 70px;
 
     h3 {
       font-size: 20px;
-      margin-top: 2 * $spacing-unit;
+      margin-top: 1 * $spacing-unit;
 
       @include media-query($on-palm) {
         font-size: 18px;
@@ -320,7 +320,7 @@ $header-height: 70px;
     p, blockquote, pre,
     ul, ol, dl, figure,
     %vertical-rhythm {
-        margin-bottom: 1 * $spacing-unit;
+        margin-bottom: 0.5 * $spacing-unit;
     }
 
     // h2 {
