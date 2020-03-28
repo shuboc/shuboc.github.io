@@ -1,10 +1,11 @@
 ---
-title: "[教學] Preload, Preconnect 與 Prefetch：三種加快網頁載入速度的技巧用法"
+title: "[教學] 深入淺出 Preload, Prefetch 和 Preconnect：三種加快網頁載入速度的 Resource Hint 技巧"
 tags: ["web browser"]
-last_modified_at: 2020/03/24
+redirect_from: /preload-preconnect-prefetch
+last_modified_at: 2020/03/28
 ---
 
-現代瀏覽器提供了 `preload`、`preconnect` 及 `prefetch` 等功能，讓你可以用 link tag 提示某個圖片、JS、CSS等資源將會被使用，並且根據 rel 屬性的不同，各自會產生不同優化效果。這篇文章將會教你這三種技巧的使用方法與時機，讓你了解如何優化資源的下載順序並提升網頁載入效能。
+現代瀏覽器提供了 `preload`、`prefetch` 和 `preconnect` 等功能，能讓開發者指定 link tag 的 rel 屬性提示瀏覽器提前下載圖片、JS、CSS等資源，以達到優化效能的效果。這篇文章將會教你這三種 resource hint 技巧的使用方法與時機，讓你了解如何優化資源的下載順序並提升網頁載入效能。
 
 ![Fetch](/images/fetch.jpg)
 
@@ -24,7 +25,7 @@ last_modified_at: 2020/03/24
 
 讓我們往下看：
 
-## `Preload`
+## Preload
 
 `preload` 告訴瀏覽器：「這份資源對目前的頁面是必要的，請用最快的速度下載此資源。」
 
@@ -52,7 +53,9 @@ last_modified_at: 2020/03/24
 
 `preload` 取得的資源，和一般的 HTTP request 使用相同的快取。所以資源如果可以快取的話會放在 HTTP cache 和 memory cache，不能快取的話，會在memory cache。
 
-### Use Case: Critical Path (關鍵路徑) CSS and JavaScript
+下面介紹一些使用情境，讓我們一起看下去！
+
+### Use Case 1: Critical Path (關鍵路徑) CSS and JavaScript
 
 我們知道，在 HTML 中引用 JS/CSS 檔案會阻擋 (block) [關鍵轉譯路徑 (critical rendering path)](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/)。
 
@@ -69,7 +72,7 @@ last_modified_at: 2020/03/24
 
 如果是重要的資源，那 `preload` 可能是比較好的優化方式。相較之下，同樣是可以非同步下載資源，`async` script 會 block `onload` event。
 
-### Use Case: Font 字體
+### Use Case 2: Font 字體
 
 ```html
 <link rel="preload" as="font" crossorigin="anonymous" type="font/woff2" href="myfont.woff2">
@@ -86,9 +89,9 @@ last_modified_at: 2020/03/24
 ](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes)
 * [Preload, Prefetch And Priorities in Chrome](https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf)
 
-### Decouple Load from Execution
+### Use Case 3: Decouple Load from Execution
 
-用 JavaScript 動態觸發 `preload`：
+用 JavaScript 動態觸發 `preload`，預先下載好，等到需要時才執行：([Source](http://yoavweiss.github.io/link_htmlspecial_16/#59))
 
 ```Javascript
 function downloadScript(src) {
@@ -105,31 +108,25 @@ function runScript(src) {
 }
 ```
 
-[Source](http://yoavweiss.github.io/link_htmlspecial_16/#59)
+### Use Case 4: Asnyc Loading of CSS
 
-### Asnyc Loading of CSS
-
-`preload` 可以用來非同步載入CSS：
+`preload` 可以用來非同步載入CSS：([Source](http://yoavweiss.github.io/link_htmlspecial_16/#61))
 
 ```jsx
 <link rel=preload as=style href="async_style.css"
       onload="this.rel='stylesheet'">
 ```
 
-[Source](http://yoavweiss.github.io/link_htmlspecial_16/#61)
+### Use Case 5: Responsive Loading
 
-### Responsive Loading
-
-`preload` 也可以搭配 media query 一起使用：
+`preload` 也可以搭配 media query 一起使用：([Source](http://yoavweiss.github.io/link_htmlspecial_16/#63))
 
 ```jsx
 <link rel=preload as=image href="someimage.jpg"
       media="(max-width: 600px)">
 ```
 
-[Source](http://yoavweiss.github.io/link_htmlspecial_16/#63)
-
-### `preload` Header
+### Use Case 6: Preload Header
 
 我們也可以用 server response header 來觸發瀏覽器的 `preload`。
 
@@ -141,7 +138,7 @@ function runScript(src) {
 
 [Server Push (HTTP/2)](https://w3c.github.io/preload/#server-push-http-2)
 
-## `Preconnect`
+## Preconnect
 
 `preconnect` 告訴瀏覽器：「這個網頁將會在不久的將來下載某個 domain 的資源，請先幫我建立好連線。」
 
@@ -172,7 +169,7 @@ function runScript(src) {
 
 如果是在 latency 很高的情況下（例如手機網路），會大大拖慢取得資源的速度。
 
-### `preconnect` 範例
+### Preconnect 的效果是什麼？
 
 這裏我引用 [Eliminating Roundtrips with Preconnect](https://www.igvita.com/2015/08/17/eliminating-roundtrips-with-preconnect/) 裡面提到的範例來做說明。
 
@@ -214,21 +211,23 @@ function preconnectTo(url) {
 }
 ```
 
-### Use Case: CDN
+下面簡單介紹一些使用情境：
+
+### Use Case 1: CDN
 
 如果你有很多資源要從某個CDN去拿，你可以提示 `preconnect` CDN的域名。
 
 特別是你不太能預先知道有哪些資源要下載的情況，只需要給定域名這點滿方便的。
 
-### Use Case: Streaming
+### Use Case 2: Streaming
 
 如果頁面上有個串流媒體，但你沒有要馬上播放，又希望按下播放的時候可以越快開始越好，那麼可以考慮先用 `preconnect` 建立連線，節省一段連線時間。
 
-## `dns-prefetch`
+## dns-prefetch
 
 跟 `preconnect` 類似，差別在於只提示瀏覽器預先處理 DNS lookup 而已。
 
-## `Prefetch`
+## Prefetch
 
 `prefetch` 告訴瀏覽器：「這資源我等等會用到，有空的話幫我先下載」。
 
@@ -246,8 +245,7 @@ function preconnectTo(url) {
 
 ## Reference
 
-https://developers.google.com/web/fundamentals/performance/resource-prioritization
-
-https://www.keycdn.com/blog/resource-hints
-
-https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf
+* [<link> - Yoav Weiss](http://yoavweiss.github.io/link_htmlspecial_16/)
+* [Resource Prioritization - Google Developer](https://developers.google.com/web/fundamentals/performance/resource-prioritization)
+* [Resource Hints](https://www.keycdn.com/blog/resource-hints)
+* [Preload, Prefetch And Priorities in Chrome](https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf)
