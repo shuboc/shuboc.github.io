@@ -1,3 +1,5 @@
+// gtag recommended events: https://developers.google.com/gtagjs/reference/event
+
 const EVENT_LABEL_HOME = 'home';
 const EVENT_LABEL_TAGS = 'tags'
 const EVENT_LABEL_HOME_PAGINATION = 'home_pagination';
@@ -15,4 +17,8 @@ function trackViewArticleList(event_label) {
 
 function trackLead(item) {
   gtag('event', 'generate_lead', { event_label: item })
+}
+
+function trackShare({ method, content_type, content_id }) {
+  gtag('event', 'share', {method, content_type, content_id});
 }
