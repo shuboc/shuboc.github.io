@@ -245,7 +245,7 @@ function preconnectTo(url) {
 
 ## Reference
 
-* [<link> - Yoav Weiss](http://yoavweiss.github.io/link_htmlspecial_16/)
+* [&lt;link&gt; - Yoav Weiss](http://yoavweiss.github.io/link_htmlspecial_16/)
 * [Resource Prioritization - Google Developer](https://developers.google.com/web/fundamentals/performance/resource-prioritization)
 * [Resource Hints](https://www.keycdn.com/blog/resource-hints)
 * [Preload, Prefetch And Priorities in Chrome](https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf)
