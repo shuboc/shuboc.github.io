@@ -22,7 +22,7 @@
     <!-- Display hyperlink -->
     {% if sameTagCount >= minCommonTags %}
       <li>
-        <a href="{{ post.url }}" target="_blank" onclick="trackViewArticle(EVENT_LABEL_RELATED_ARTICLES)">{{ post.title }}</a>
+        <a href="{{ post.url }}" onclick="trackViewArticle(EVENT_LABEL_RELATED_ARTICLES)">{{ post.title }}</a>
       </li>
       <!-- Check if # of max related posts has been reached -->
       {% assign relatedCount = relatedCount | plus: 1 %}
@@ -36,7 +36,7 @@
   {% if relatedCount < maxRelated %}
     {% for post in site.related_posts %}
       <li>
-        <a href="{{ post.url }}" target="_blank" onclick="trackViewArticle(EVENT_LABEL_RELATED_ARTICLES)">{{ post.title }}</a>
+        <a href="{{ post.url }}" onclick="trackViewArticle(EVENT_LABEL_RELATED_ARTICLES)">{{ post.title }}</a>
       </li>
       <!-- Check if # max related posts has been reached -->
       {% assign relatedCount = relatedCount | plus: 1 %}
