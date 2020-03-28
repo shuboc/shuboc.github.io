@@ -101,12 +101,3 @@ tags: ["book"]
 [馬上買，讓你不再一邊寫code一邊罵WTF](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)
 
 [![Clean Code](https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/057/98/0010579897.jpg&v=513f2000&w=348&h=348)](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)
-
-<script>
-  const aList = document.querySelectorAll('a');
-  for (let a of aList) {
-    if (a.href.includes('utm_medium=ap-books')) {
-      a.onclick = () => trackLead('Clean Code');
-    }
-  }
-</script>
