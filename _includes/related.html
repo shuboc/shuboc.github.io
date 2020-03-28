@@ -1,10 +1,11 @@
 <div class="related-posts">
-  <h2>看看其他文章...</h2>
+  <h2>相關文章</h2>
 
   {% assign maxRelated = 3 %}
   {% assign minCommonTags = 1 %}
   {% assign relatedCount = 0 %}
 
+  <ul>
   <!-- Display posts that have the same tag as the current post-->
   {% for post in site.posts %}
     <!-- Calculate # of common tags -->
@@ -20,9 +21,9 @@
 
     <!-- Display hyperlink -->
     {% if sameTagCount >= minCommonTags %}
-      <p>
+      <li>
         <a href="{{ post.url }}" target="_blank" onclick="trackViewArticle(EVENT_LABEL_RELATED_ARTICLES)">{{ post.title }}</a>
-      </p>
+      </li>
       <!-- Check if # of max related posts has been reached -->
       {% assign relatedCount = relatedCount | plus: 1 %}
       {% if relatedCount >= maxRelated %}
@@ -34,9 +35,9 @@
   <!-- Recent posts (if the above is not enough) -->
   {% if relatedCount < maxRelated %}
     {% for post in site.related_posts %}
-      <p>
+      <li>
         <a href="{{ post.url }}" target="_blank" onclick="trackViewArticle(EVENT_LABEL_RELATED_ARTICLES)">{{ post.title }}</a>
-      </p>
+      </li>
       <!-- Check if # max related posts has been reached -->
       {% assign relatedCount = relatedCount | plus: 1 %}
       {% if relatedCount >= maxRelated %}
@@ -44,5 +45,6 @@
       {% endif %}
     {% endfor %}
   {% endif %}
+  </ul>
 
 </div>
