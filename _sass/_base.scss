@@ -23,8 +23,7 @@ dl, dd, ol, ul, figure {
 body {
     font: $base-font-weight $base-font-size $base-font-family;
     color: $text-color;
-    background-color: $background-color;
-    background: linear-gradient(to bottom, #eee, #62B1D0);
+    background-color: $theme-color-light;
     -webkit-text-size-adjust: 100%;
     -webkit-font-feature-settings: "kern" 1;
     -moz-font-feature-settings: "kern" 1;
