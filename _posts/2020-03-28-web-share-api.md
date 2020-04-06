@@ -1,5 +1,5 @@
 ---
-title: "[教學] Web Share API - Navigator.share() 使用方法介紹"
+title: "[教學] Web Share API - Navigator.share() 介紹"
 tags: ["javascript", "browser"]
 ---
 
