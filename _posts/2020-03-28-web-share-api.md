@@ -1,13 +1,9 @@
 ---
-title: "[教學] Web Share API - Navigator.share() 使用方法"
+title: "[教學] Web Share API - Navigator.share() 使用方法介紹"
 tags: ["javascript", "browser"]
 ---
 
 Web Share API 是現代瀏覽器提供的最新功能之一，它讓網頁的使用者能夠體驗到和原生 app 完全相同的分享體驗。這篇文章將會教你 navigator.share() 的使用方法。
-
-## Web Share API 是什麼？
-
-Web Share API 是一個簡單易用的 API，可以讓使用者用作業系統原生的介面分享至其他 app、分享給你的朋友等，就像是使用原生 app 一樣。以下就是 Android 和 iOS 的原生分享介面，相信大家一定不陌生：
 
 <style>
   .share-image-section {
@@ -25,12 +21,22 @@ Web Share API 是一個簡單易用的 API，可以讓使用者用作業系統�
     }
   }
 </style>
+
 <div class="share-image-section">
-  <img src="https://web.dev/web-share/wst-send.png" alt="Android Share" class="share-image" >
   <img src="/images/web-share-api/ios-share.jpg" alt="iOS Share" class="share-image" >
 </div>
 
-網頁端實作這隻 API，就等於同時實作了 Share to Facebook、Share to Twitter、Share to XXX... 等各種分享至第三方平台的功能了！
+## Web Share API 是什麼？
+
+原生的 Android 和 iOS app 如果要做分享，通常會使用原生的分享介面，類似的介面相信大家一定不陌生：
+
+<div class="share-image-section">
+  <img src="https://web.dev/web-share/wst-send.png" alt="Android Share" class="share-image" >
+</div>
+
+然而手機網頁要達到一樣的效果就沒有那麼容易了，網頁的分享通常體驗會比原生 app 差一點，且如果要讓使用者用得習慣，可能得必須針對不同的平台去盡量模仿原生的介面，這種做法的實作成本相對是高的。這時候 Web Share API 就能派上用場了！
+
+Web Share API 是比較新的瀏覽器 API，可以讓使用者輕鬆地用作業系統原生的介面分享至其他 app、分享給你的朋友等，就像是使用原生 app 一樣。網頁端實作這隻 API，就等於同時實作了 Share to Facebook、Share to Twitter、Share to XXX... 等各種分享至第三方平台的功能了！
 
 另外 Google Chrome Developers 的[影片](https://www.youtube.com/watch?v=zJQNQmE6_UI)也有對 Web Share API 簡單的介紹 (0:18 ~ 1:00)：
 
@@ -38,9 +44,7 @@ Web Share API 是一個簡單易用的 API，可以讓使用者用作業系統�
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zJQNQmE6_UI?start=18" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-是不是很想趕快學起來呢？
-
-讓我們繼續往下看！
+是不是很想趕快一窺究竟呢？讓我們繼續往下看！
 
 ## Web Share API 的使用限制
 
