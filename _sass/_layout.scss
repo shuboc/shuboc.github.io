@@ -324,6 +324,11 @@ $header-height: 70px;
         margin-bottom: 0.5 * $spacing-unit;
     }
 
+    blockquote {
+        margin-top: $spacing-unit;
+        margin-bottom: $spacing-unit;
+    }
+
     // h2 {
     //     // font-size: 32px;
     //     @include level(2);
