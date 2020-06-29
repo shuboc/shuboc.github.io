@@ -1,10 +1,12 @@
 ---
-title: "[教學] 如何用 getBoundingClientRect 計算元素在視窗中的相對與絕對位置"
+title: "getBoundingClientRect() 教學"
 tags: ["javascript", "web browser"]
-last_modified_at: 2020/03/24
+last_modified_at: 2020/06/29
 ---
 
-如何取得元素在視窗中的相對以及絕對位置，是前端工程師最常需要處理的問題之一。這篇文章將會教你如何用 `getBoundingClientRect()` 取得元素的相對位置，以及如何用一條非常簡單的公式轉換成絕對位置。
+這篇文章將會講解 getBoundingClientRect() 的屬性，包含 left、top、right、bottom、width、height 等，並整理如何用這些屬性取得元素的大小相對位置，以及如何搭配 window.pageXOffset 和 window.pageYOffset 轉換成絕對位置。
+
+<br>
 
 ![Rect](https://mdn.mozillademos.org/files/15087/rect.png)
 
@@ -19,10 +21,12 @@ last_modified_at: 2020/03/24
 * `right`：`elem` 右下角的 x 座標
 * `bottom`：`elem` 右下角的 y 座標
 
-* 注意：**座標可能是負值**，例如：當元素的頂端超出視窗頂端的範圍時，`top`就會變成負的。
-* 注意：IE 跟 Edge 沒有 `x` 跟 `y` 屬性，但可用 `left` 跟 `top`。
-* 注意：`rect.width` 跟 `rect.height` 可能有小數，而 `offsetWidth`/`offsetHeight` 會回傳整數。
-* 注意：一般來說 `rect.width` 等於 `elem.offsetWidth`，但 `elem.offsetWidth` 是 layout 的大小，而 `width` 是實際 rendering 的大小。比如說用了 `transform: scale(0.5)`，寬度 200px 的元素在空間上佔據的位置一樣是 200px (`offsetWidth`)，但是視覺實際看到只有 100px (`rect.width`)。
+這些屬性有一些需要注意的事項：
+
+1. **座標可能是負值**，例如：當元素的頂端超出視窗頂端的範圍時，`top`就會變成負的。
+2. IE 跟 Edge 沒有 `x` 跟 `y` 屬性，但可用 `left` 跟 `top`。
+3. `rect.width` 跟 `rect.height` 可能有小數，而 `offsetWidth`/`offsetHeight` 會回傳整數。**如果需要精確的大小則需要用到 getBoundingClientRect()。**
+4. 一般來說 `rect.width` 等於 `elem.offsetWidth`，但 `elem.offsetWidth` 是 layout 的大小，而 `width` 是實際 rendering 的大小。比如說用了 `transform: scale(0.5)`，寬度 200px 的元素在空間上佔據的位置一樣是 200px (`offsetWidth`)，但是視覺實際看到只有 100px (`rect.width`)。可以看以下的例子：
 
 <p class="codepen" data-height="336" data-theme-id="default" data-default-tab="js,result" data-user="shubochao" data-slug-hash="RwNGJoy" style="height: 336px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RwNGJoy">
   <span>See the Pen <a href="https://codepen.io/shubochao/pen/RwNGJoy">
@@ -31,15 +35,17 @@ last_modified_at: 2020/03/24
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-如果還不熟 `offsetWidth`/`offsetHeight`，可以先看這篇：
+<br>
 
-延伸閱讀：[[教學] 一次搞懂 clientHeight/clientWidth/offSetHeight/offsetWidth/scrollHeight/scrollWidth/scrollTop/scrollLeft 的區別](/element-size-scrolling)
+想了解更多 `offsetWidth`/`offsetHeight` 細節可以看這篇：
 
-## 絕對位置
+> 延伸閱讀：[[教學] 一次搞懂 clientHeight/clientWidth/offSetHeight/offsetWidth/scrollHeight/scrollWidth/scrollTop/scrollLeft 的區別](/element-size-scrolling)
+
+## 用 window.pageXOffset 和 window.pageYOffset 算出絕對位置
 
 很多時候我們需要的是「絕對位置」，也就是元素相對於「文件左上角」的座標，可惜的是瀏覽器並沒有提供一個原生的值可以讓我們使用。
 
-但是有個很重要的事實，可以幫助我們很方便地計算出絕對位置，那就是「絕對位置座標系和視窗座標系之間的差距」等於捲軸已捲動的長度，亦即 `[window.pageXOffset, window.pageYOffset]`。
+幸好有個很簡單的公式可以幫助我們很方便地計算出絕對位置，那就是「絕對位置座標系和視窗座標系之間的差距」等於捲軸已捲動的長度，也就是 `[window.pageXOffset, window.pageYOffset]`。
 
 所以，絕對位置的計算方式如下：
 
@@ -50,12 +56,12 @@ const y = window.pageYOffset + rect.top;
 
 即使元素在視窗的範圍以外，上面的等式也成立，因為 `top/left` 是視窗座標系的座標，當超出視窗範圍時會變負值。
 
-如果還不熟 `pageXOffset`/`pageYOffset`，可以先看這篇：
+想知道更多 `pageXOffset`/`pageYOffset` 的細節，可以看這篇：
 
-延伸閱讀：[[教學] 一次搞懂 clientHeight/clientWidth/offSetHeight/offsetWidth/scrollHeight/scrollWidth/scrollTop/scrollLeft 的區別](/element-size-scrolling)
+> 延伸閱讀：[[教學] 一次搞懂 clientHeight/clientWidth/offSetHeight/offsetWidth/scrollHeight/scrollWidth/scrollTop/scrollLeft 的區別](/element-size-scrolling)
 
 ## Reference
 * [Element.getBoundingClientRect() - MDN
 ](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
 * [Determining the dimensions of elements - MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements)
-* [Coordinates - javascript.info] (https://javascript.info/coordinates)
+* [Coordinates - javascript.info](https://javascript.info/coordinates)
