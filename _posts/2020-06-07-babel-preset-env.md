@@ -1,5 +1,5 @@
 ---
-title: "@babel/preset-env 設定教學"
+title: "[教學] @babel/preset-env 設定"
 tags: ["webpack", "javascript"]
 ---
 
