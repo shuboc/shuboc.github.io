@@ -1,6 +1,7 @@
 ---
 title: "[教學] @babel/preset-env 設定"
 tags: ["webpack", "javascript"]
+last_modified_at: 2020/06/29
 ---
 
 這篇文章要介紹如何設定 `@babel/preset-env`。`@babel/preset-env` 是 babel 7 架構下的一組 preset，能讓你用最新的 JavaScript 語法寫程式，並且智慧地根據瀏覽器的環境引入需要的 polyfill，節省手動管理 syntax transform 的時間，還能夠減少 bundle 檔案大小，是現代前端開發不可或缺的利器，快跟我一起來看看設定上有哪些要注意的地方吧！
