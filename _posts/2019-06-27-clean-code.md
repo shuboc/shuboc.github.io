@@ -1,11 +1,11 @@
 ---
-title: "[推薦]《Clean Code 無瑕的程式碼 中文版》介紹：10個可立即運用的技巧，讓你的程式碼超容易維護"
+title: "[推薦]《Clean Code 無瑕的程式碼 中文版》介紹＋讀書心得"
 tags: ["book"]
 ---
 
-今天要來介紹[《Clean Code 無瑕的程式碼 中文版》](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)這本書的心得。我真的覺得這是一本任何工程師都應該讀十遍的好書。俗話說，唯一有效的程式品質度量單位就是每分鐘罵髒話的次數 (WTF/min)，這本書將會讓你擺脫天天對著程式碼罵髒話的日子。
+這篇文章要介紹[《Clean Code 無瑕的程式碼 中文版》](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)這本書的讀書心得。這本書從命名、函式、註解、編排、物件與資料結構、錯誤處理、單元測試、類別等平易近人的主題開始，雖然這些主題對有些人來說可能太過簡單，但我每隔一陣子重新翻一次都會有越來越深刻的感受：裡面的很多技巧並不華麗、非常容易實踐，甚至簡單到說破了就不值錢的地步，但我總是會很訝異能在工作中好好運用這些技巧的人比想像中還少很多。而每當我讀到自己或他人運用了這些技巧所寫的程式碼，發現他們是多麽的容易理解與維護，我總是會不禁讚嘆這本書的實用性。
 
-看了這本書，你將會學到如何寫出高品質程式碼。花更少的時間維護程式碼，更容易加新功能，早點下班！真心推薦所有工程師朋友都應該要有一本放在案頭隨時參考！
+我真的覺得這是一本任何工程師都應該讀十遍的好書。俗話說，唯一有效的程式品質度量單位就是每分鐘罵髒話的次數 (WTF/min)，這本書將會讓你擺脫天天對著程式碼罵髒話的日子。看了這本書，你將會學到如何寫出高品質程式碼。花更少的時間維護程式碼，更容易加新功能，早點下班！真心推薦所有工程師朋友都應該要有一本放在案頭隨時參考！
 
 [![Clean Code](https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/057/98/0010579897.jpg&v=513f2000&w=348&h=348)](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)
 
@@ -92,12 +92,10 @@ tags: ["book"]
 
 就我自己工作遇到的經驗，書中很多建議很容易就能運用，並不需要學會很厲害的Design Pattern就可以寫出乾淨好維護的程式碼。
 
-你可能會想：就算我code寫的很乾淨，其他人寫得很糟，那我不是白寫了？
-
-但其實下一個看到這段爛程式碼的人，最有可能就是你自己！
+你可能會想：就算我code寫的很乾淨，其他人寫得很糟，那我不是白寫了？但其實下一個看到這段爛程式碼的人，最有可能就是你自己！
 
 為了不要讓現在的自己成為未來的自己的絆腳石，我還是非常推薦入手一本[《Clean Code 無瑕的程式碼 中文版》](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)的。
 
-[馬上買，讓你不再一邊寫code一邊罵WTF](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)
+[購書連結](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)
 
 [![Clean Code](https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/057/98/0010579897.jpg&v=513f2000&w=348&h=348)](https://www.books.com.tw/exep/assp.php/shubo/products/0010579897?utm_source=shubo&utm_medium=ap-books&utm_content=recommend&utm_campaign=ap-201906)
