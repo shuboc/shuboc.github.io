@@ -143,14 +143,15 @@ blockquote {
  */
 pre,
 code {
-    border: 1px solid $grey-color-light;
-    border-radius: 3px;
-    background-color: #eee;
+    // border: 1px solid $grey-color-light;
+    // border-radius: 3px;
+    // background-color: #eee;
     // color: #c7254e; // TODO: maybe try this color?
 }
 
 code {
-    padding: 1px 5px;
+    // padding: 1px 5px;
+    padding: 0 1px;
 }
 
 pre {
