@@ -32,12 +32,19 @@
                       </script>
                       <gcse:searchbox-only></gcse:searchbox-only>
                 </div> -->
-                <h1>最新文章</h1>
+
+                <!-- NOTE: perf is a little worse than categories, maybe readers don't care -->
+                <!-- <h1>最新文章</h1>
                 <ul>
                   {% for post in site.posts limit: 5 %}
                     <li><a href="{{ post.url }}" onclick="trackViewArticle(EVENT_LABEL_LATEST_ARTICLES)">{{ post.title }}</a></li>
                   {% endfor %}
-                </ul>
+                </ul> -->
+
+                {% include trending-posts.html %}
+
+                {% include recommend-books.html %}
+
                 <h1>文章分類</h1>
                 {% capture tags %}
                   {% for tag in site.tags %}
