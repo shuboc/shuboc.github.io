@@ -2,10 +2,10 @@
 title: "[教學] JavaScript Closure (閉包)、函式與語彙環境"
 tags: ["javascript"]
 redirect_from: /2018/03/04/javascript-closure-in-depth
-last_modified_at: 2020/07/15
+last_modified_at: 2020/07/20
 ---
 
-閉包 (Closure) 是函式以及其語彙環境 (lexical environment) 的組合，函式能夠記住被創造的當下的環境以及變數。事實上 closure 是 JavaScript 中最重要卻又不易理解的概念之一，並且有許多實際應用，例如IIFE、模擬 private member 達到封裝的特性 (module pattern) 等，這篇文章將會一一介紹範例。
+JavaScript 中的閉包 (Closure) 是函式以及其語彙環境 (Lexical Environment) 的組合，函式能夠記住被創造的當下的環境以及變數，也是面試常考題。這篇教學將會講解其原理，包含變數的存取規則、函數可以作為回傳值等，以及實際應用範例，包括 IIFE (Immediately Invoked Function Expression)、模擬 private member 達到封裝的特性 (module pattern) 等。
 
 <!-- ![JavaScript Closure](/images/javascript-closure.jpg) -->
 
@@ -24,9 +24,9 @@ last_modified_at: 2020/07/15
 Closure 是由兩個主角構成的一個組合，分別是：
 
 1. 函式 (function)
-2. 函式被宣告時所在的語彙環境 (lexical environment)。
+2. 函式被宣告時所在的語彙環境 (Lexical Environment)。
 
-簡單地說，closure 包含了一個函式，這個函式會對應到一個 lexical environment (語彙環境)。
+簡單地說，closure 包含了一個函式，這個函式會對應到一個 Lexical Environment (語彙環境)。
 
 所謂的「語彙環境」，可以簡單地想像成是函式被宣告時所在的 scope，這個 scope 裡面包含了能夠被這個函式存取到的變數。
 
@@ -212,13 +212,9 @@ add10(2) // ?
 
 ### 小結
 
-辛苦了！🙇
+恭喜你！看到這裡，你應該能夠大致了解 closure 的特性了！
 
-看到這裡，你應該大致了解 closure 的特性了吧！
-
-在 JavaScript 中，closure 其實扮演很重要的角色喔！
-
-下面我們就來看看一些 closure 的實際應用吧！
+在 JavaScript 中，closure 其實有很多應用，下面我們就來看看一些 closure 應用的範例吧！
 
 ## 閉包 (Closure) 的應用
 
@@ -230,17 +226,15 @@ add10(2) // ?
 
 ### 用閉包 (Closure) 模擬物件導向中的私有成員 (Private Member)
 
-我們可以用Closure的特性模擬物件導向中的私有成員(private member)。
+我們可以用 closure 的特性，模擬物件導向中的私有成員 (private member)。這個方法有時又被稱作 Module Pattern。
 
-(這個方法有時又被稱作 Module Pattern。)
-
-下面這個例子，我們創造一個`counter`物件，並提供三個方法存取物件內部的`count`變數。
+下面這個範例，我們創造一個 `counter` 物件，並提供三個方法存取物件內部的 `count` 變數。
 
 ```Javascript
-const counter = (function() {
-  let count = 0
+function makeCounter() {
+  let count = 0;
   function changeBy(val) {
-    count += val
+    count += val;
   }
 
   return {
@@ -253,70 +247,49 @@ const counter = (function() {
     value: function() {
       return count
     }
-  }
-})();
+  };
+};
 
-counter.value() // 0
-counter.increment()
-counter.increment()
-counter.value() // 2
-counter.decrement()
-counter.value() // 1
+const counter = makeCounter();
+
+console.log(counter.value()); // 0
+counter.increment();
+counter.increment();
+console.log(counter.value()); // 2
+counter.decrement();
+console.log(counter.value()); // 1
 ```
 
-物件的三個方法 (`increment`, `decrement`, `value`) 共同能夠存取同一組環境(Lexical Environment)，因此他們都能夠存取同一組`count`及`changeBy`。
+因為 closure 的特性，`counter` 物件的三個方法 `increment()`、`decrement()` 和 `value()` 能夠存取同一個語彙環境 (Lexical Environment)，所以這三個方法能夠存取 `makeCounter()` 中的同一個 `count` 變數及 `changeBy()` 函式。
 
-除了透過`counter`物件上的方法以外，我們沒辦法直接存取其內部的`count`變數。
+透過呼叫這三個方法，我們能夠改變或讀取隱藏起來的 `count` 變數。
 
-☝️`count`就相當於物件導向中的私有成員變數private member。
+值得注意的是，除非透過 `counter` 物件上的 `increment()`、`decrement()` 或 `value()` 方法，我們沒辦法直接存取其內部的 `count` 變數。因此這裏的 `count` 就相當於物件導向中的私有成員變數 (private member)。
 
-### 用閉包 (Closure) 達到資料隔離的效果
+不僅如此，closure 還能夠達到資料隔離的效果。
 
-我們可以把上面的例子改寫成工廠函式 `makeCounter`，用來產生更多的 counter 物件。
-
-這裡產生了兩個物件`counter1`和`counter2`。
-
-☝️`counter1`和`counter2`擁有各自的`count`變數，不會互相干擾，達到資料互相隔離的效果。
+延續上個例子，這裡利用 `makeCounter()` 函式產生了兩個物件 `counter1` 和 `counter2`:
 
 ```Javascript
-const makeCounter = function() {
-  let count = 0
-  function changeBy(val) {
-    count += val
-  }
+const counter1 = makeCount();
+const counter2 = makeCount();
 
-  return {
-    increment: function() {
-      changeBy(1)
-    },
-    decrement: function() {
-      changeBy(-1)
-    },
-    value: function() {
-      return count
-    }
-  }
-}
+counter1.increment();
+counter1.increment();
 
-let counter1 = makeCount()
-let counter2 = makeCount()
+counter2.decrement();
 
-counter1.increment()
-counter1.increment()
-
-counter2.decrement()
-
-counter1.value() // 2
-counter2.value() // -1
+counter1.value(); // 2
+counter2.value(); // -1
 ```
 
-### 避免 for loop 中使用 callback function 的錯誤寫法
+因為每次呼叫 `makeCounter()` 時都會產生新的一組環境，所以 `counter1` 和 `counter2` 擁有各自的 `count` 變數，不會互相干擾，達到資料互相隔離的效果。
 
-在以前只有`var`的時代，在for loop裡使用callback函式很容易不小心寫錯。
+### 利用 IIFE (Immediately Invoked Function Expression) 產生獨立的環境
 
-舉個例子，假設現在要寫一段code能夠每隔一秒分別印出0 1 2 3 4。
+以下是一題很經典的 JavaScript closure 面試題：
 
-你可能會寫成這樣，用`setTimeout`搭配一個for loop去寫：
+> 請問以下這段 code 會印出什麼值呢？
 
 ```Javascript
 for (var i = 0; i < 5; ++i) {
@@ -326,13 +299,16 @@ for (var i = 0; i < 5; ++i) {
 }
 ```
 
-但這樣寫是錯的❌。
+你可能會很直覺地覺得是每隔一秒印出一個數字，第一秒印出 `0`，第二秒印出 `1`，以此類推，最後印出 `0 1 2 3 4`。
 
-這段code實際上會印出 `5 5 5 5 5` 。
+很遺憾，這段 code 並不會如你想的運行。這段 code 實際上會印出 `5 5 5 5 5`。
 
-為什麼呢？🤔
+為什麼呢？下面讓我來說明：
 
-因為`var`宣告的變數是以函式作為scope，所以上面那種寫法的`i`可以看成是全域變數：
+<!-- TODO: JavaScript 的 scope 到底是怎麼一回事？ hoisting 又是什麼？ -->
+<!-- Scope 跟 Lexical Environment 的關係是什麼？ 可以這樣混著用嗎？ -->
+
+首先 `var` 宣告的變數是以函式作為 scope，所以變數 `i` 可以看成是全域變數。上面那樣的寫法實際上等於：
 
 ```Javascript
 var i; // A global variable!
@@ -341,28 +317,29 @@ for (i = 0; i < 5; ++i) {
     console.log(i)
   }, 1000 * i)
 }
-// After the execution of the for loop, i = 5
 ```
 
-因此會產生五個callback function，他們看到的變數`i`都是同一個。
+這段程式碼總共會產生五個 callback 函式，因為 closure 的特性，它們都會存取到 global scope 中的同一個變數 `i`。
 
-而跑完for loop後，`i` = 5。當callback function實際被呼叫到時，才會去看`i`實際的值，也就是5，所以才會印出5 5 5 5 5。
+當跑完 for 迴圈後，`i` 等於 5。
 
-那我們到底該怎麼做才對呢？🤔
+接著每隔一秒會有一個 callback 被呼叫到。當 callback 實際被呼叫到時，才會去看 `i` 實際的值，也就是 5，所以才會印出 5 5 5 5 5。
 
-關鍵是：我們需要讓每個callback function都可以記住各自的`i`。
+現在我們已經知道上面的寫法有問題，那我們到底該怎麼寫才對呢？
 
-☝️所以我們必須要運用closure的特性，讓每個callback function都有各自的環境。
+關鍵是：我們需要讓每個 callback 都可以有各自的變數 `i`。也就是對第一個 callback 來說，變數 `i` 要等於 0；對第二個 callback 變數來說，`i` 要等於 1，以此類推。
 
-實際上的做法就是用一個function包起來。
+這裏我們可以運用 closure 的特性，讓每個 callback 函數都有各自的環境。**關鍵在於我們要把 callback 用一個 function 包起來。**
 
-👇下面列舉了幾種可能的解法：
+下面列舉了幾種可能的解法：
 
-#### 用 IIFE 包起來執行
+#### 1. 用 IIFE (Immediately Invoked Function Expression) 把程式碼包起來執行
 
-第一種方法是：把整段code包在一個IIFE中去執行。
+<!-- TODO: 解釋一下什麼是 IIFE? -->
 
-for loop的每個iteration呼叫IIFE時，都會產生一組新的環境，並且`i`的值會copy給`j`，這樣每個callback都會有各自的`j`了。
+<!-- TODO: 說明為什麼 IIFE 能夠產生新環境 -->
+
+第一種方法是：把整段 `setTimeout()` 的程式碼包在 IIFE 中去執行。
 
 ```Javascript
 for (var i = 0; i < 5; ++i) {
@@ -374,13 +351,13 @@ for (var i = 0; i < 5; ++i) {
 }
 ```
 
-#### 用 IIFE 產生 callback function
+for 迴圈的每個 iteration 中，callback 都會被包在一個新的 IIFE 中，每個 IIFE 都是一組獨立的環境。
 
-第二種方法是：用IIFE直接回傳一個callback function。
+呼叫 IIFE 時，會將 `i` 的值複製給 `j`，因此每個 IIFE 都會保存各自的變數 `j`。
 
-for loop的每個iteration呼叫IIFE時，同樣會產生一組新的環境，也會把`i`的值會copy給`j`。
+因為 closure 的關係，每個 callback 都可以存取到 IIFE 中的變數 `j`，並且不同 callback 存取到的變數 `j` 都是各自獨立的變數。
 
-與前一種做法的差別是，IIFE最後要回傳`setTimeout`需要的callback function。
+另一種方法是：用 IIFE 產生一個 callback 函數。
 
 ```Javascript
 for (var i = 0; i < 5; ++i) {
@@ -392,9 +369,13 @@ for (var i = 0; i < 5; ++i) {
 }
 ```
 
-#### 用 let
+這裏的 IIFE 回傳了我們需要讓 `setTimeout()` 執行的 callback。
 
-如果沒有硬要用closure解決這個問題的話，其實用`let`解決是最快的：
+原理和前一個範例相同，都是利用 IIFE 在 for 迴圈的每個 iteration 產生一組新的環境。
+
+#### 2. 用 let
+
+上面是比較傳統的寫法，如果沒有硬要用 IIFE 解決這個問題的話，其實用 `let` 解決是最方便快速的：
 
 ```Javascript
 for (let i = 0; i < 5; ++i) {
@@ -404,28 +385,46 @@ for (let i = 0; i < 5; ++i) {
 }
 ```
 
-## 補充說明：Lexical Environment (語彙環境)
+因為對 `let` 而言，每個 for 迴圈中的 iteration 都是一個獨立的環境，所以很自然地每個 `setTimeout()` 的 callback 看到的 `i` 是不同的 `i`。
 
-上面一直提到語彙環境 (Lexical Environment) 這個詞彙，這邊稍加補充說明。
+## Lexical Environment (語彙環境)
 
-JavaScript 中，一段 code 能夠存取哪些變數，是由 code 所在的 lexical environment 決定的。
+前面一直提到語彙環境 (Lexical Environment) 這個詞彙，這邊稍加補充說明。
 
-所謂 lexical enviroment 包含了：
+JavaScript 中，每段函數及區塊 (code block，也就是大括號 `{}` 圍起來的範圍) 都會對應到一個稱為 Lexical Environment (語彙環境) 的資料結構。
 
-1. 區域變數
-2. 外層的 Lexical Environment 的參考（可以簡單想像成大括號外的區域）
+Lexical Environment 包含了以下兩個部分：
 
-一段 code 要存取一個變數的時候，會先在當下的 Lexical Environment 找，找不到會再往外層找，直到 global scope 為止。
+1. Environment Record：儲存了所有的區域變數。
+2. 外層的 Lexical Environment 的參考。
 
-這就是內層的 function 存取外層宣告的變數的原理。
+<!-- 接下來會用一些例子帶大家看 Lexical Environment 是怎麼運作的。
 
-<!-- TODO: 或許可加一段程式碼說明 -->
+下面這個例子在 global 的環境中簡單地宣告了一個變數 `name`。
 
-## 結語
+```JavaScript
+                  // [[ name: <uninitialized> ]] -> null
+let name;         // [[ name: undefined       ]] -> null
+name = "John";    // [[ name: "John"          ]] -> null
+```
 
-看到這裡，希望你已經對JavaScript Closure(閉包)的概念以及實際應用有了深入了解！這篇文章的例子和說明大部分都是參考自[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)與[JavaScript.info](http://javascript.info/closure)，有興趣更深入了解Closure的朋友可以再去看看喔！
+`[[ ]]` 的部分指的是 Environment Record；箭頭的部分是指向外層的 Lexical Environment。
 
-有任何問題，或是覺得寫得不清楚的地方，歡迎在下面👇👇👇留言讓我知道喔。
+這裏只有一個 Lexical Environment，也就是 "global" Lexical Environment。因為 Global Lexical Environment 已經是最外層了，所以其外層的 Lexical Environment 是 `null`。
+
+當我們創造或修改一個變數時，其實就是在新增或是修改 enviromental record 的屬性。
+
+這邊一步步解釋上面這段 code 怎麼運作。
+
+1. 首先 script 開始執行時，Lexical Environment 被創造出來且包含了所有被宣告的變數，也就是這裏的 `name` 變數，但因為還沒宣告，所以處於一個特別的 uninitialized 狀態。
+2. 我們宣告 `let name;`，此時 `name` 的值為 `undefined`。
+3. 我們把一個值指定給 `name` 變數。 -->
+
+<!-- TODO: function 如何運作 -->
+
+一段 code 要存取一個變數的時候，會先在自己的 environment record 裡面找，找不到會再往外層的 Lexical Environment 找，直到 global Lexical Environment 為止。
+
+**這就是內層的 function 能夠存取宣告在外層的變數的原理。**
 
 ## Reference
 
