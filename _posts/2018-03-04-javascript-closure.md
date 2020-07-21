@@ -9,6 +9,8 @@ JavaScript 中的閉包 (Closure) 是函式以及其語彙環境 (Lexical Enviro
 
 ![Sea Turtle](/images/sea-turtle.jpg)
 
+<span>Photo by <a href="https://unsplash.com/@kmkr?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Kris Mikael Krister</a> on <a href="https://unsplash.com/s/photos/animal?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+
 ## 閉包 (Closure) 是什麼？
 
 簡單用一句話解釋 closure 就是：**閉包 (Closure) 是一種函式，它能夠存取被宣告當下的環境中的變數。**
