@@ -5,13 +5,13 @@ redirect_from: /2018/03/04/javascript-closure-in-depth
 last_modified_at: 2020/07/20
 ---
 
-JavaScript 中的閉包 (Closure) 是函式以及其語彙環境 (Lexical Environment) 的組合，函式能夠記住被創造的當下的環境以及變數，也是面試常考題。這篇教學將會講解其原理，包含變數的存取規則、函數可以作為回傳值等，以及實際應用範例，包括 IIFE (Immediately Invoked Function Expression)、模擬 private member 達到封裝的特性 (module pattern) 等。
+JavaScript 中的閉包 (Closure) 是函式以及其語彙環境 (Lexical Environment) 的組合，所有的函式都能夠記住被創造的當下的環境以及變數。這篇教學將會從 JavaScript 函式的特性開始講解，包含變數的存取規則、以及函式可以作為另一個函式的回傳值，最後帶到 closure 的特性，也就是函式能夠保留其環境。本篇還會講解 closure 的實際應用範例，包括 IIFE (Immediately Invoked Function Expression)、以及用 closure 的特性模擬物件導向中的 private member 以達到封裝的特性 (又稱為 module pattern)。
 
 <!-- ![JavaScript Closure](/images/javascript-closure.jpg) -->
 
 ## 閉包 (Closure) 是什麼？
 
-要我用一句話解釋 closure 的話，就是：**閉包 (Closure) 是一個函式，他能夠存取被宣告當下的環境中的變數。**
+簡單用一句話解釋 closure 就是：**閉包 (Closure) 是一種函式，它能夠存取被宣告當下的環境中的變數。**
 
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)上對 closure 比較正式的定義是：
 
@@ -19,20 +19,18 @@ JavaScript 中的閉包 (Closure) 是函式以及其語彙環境 (Lexical Enviro
 
 翻譯成中文就是：closure 是一個函數和此函數被宣告時所在的語彙環境。
 
-讓我來為大家翻譯一下，這句話的意思是：
-
-Closure 是由兩個主角構成的一個組合，分別是：
+讓我來為大家翻譯一下，這句話的意思是：Closure 是由兩個主體構成的一個組合，分別是：
 
 1. 函式 (function)
 2. 函式被宣告時所在的語彙環境 (Lexical Environment)。
 
-簡單地說，closure 包含了一個函式，這個函式會對應到一個 Lexical Environment (語彙環境)。
+函式大家應該都很熟悉，但所謂的「語彙環境」又是什麼呢？
 
-所謂的「語彙環境」，可以簡單地想像成是函式被宣告時所在的 scope，這個 scope 裡面包含了能夠被這個函式存取到的變數。
+語彙環境簡單地說，就是函式被宣告時所在的 scope，這個 scope 裡面包含了能夠被這個函式存取到的變數。為了方便理解，你可以把語彙環境想成是**函式能夠存取到的所有變數。**
 
-為了方便理解和記憶，你可以把 closure 想成是**一個函式，它能夠存取自己被宣告時的環境中的變數。**
+因此 closure 就是**一個函式能夠存取自己被宣告時的環境中的變數。**
 
-到這邊或許會有點難理解，但是別擔心！下面我會用一些很簡單的例子說明 closure 的特性，之後再回頭看這段的話，應該會比較有感覺！
+前面講的東西，沒有搭配實際的程式碼或許會有點難理解，但是別擔心！下面我會用一些很簡單的程式碼範例說明 closure，之後再回頭看這段的話，應該會比較有感覺！
 
 讓我們繼續看下去！
 
