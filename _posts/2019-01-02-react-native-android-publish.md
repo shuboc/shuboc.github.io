@@ -2,7 +2,7 @@
 title: "[教學] 如何將 React Native Android App 打包成 apk 並發布上架至 Google Play Store (2020年更新)"
 image: "https://facebook.github.io/react-native/img/header_logo.png"
 tags: ["react", "react native", "android"]
-last_modified_at: 2020/03/24
+last_modified_at: 2020/07/26
 ---
 
 ![Google Play](/images/react-native-android-publish/react-native-android-publish.png)
@@ -11,13 +11,15 @@ React Native Android App 要打包成 apk 並 release 到 Google Play 有許多�
 
 ## 目錄
 
-1. [設定App Signing](#第一步設定app-signing)
-2. [建立Keystore](#第二步建立keystore)
-3. [設定Release Config](#第三步設定release-config)
-4. [產生簽署過的APK檔](#第四步產生簽署過的apk檔)
-5. [上傳APK至Google Play Console](#第五步上傳apk至google-play-console)
+Android APP 上架一共有五個步驟：
 
----
+1. 設定App Signing
+2. 建立Keystore
+3. 設定Release Config
+4. 產生簽署過的APK檔
+5. 上傳APK至Google Play Console
+
+接下來我們一步一步來看該怎麼做吧！
 
 ## 第一步：設定App Signing
 
