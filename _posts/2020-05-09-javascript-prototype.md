@@ -1,9 +1,9 @@
 ---
-title: "[教學] JavaScript Prototype (原型)、Prototype Chain (原型鏈) 及 Prototypal Inheritance (原型繼承)"
+title: "[教學] JavaScript Prototype (原型) 是什麼？"
 tags: [javascript]
 ---
 
-在 JavaScript 中，prototype (原型) 是最基礎又最重要的觀念，我們可以透過 prototypal inheritance (原型繼承) 達到復用程式碼的效果，本篇文章將介紹 prototype 以及 prototype chain (原型鏈) 的基本觀念，與 class (類別) 的不同之處，以及如何用 prototype 模擬 class 中的繼承，就讓我們一起來搞懂 prototype 的觀念吧！
+在 JavaScript 中，每個物件都有一個 prototype (原型)，物件可以從原型上繼承屬性和方法，達到復用程式碼的效果，這就是所謂的 prototypal inheritance (原型繼承)。除此之外，原型也能繼承其他物件，因此物件可以繼承一層又一層的屬性和方法，這形成了所謂的 prototype chain (原型鏈)。本篇文章將介紹 prototype、prototype chain，以及 prototypal inheritance 與 class inheritance (類別繼承) 的差異。
 
 ![Prototype](/images/javascript-prototype.jpg)
 
