@@ -2,9 +2,9 @@
 
 ## 使用者抱怨網頁載入速度很慢，怎麼辦？
 
-首先第一步我們要來診斷出可能的問題
+首先第一步我們要來診斷出可能的問題。
 
-Google PageSpeed Insight 是你的好朋友
+* Google PageSpeed Insight
 
 PageSpeed 建議我們移除未使用的 JavaScript
 
@@ -176,7 +176,7 @@ Entrypoint index = index.bundle.js
 * vendor.js: 630KB, gzipped
 * omlib.js: 205KB, gzipped
 
-共計 1156KB -> (1050KB + 20KB = 1080KB)。在有快取的情況下，至少也需要下載 585KB -> (215KB + 20KB = 235KB)。
+共計 1156KB -> (1050KB + 20KB = 1080KB)。application bundle: 310KB -> (215KB + 20KB = 235KB)。
 
 手機版：
 
@@ -184,22 +184,108 @@ Entrypoint index = index.bundle.js
 * vendor.js: 630KB, gzipped
 * omlib.js: 205KB, gzipped
 
-共計 997KB -> (1055KB + 20KB) = 1075KB。在有快取的情況下，至少需下載 426KB -> (169KB + 20KB = 189KB)。
+共計 997KB -> (1055KB + 20KB) = 1075KB。application bundle 218KB -> (169KB + 20KB = 189KB)。
 
-## 移除大型 package
+## 其他: preset-env
 
-到目前為止，我們大幅減少了有快取的情況下，使用者需要等待載入的時間，但對於第一次進到網站的使用者來說，他們需要下載的量並沒有減少。所以接下來我們
+Babel loader 搭配 preset-2015 可以把 ES2015 的語法轉換成瀏覽器支援的語法，而 preset-env 是用來取代 preset-2015。
 
-把大型骨架都處理完了之後，接著便是抓出佔很大體積的第三方套件，找尋方法移除或是用更輕量的套件取代。
+preset-env 的好處是可以根據你要支援的瀏覽器，決定要啟用哪些語法 plugin。
 
+Ref: https://babeljs.io/docs/en/env/
+
+polyfill = 31KB, gzipped -> TODO: ??KB
+
+## 處理大型 package
+
+到目前為止，我們大幅減少了有快取的情況下，使用者需要等待載入的時間，但對於第一次進到網站的使用者來說，他們需要下載的量並沒有減少。
+
+所以接下來我們要抓出佔很大體積的第三方套件，找尋方法移除或是用更輕量的套件取代。
+
+Dynamic loading example code
+
+```JavaScript
+componentDidMount() {
+  this.importJSZip = import('jszip/dist/jszip.min.js').then(({ default: JSZip }) => JSZip);
+}
+
+onDrop() {
+  this.importJSZip.then(JSZip => {
+    const newZip = new JSZip();
+    // ...
+  });
+}
+```
 
 ```JavaScript
 splitChunks: {
   cacheGroups: {
     vendor: {
-      test: /[\\/]node_modules[\\/](?!moment)/, // Exclude modules that need to be dynamically loaded
+      test: /[\\/]node_modules[\\/](?!moment|hls.js)/, // Exclude modules that need to be dynamically loaded
       name: 'vendor',
     },
   },
 }.
 ```
+
+* hls.js: 77KB
+* moment.js: 64KB
+* JSZip: 27KB
+* request: 70KB
+
+request 是因為歷史因素，這個專案要給 node 和 web 使用，所以有些地方用到 request。
+
+## Webpack Tree Shaking
+
+[Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 指的是把沒用到的 code 從 bundle 中移除。
+
+這個功能可以實現是因為 ES2015 模組語法 import 跟 export 的[靜態結構](https://exploringjs.com/es6/ch_modules.html#static-module-structure)。
+
+使用 tree shaking 的方法是
+
+1. 將 CommonJS 的語法改寫成 import 跟 export
+2. 標示出具有 side effect 的模組
+
+```JavaScript
+// Package.json
+"sideEffects": [
+  "*.css",
+  "*.scss"
+],
+```
+
+這邊比較多是苦工，改寫成新語法的同時需要一邊確定各種功能沒有壞掉。
+
+我們的專案針對 API 會對各平台產生和 server API 溝通用的 protocol，其中 JS 的 protocol 使用舊的 module 語法，因此也有針對這個部分去做改寫。
+
+結果:
+
+* omlib.js: 205KB -> 86.65KB
+
+## 其他: 第三方 library 使用 CDN
+
+大家很常使用到的 library 像是 jQuery、React 等，可用 CDN 提供的版本。
+
+使用 CDN 的好處是，因為可能在瀏覽別的網站的時候就先快取了一份，所以有機會第一次進佔的時候就省下流量。
+
+* react-dom: 36KB
+
+## Final Result
+
+* arcade.js: 202KB, gzipped
+* vendor.js: 267KB, gzipped
+* omlib.js: 87KB, gzipped
+
+<!-- Total: 1156KB -> 556KB。 -->
+Home: 87 + 267 + 36 (React) + 202 + 77 (hls.js) + 20 = 689KB
+
+手機版：
+
+* arcade.js: 151KB, gzipped
+* vendor.js: 267KB, gzipped
+* omlib.js: 87KB, gzipped
+
+Total: 997KB -> 505KB。
+Home: 87 + 267 + 151 + 20 = 525KB
+
+結論：桌機結果還不錯，手機結果還需要再加強
