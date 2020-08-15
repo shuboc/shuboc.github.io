@@ -328,6 +328,14 @@ $header-height: 70px;
         margin-bottom: $spacing-unit;
     }
 
+    img {
+        margin: $spacing-unit auto;
+
+        @include media-query($on-palm) {
+        margin: 0.5 * $spacing-unit auto;
+        }
+    }
+
     // h2 {
     //     // font-size: 32px;
     //     @include level(2);
