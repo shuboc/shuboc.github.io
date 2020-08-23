@@ -43,7 +43,7 @@ const results = [];
 for (let i = 0; i < data.length; ++i) {
   results.push(data[i].price * 0.9 + 30);
 }
-console.log(results)
+console.log(results); // [120, 210, 300]
 ```
 
 注意到上面兩段程式碼有共同的模式，也就是：
