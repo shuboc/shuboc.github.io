@@ -419,3 +419,22 @@ h6:hover .header-link {
 .related-posts {
     margin-bottom: 2 * $spacing-unit;
 }
+
+// Table of contents
+#markdown-toc {
+    background-color: #f8f9fa;
+    padding: 12px 36px;
+    border: dashed 1px #000;
+    min-width: 300px;
+    margin-bottom: 20px;
+    margin-left: 0;
+}
+
+#markdown-toc ul {
+    margin-bottom: 4px;
+}
+
+#markdown-toc a {
+    display: inline-block;
+    margin-bottom: 4px;
+}

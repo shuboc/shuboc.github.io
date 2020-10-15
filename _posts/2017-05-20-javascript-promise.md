@@ -2,10 +2,16 @@
 title: "[教學] 如何使用 JavaScript Promise 簡化非同步流程"
 tags: [javascript]
 redirect_from: /2017/05/20/javascript-promise
-last_modified_at: 2020/07/26
+last_modified_at: 2020/10/15
 ---
 
 JavaScript 中的 Promise 是專門用來執行非同步操作的資料結構，提供了 then、catch、all、race 等方法，使得複雜的非同步流程變得簡潔好管理。這篇文章將會介紹 promise 的 resolve 和 reject，如何使用 then 串接非同步流程以及 catch 處理錯誤，方便好用的 promise chain，以及如何利用 Promise.all 及 Promise.race 平行處理非同步流程。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ## Why Promise?
 

@@ -1,10 +1,16 @@
 ---
 title: "[筆記] 如何正確實作 JavaScript Array Random Shuffle 亂數排序演算法"
 tags: ["javascript"]
-last_modified_at: 2020/03/24
+last_modified_at: 2020/10/15
 ---
 
 Array random shuffle 是一個很常使用的演算法，但你真的知道如何正確地實作它嗎？這篇文章將會討論各種用 JavaScript 實作 array random shuffle (亂數排序) 的方法，以及他們的優缺點。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![Shuffle Poker Cards](/images/javascript-random-shuffle.jpg)
 

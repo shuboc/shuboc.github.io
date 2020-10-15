@@ -1,10 +1,16 @@
 ---
 title: "[教學] 深入淺出 JavaScript ES6 Class (類別)"
 tags: ["javascript"]
-last_modified_at: 2020/03/25
+last_modified_at: 2020/10/15
 ---
 
 你是否還對 ES6 JavaScript class 有點陌生呢？其實 JavaScript class 一點也不難！這篇文章將會解釋 JavaScript class 的觀念以及使用方法，包含 class 和 prototype 的關係，如何用 `extends` 達到繼承 (inheritance) 效果、`constructor` 及 `super` 的寫法，以及如何使用 static method/class function (靜態方法)，一起來看看吧！
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![Someone coding](/images/javascript-class.jpg)
 

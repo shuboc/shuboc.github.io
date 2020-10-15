@@ -1,10 +1,16 @@
 ---
 title: "getBoundingClientRect() 教學"
 tags: ["javascript", "web browser"]
-last_modified_at: 2020/06/29
+last_modified_at: 2020/10/15
 ---
 
 這篇文章將會講解 getBoundingClientRect() 的屬性，包含 left、top、right、bottom、width、height 等，並整理如何用這些屬性取得元素的大小相對位置，以及如何搭配 window.pageXOffset 和 window.pageYOffset 轉換成絕對位置。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 <br>
 

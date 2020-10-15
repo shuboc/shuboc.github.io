@@ -1,9 +1,16 @@
 ---
 title: "[教學] JavaScript 中的 this 是什麼？"
 tags: ["javascript"]
+last_modified_at: 2020/10/15
 ---
 
 在 JavaScript 中，「this 是什麼」絕對是讓人頭痛難題前三名。This 和物件方法息息相關，因此這篇文章會先介紹在物件方法、物件方法中的 this 是如何被決定的，把握一個簡單原則就可以知道 this 到底是誰。另外，arrow function 的 this 也很常令人搞混，這篇文章也會一併介紹 arrow function 中的 this。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![this](/images/this.jpg)
 

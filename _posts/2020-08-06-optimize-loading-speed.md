@@ -2,6 +2,7 @@
 title: "前端工程師都該懂的6個網頁載入加速技巧 (加速 30% 真實案例分享)"
 tags: ["javascript", "webpack"]
 image: /images/optimize-loading-speed/cover.png
+last_modified_at: 2020/10/15
 ---
 
 為什麼要優化網頁的載入速度？大家開發產品時，總是把使用者體驗掛在嘴邊，但卻常常忽略一個事實：**載入速度和使用者體驗息息相關。**根據 Amazon 內部統計，網頁載入的速度每增加100ms，營收就減少 1%。網站速度越慢，客戶越不願意掏出錢來買你的東西。另外[網頁載入速度也會影響 SEO](https://www.yesharris.com/page-speed-seo/)。
@@ -13,6 +14,12 @@ image: /images/optimize-loading-speed/cover.png
 先講結果：**經過優化，JavaScript bundle 大小減少 43%，載入度減少 30%。**
 
 想知道怎麼做到的？那就跟我一起看下去吧！
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ## 優化載入速度的第一步：善用網頁測速工具
 

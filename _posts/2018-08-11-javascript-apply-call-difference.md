@@ -2,10 +2,16 @@
 title: "[教學] 3個JavaScript的call()和apply()的應用範例"
 tags: ["javascript"]
 redirect_from: /2018/08/11/javascript-apply-call-call-forwarding
-last_modified_at: 2018/12/30
+last_modified_at: 2020/10/15
 ---
 
 這篇教學會用3個JavaScript中運用到`apply()`和`call()`的例子，讓你快速了解`apply()`和`call()`的使用方法。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ## 範例應用1: Call Forwarding
 

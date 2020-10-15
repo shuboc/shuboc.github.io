@@ -1,9 +1,16 @@
 ---
 title: "[教學] Web Share API - Navigator.share() 介紹"
 tags: ["javascript", "web browser"]
+last_modified_at: 2020/10/15
 ---
 
 Web Share API 是現代瀏覽器提供的最新功能之一，它讓網頁的使用者能夠體驗到和原生 app 完全相同的分享體驗。這篇文章將會教你 navigator.share() 的使用方法。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 <style>
   .share-image-section {

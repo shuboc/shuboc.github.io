@@ -2,10 +2,16 @@
 title: "[教學] JavaScript Closure (閉包)、函式與語彙環境"
 tags: ["javascript"]
 redirect_from: /2018/03/04/javascript-closure-in-depth
-last_modified_at: 2020/07/20
+last_modified_at: 2020/10/15
 ---
 
 JavaScript 中的閉包 (Closure) 是函式以及其語彙環境 (Lexical Environment) 的組合，所有的函式都能夠記住被創造的當下的環境以及變數。這篇教學將會從 JavaScript 函式的特性開始講解，包含變數的存取規則、以及函式可以作為另一個函式的回傳值，最後帶到 closure 的特性，也就是函式能夠保留其環境。本篇還會講解 closure 的實際應用範例，包括 IIFE (Immediately Invoked Function Expression)、以及用 closure 的特性模擬物件導向中的 private member 以達到封裝的特性 (又稱為 module pattern)。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![Sea Turtle](/images/sea-turtle.jpg)
 

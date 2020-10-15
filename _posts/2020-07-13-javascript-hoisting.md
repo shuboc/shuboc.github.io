@@ -1,9 +1,16 @@
 ---
 title: "[教學] JavaScript 中的 Hoisting 是什麼意思？let const var 的差異居然是這個？"
 tags: ["javascript"]
+last_modified_at: 2020/10/15
 ---
 
 JavaScript 在 ES6 let 和 const 問世之前，都是用 var 來定義變數，但是 var 有許多迥異於其他程式語言的特性，像是使用函式作用域 (function-level scope)，以及具有變數 hoisting 的規則，對於初學者而言非常容易搞錯。這篇文章要告訴你 hoisting 是什麼意思，以及 let const var 的差異，以及區塊作用域 (block-level scope) 和函式作用域 (function-level scope) 的差異。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![Hoisting是什麼](/images/hoisting.jpg)
 

@@ -2,9 +2,16 @@
 title: "JavaScript高手都該會的7種陣列方法"
 tags: ["javascript"]
 image: /images/javascript-array-methods.png
+last_modified_at: 2020/10/15
 ---
 
 本篇介紹的陣列方法將寫程式的焦點從「如何做」轉移到「做什麼」，也就是 functional programming 中的「宣告性編程」。這些陣列方法易學易用，能夠幫助你提升程式碼的可維護性並減少潛在的bug，所以我認為每個 JavaScript 的使用者都有必要了解本篇介紹的陣列方法。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ## 專注在「做什麼」，而非「如何做」
 

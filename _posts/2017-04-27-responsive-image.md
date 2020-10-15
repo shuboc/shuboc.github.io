@@ -2,10 +2,16 @@
 title: "[教學] 用 img srcset 與 HTML5 picture，讓圖片也能RWD"
 tags: [rwd, web browser]
 redirect_from: /2017/04/27/responsive-image
-last_modified_at: 2020/03/24
+last_modified_at: 2020/10/15
 ---
 
 RWD的網頁顯示圖片，經常會遇到問題：同樣的圖片，檔案過大使得在手機上載入速度過慢，但在桌機上又顯得解析度不夠。這篇文章將會教你如何經由設定 `img` 標籤的 `srcset` 屬性以及 HTML5 picture tag，依據裝置解析度載入適當的圖片，在圖片解析度和下載速度之間取得平衡。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![coding](/images/coding.jpg)
 

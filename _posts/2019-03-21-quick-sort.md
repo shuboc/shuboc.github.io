@@ -2,10 +2,16 @@
 title: "[教學] 深入淺出 Quick Sort 演算法（以 JavaScript 為例）"
 tags: ["javascript", "algorithm"]
 redirect_from: /quick-sort-quick-selection/
-last_modified_at: 2020/03/24
+last_modified_at: 2020/10/15
 ---
 
 Quick Sort (快速排序) 是一種 divide and conquer 的排序方法，這篇文章詳細說明其原理，並以 JavaScript 為例教你如何實作 Quick Sort (快速排序演算法)，最後介紹其進階應用: Quick Select (快速選擇演算法)。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![Sort](/images/sort.jpg)
 

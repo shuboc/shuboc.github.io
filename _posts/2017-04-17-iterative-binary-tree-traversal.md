@@ -2,10 +2,16 @@
 title: "[教學] 三種 Interative Binary Tree Traversal 的方法 (In-Order, Pre-Order and Post-Order)"
 tags: [algorithm, data structure]
 redirect_from: /2017/04/17/iterative-binary-tree-traversal
-last_modified_at: 2020/03/24
+last_modified_at: 2020/10/15
 ---
 
 這篇文章將會教你如何實作三種 Interative Binary Tree Traversal 的方法 (In-Order, Pre-Order and Post-Order)。值得注意的是，迭代相對於遞迴的遍歷二元樹 (binary tree traversal) 方法較為不直觀，為了符合traverse的順序，有些節點需要晚點再拜訪，實作上會用到stack的資料結構。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ## Binary Tree Traversal
 

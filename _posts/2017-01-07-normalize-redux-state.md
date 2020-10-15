@@ -2,10 +2,16 @@
 title: "[教學] 正規化 (Normalize) Redux State"
 tags: [react]
 redirect_from: /2017/01/07/how-to-normalize-redux-state
-last_modified_at: 2018/12/29
+last_modified_at: 2020/10/15
 ---
 
 這篇教學介紹Redux如何用正規化(normalization)的方式，儲存從API取得的遠端資料。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ## TL;DR
 

@@ -2,10 +2,16 @@
 title: "[教學] 深入淺出 Preload, Prefetch 和 Preconnect：三種加快網頁載入速度的 Resource Hint 技巧"
 tags: ["web browser"]
 redirect_from: /preload-preconnect-prefetch
-last_modified_at: 2020/03/28
+last_modified_at: 2020/10/15
 ---
 
 現代瀏覽器提供了 `preload`、`prefetch` 和 `preconnect` 等功能，能讓開發者指定 link tag 的 rel 屬性提示瀏覽器提前下載圖片、JS、CSS等資源，以達到優化效能的效果。這篇文章將會教你這三種 resource hint 技巧的使用方法與時機，讓你了解如何優化資源的下載順序並提升網頁載入效能。
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![Fetch](/images/fetch.jpg)
 

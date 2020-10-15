@@ -1,10 +1,16 @@
 ---
 title: "[教學] 如何用 Intersection Observer API 實作 Infinite Scroll/Lazy Loading"
 tags: ["javascript", "web browser"]
-last_modified_at: 2020/03/24
+last_modified_at: 2020/10/15
 ---
 
 現代瀏覽器提供的 Intersection Observer API 非常適合用來實現 Infinite Scroll 和 Lazy Loading 等前端常見的需求。這篇文章將會教你 Intersection Observer API 的用法，不僅程式碼更簡潔，而且效能比起監聽 scroll event 更好，此外瀏覽器支援度也不錯，就讓我們一起來看看吧！
+
+## 目錄
+{: .no_toc}
+
+- TOC
+{:toc}
 
 ![Cat](/images/cat1.jpg)
 
