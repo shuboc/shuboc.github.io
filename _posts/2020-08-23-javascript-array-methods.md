@@ -1,11 +1,11 @@
 ---
-title: "JavaScript高手都該會的7種陣列方法"
+title: "JavaScript 開發者都該會的 7 個好用陣列方法"
 tags: ["javascript"]
 image: /images/javascript-array-methods.png
 last_modified_at: 2020/10/15
 ---
 
-本篇介紹的陣列方法將寫程式的焦點從「如何做」轉移到「做什麼」，也就是 functional programming 中的「宣告性編程」。這些陣列方法易學易用，能夠幫助你提升程式碼的可維護性並減少潛在的bug，所以我認為每個 JavaScript 的使用者都有必要了解本篇介紹的陣列方法。
+本篇文章要教你 7 個好用的 JavaScript 的陣列方法：map(), forEach(), filter(), find(), every(), some() 以及 reduce()。這些陣列方法容易使用，能夠幫助你提升程式碼的可維護性並減少潛在的bug，身為 JavaScript 的開發者的你一定要會！
 
 ## 目錄
 {: .no_toc}
@@ -13,7 +13,9 @@ last_modified_at: 2020/10/15
 - TOC
 {:toc}
 
-## 專注在「做什麼」，而非「如何做」
+## 何謂宣告式編程：專注在「做什麼」，而非「如何做」
+
+在正式介紹這些好用的方法之前，我們先來深入剖析平常處理陣列資料的方法。
 
 假設我們有一組商品資料：
 
@@ -32,7 +34,9 @@ const data = [
 ];
 ```
 
-我們可以對這組資料做各式各樣的操作，如果我想要所有品項「價格」的陣列，可以這樣寫：
+我們可以對這組資料做各式各樣的操作。
+
+舉例來說，如果我想要所有品項「價格」的陣列，可以這樣寫：
 
 ```JavaScript
 const results = [];
@@ -59,7 +63,7 @@ console.log(results); // [120, 210, 300]
 2. 用一個 `for` 迴圈遍歷陣列
 3. 經過某種計算後將結果放進陣列中
 
-這些重複使用的邏輯，可以提取成一個新的陣列方法 `map()`：
+**這些重複使用的邏輯，可以提取成一個新的陣列方法 `map()`：**
 
 ```JavaScript
 Array.prototype.map = function(callback) {
@@ -71,7 +75,7 @@ Array.prototype.map = function(callback) {
 }
 ```
 
-將上述兩個例子用 `map()` 改寫如下：
+於是上述兩個例子可以用 `map()` 重新改寫如下：
 
 ```JavaScript
 const result1 = data.map(item => item.price);
@@ -80,19 +84,17 @@ const result2 = data.map(item => item.price * 0.9 + 30);
 
 怎麼樣，是不是簡潔許多呢？
 
-這就是 functional programming 強調的宣告式編程 (Declarative Paradigm)。
+這就是 functional programming (函數式編程) 強調的**宣告式編程 (Declarative Paradigm)**。
 
-**宣告式編程指的是，寫程式的時候專注在「我想要達到什麼結果」，而不是「如何達成這個結果」。**
+Functional Programming 是一種程式設計的方法論，主要的特色是函式是第一等物件、提倡純函式 (Pure Function) 及避免副作用 (Side Effect)、宣告式 (Declarative) 程式設計等。
 
-這裏的 `item => item.price * 0.9 + 30` 就是在告訴電腦，我想要這樣的結果，但是結果如何產生的我不需要在意，所有細節都已經封裝在 `map()` 裡面了。
+其中這裡使用到的「宣告式編程」指的是，**寫程式的時候專注在「我想要達到什麼結果」，而不是「如何達成這個結果」。**
+
+這裏的 `item => item.price * 0.9 + 30` 就是一種宣告，作用是告訴電腦我想要這樣的結果，結果如何產生的我不需要在意，因為所有細節都已經封裝在 `map()` 裡面了。
 
 這樣做的好處是，寫出來的程式碼的「意圖」會變的很明白，讀程式碼的人只需要關注真正重要的邏輯，也就是 `item => item.price * 0.9 + 30`，而不會迷失在細節中。
 
-## JavaScript 內建 Functional Programming
-
-Functional Programming 是一種程式設計的方式，主要的特色是函式是第一等物件、提倡純函式 (Pure Function) 及避免副作用 (Side Effect)、宣告式 (Declarative) 程式設計等。
-
-實際上 JavaScript 中的 `Array` 內建包含 `map()` 在內的許多方法，讓我們可以很方便地以 functional programming 的方式操作資料。
+實際上 JavaScript 中的 `Array` ˇ已經內建包含 `map()` 在內的許多方法，讓我們可以很方便地以 functional programming 的方式操作資料。
 
 接下來就要介紹這些方法：`forEach()`、`map()`、`filter()`、`find()`、`every()`、`some()` 及 `reduce()`。
 
