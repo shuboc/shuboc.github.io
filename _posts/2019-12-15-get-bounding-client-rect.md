@@ -1,10 +1,10 @@
 ---
-title: "getBoundingClientRect() 教學"
+title: "[教學] Element.getBoundingClientRect()"
 tags: ["javascript", "web browser"]
 last_modified_at: 2020/10/15
 ---
 
-這篇文章將會講解 getBoundingClientRect() 的屬性，包含 left、top、right、bottom、width、height 等，並整理如何用這些屬性取得元素的大小相對位置，以及如何搭配 window.pageXOffset 和 window.pageYOffset 轉換成絕對位置。
+Element.getBoundingClientRect() 回傳元素的大小，以及其相對於可視範圍 (viewport) 的位置。這篇文章將會教你 getBoundingClientRect() 的用法，以及 left、top、right、bottom、width、height 等位置及大小的屬性，並教你如何搭配 window.pageXOffset 和 window.pageYOffset 轉換成絕對位置。
 
 ## 目錄
 {: .no_toc}
@@ -16,9 +16,11 @@ last_modified_at: 2020/10/15
 
 ![Rect](https://mdn.mozillademos.org/files/15087/rect.png)
 
-## `getBoundingClientRect()`
+## `getBoundingClientRect()` 用法
 
 如果要取得元素 `elem` 「相對於視窗」的座標，我們可以使用 `elem.getBoundingClientRect()` 這個方法。他會量測元素包含 border 的大小，並回傳一個 [DOMRect](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect) 物件，其中包含了 `x`/`y`/`width`/`height`/`top`/`right`/`bottom`/`left` 等屬性。
+
+## `getBoundingClientRect()` 屬性說明
 
 * `x`/`left`：`elem` 左上角的 x 座標
 * `y`/`top`：`elem` 左上角的 y 座標
