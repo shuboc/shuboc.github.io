@@ -43,11 +43,13 @@ pre[class*="language-"] {
 
 /* Inline code */
 :not(pre) > code[class*="language-plaintext"] {
-	padding: .1em;
+	margin: 0 .3em;
+	padding: 0 .3em;
 	border-radius: .3em;
 	white-space: normal;
 	background: #eee;
-	color: rgb(52, 73, 94);
+	/* color: rgb(52, 73, 94); */
+	color: #c7254e;
 	font-family: monospace, sans-serif;
 	text-shadow: none;
 }

@@ -144,15 +144,16 @@ blockquote {
  */
 pre,
 code {
+    // Should use prism.css
     border: 1px solid $grey-color-light;
     border-radius: 3px;
     background-color: #eee;
     color: #c7254e;
-}
-
-code {
-    // padding: 1px 5px;
-    padding: 0 1px;
+    margin: 0 0.1em;
+	padding: 0 .3em;
+	border-radius: .3em;
+	white-space: normal;
+	background: #eee;
 }
 
 pre {
