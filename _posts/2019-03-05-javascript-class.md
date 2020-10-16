@@ -14,7 +14,7 @@ last_modified_at: 2020/10/15
 
 ![Someone coding](/images/javascript-class.jpg)
 
-## `class` 語法
+## class 語法
 
 如果要建構新物件，傳統的Prototype-based的寫法會需要：
 
@@ -61,7 +61,7 @@ sayHi() {
 
 這種寫法是在 `class` 中定義「物件方法」的語法。
 
-## `class` 只是宣告函式的一種語法
+## class 只是宣告函式的一種語法
 
 JavaScript中沒有真正的「類別」實體。
 
@@ -76,7 +76,7 @@ JavaScript中沒有真正的「類別」實體。
 
 也就是說，透過 `class` 語法宣告的 `User`，其實是宣告了一個函式 `User`，其`prototype`屬性上有我們定義在class body內的方法。
 
-## `class` 的靜態方法 (Static Method)
+## class 的靜態方法 (Static Method)
 
 `class` 裡面可以宣告靜態方法 (static method)。
 
@@ -100,7 +100,7 @@ Article.compare = function(a, b) {
 }
 ```
 
-## 用 `extends` 繼承類別
+## 用 extends 繼承類別
 
 類別可以用`extends`語法繼承。
 
@@ -136,7 +136,7 @@ rabbit.run(); // From `Animal`
 
 想要延伸既有的方法，可以用 `super` 關鍵字，呼叫母類別的方法。
 
-### 用 `super` 覆寫方法
+### 用 super 覆寫方法
 
 利用 `super` 關鍵字，在子類別的 `run()` 方法內呼叫母類別的 `run()` 方法：
 
@@ -176,7 +176,7 @@ class Rabbit extends Animal {
 
 相反地，你不能用 `function() { ... }`，因為function不是一個類別方法，沒有 `super`。
 
-### 用 `super` 覆寫 `constructor`
+### 用 super 覆寫 constructor
 
 利用 `super` 關鍵字，在constructor內，呼叫母類別的 constructor：
 
@@ -230,7 +230,7 @@ class Rabbit extends Animal {}
 
 在母類別建立好物件，確保執行到 `this.earLength = earLength;` 這一行時，`this` 不是空的。
 
-### `super` 在「物件方法」內使用的限制
+### super 在「物件方法」內使用的限制
 
 定義在「物件」上的方法，有兩種寫法（注意，是「物件」不是「類別」）：
 
@@ -424,7 +424,7 @@ rabbits.sort(Rabbit.compare); // calls Animal.compare
 
 這是透過 `Rabbit.__proto__ === Animal` 達成的。
 
-## 兩種 `extends` 幫你自動建立的 [[prototype]] 關聯
+## 兩種 extends 幫你自動建立的 [[prototype]] 關聯
 
 **以下重點！！！**
 
