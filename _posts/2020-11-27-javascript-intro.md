@@ -1,6 +1,7 @@
 ---
 title: "JavaScript 教學"
 tags: ["javascript"]
+permalink: /javascript/intro
 ---
 
 這篇文章將會告訴你 JavaScript 是什麼，可以做到什麼事情，以及你為什麼應該學 JavaScript。
