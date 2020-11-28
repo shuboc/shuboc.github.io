@@ -1,5 +1,5 @@
 ---
-title: "JavaScript 教學"
+title: "JavaScript 教學 - JavaScript 程式教學 / JS Tutorial"
 tags: ["javascript"]
 permalink: /javascript/intro
 ---
@@ -49,3 +49,7 @@ HTML 負責網頁的內容，CSS 負責網頁的外觀，而 JavaScript 在這�
 另外隨著技術進步，JavaScript 也能用於後端開發 (例：Node.js) 以及手機應用程式開發 (例：React Native)。
 
 總體而言，JavaScript 能做到的事情非常多，是一項投資報酬率很高的技能。
+
+## 總結
+
+我們學到了 JavaScript 是一種程式語言，能夠為網頁提供動態性的互動功能，是網頁技術的核心，也是網頁開發必學的技術。
