@@ -7,7 +7,7 @@
 
 # Site settings
 # title: "{name: \"趙勗博\"}"
-title: "Shubo's Notes"
+title: "Shubo 的程式教學筆記"
 email: shubochao@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Shubo的程式設計教學、書籍推薦、心得分享。
