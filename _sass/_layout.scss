@@ -422,10 +422,10 @@ h6:hover .header-link {
 
 // Table of contents
 #markdown-toc {
+    display: inline-block;
     background-color: #f8f9fa;
     padding: 12px 36px;
     border: dashed 1px #000;
-    width: 100%;
     margin-bottom: 20px;
     margin-left: 0;
 }
