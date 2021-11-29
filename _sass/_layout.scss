@@ -198,7 +198,7 @@ $header-height: 70px;
     vertical-align: top;
 
     margin: 0 0 $spacing-unit $spacing-unit;
-    width: ($content-width - $main-column-width) / 2 - $spacing-unit - 4px;
+    width: $content-width - $main-column-width - $spacing-unit - 4px;
 
     padding: $spacing-unit;
     background: $background-color;
