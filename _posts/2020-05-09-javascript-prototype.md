@@ -1,7 +1,7 @@
 ---
 title: "[教學] JavaScript Prototype (原型) 是什麼？"
 tags: [javascript]
-last_modified_at: 2020/10/15
+last_modified_at: 2021/12/31
 ---
 
 在 JavaScript 中，每個物件都有一個 prototype (原型)，物件可以從原型上繼承屬性和方法，達到復用程式碼的效果，這就是所謂的 prototypal inheritance (原型繼承)。除此之外，原型也能繼承其他物件，因此物件可以繼承一層又一層的屬性和方法，這形成了所謂的 prototype chain (原型鏈)。本篇文章將介紹 prototype、prototype chain，以及 prototypal inheritance 與 class inheritance (類別繼承) 的差異。
@@ -18,7 +18,7 @@ Photo by Hal Gatewood on Unsplash
 
 ## JavaScript Prototype 原型
 
-JavaScript 中的每個物件都有一個隱藏的屬性 [[Protytype]]，我們稱它為 prototype (原型)。Prototype 只能是一個物件或是 `null`。我們有一個非標準的方法可以存取 prototype：`__proto__`。
+JavaScript 中的每個物件都有一個隱藏的屬性 [[Prototype]]，我們稱它為 prototype (原型)。Prototype 只能是一個物件或是 `null`。我們有一個非標準的方法可以存取 prototype：`__proto__`。
 
 例如，我們可以用 `__proto__` 將 `dog` 物件的 prototype 指定為 `animal` 物件：
 
@@ -161,7 +161,7 @@ const dog = new Animal('Barley');
 const cat = new dog.constructor('Chris');
 ```
 
-## 如何利用 Prototypal Inheritance (原型繼承) 模擬 class inheriance
+## 如何利用 Prototypal Inheritance (原型繼承) 模擬 class inheritance
 
 為了達到程式碼復用，我們可能會想讓 `Dog` 可以繼承 `Animal` 上的屬性和方法。常見的物件導向語言可以讓 child class (子類別) 繼承 parent class (父類別)，也就是類似 `class Dog extends Animal` 之類的方式。那使用 prototype 的 JavaScript 該如何達到類似的效果呢？
 
@@ -179,7 +179,7 @@ function Dog(name, breed) {
 現在有另外一個問題：我們沒辦法存取 `Animal` 定義的方法：
 
 ```js
-const dog = Dog('Barley', 'Golden Retriever');
+const dog = new Dog('Barley', 'Golden Retriever');
 dog.eat(); // Uncaught TypeError: dog.eat is not a function
 ```
 
@@ -195,7 +195,7 @@ Dog.prototype = Object.create(Animal.prototype);
 
 這個做法還會衍生一個問題，就是 `Dog.prototype.constructor` 的值會變成 `Animal`，因為 `Dog.prototype` 繼承 `Animal.prototype`，而 `Animal.prototype.constructor === Animal`。
 
-解法是我們要幫 `Dog.prototype` 手動加上 `contructor` 屬性：
+解法是我們要幫 `Dog.prototype` 手動加上 `constructor` 屬性：
 
 ```js
 Object.defineProperty(Dog.prototype, 'constructor', {
